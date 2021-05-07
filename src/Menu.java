@@ -12,6 +12,6 @@ public class Menu {
 	}
 	
 	public void runGame() {
-		
+		System.out.println("game run");
 	}
 }
