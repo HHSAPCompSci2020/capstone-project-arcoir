@@ -1,4 +1,17 @@
 
 public class Menu {
 
+	public GameRunner runner;
+	public DrawingSurface surface;
+	public Dashboard board;
+	
+	public Menu() {
+		 runner = new GameRunner();
+		 surface = new DrawingSurface();
+		 board = new Dashboard();
+	}
+	
+	public void runGame() {
+		
+	}
 }
