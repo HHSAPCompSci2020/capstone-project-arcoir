@@ -241,11 +241,6 @@ UML Link
       * Act()
       * addFrame(Image image)
       * getFrame()
-* Buttons
-   * Fields
-      * ArrayList buttons
-   * Methods
-      * clickButtons
 * Character
    * Fields
       * health
