@@ -11,7 +11,10 @@ public class Menu {
 		 board = new Dashboard();
 	}
 	
+	/**This method starts the game
+	 * 
+	 */
 	public void runGame() {
-		System.out.println("game run");
+		System.out.println("game runs");
 	}
 }
