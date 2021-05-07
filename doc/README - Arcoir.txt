@@ -264,5 +264,3 @@ Emily: Gameplay Elements, GUI, Music
 Fun things to do if we feel like it:
 Nicole voice every time you open the program: “Arcoir: Legendary Adventure” nicole says noooooooooooo :(
 Intro animation that gives you the story
-[a]I'm having trouble imagining this? Is it like a pixelated image and the user is drawing the character by clicking on the pixels on the grid individually?
-[b]Is this a platformer game? what is the viewpoint the user plays from? Top down view, Side view, FPS?
