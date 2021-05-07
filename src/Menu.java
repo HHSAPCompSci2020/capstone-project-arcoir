@@ -15,6 +15,6 @@ public class Menu {
 	 * 
 	 */
 	public void runGame() {
-		System.out.println("game runs");
+		System.out.println("game runs!");
 	}
 }
