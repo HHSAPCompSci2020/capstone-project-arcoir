@@ -8,9 +8,12 @@ import java.awt.Color;
 public class ColorPalette {
 	private Color [] palette;
 	
+	/**
+	 * Initializes a new palette with 24 default colors.
+	 */
 	public ColorPalette () {
 		palette = new Color [24];
-		makeStartingColors();
+		reset();
 	}
 	
 	/**
@@ -35,7 +38,10 @@ public class ColorPalette {
 		palette[index] = new Color(r, g, b);
 	}
 	
-	private void makeStartingColors () {
+	/**
+	 * Resets the palette to the default colors.
+	 */
+	public void reset () {
 		palette[0] = new Color (205,74,74); //mahogany
 		palette[1] = Color.RED; //red
 		palette[2] = new Color (255,83,73); //red orange
