@@ -3,6 +3,10 @@ public class MainCharacter {
 	private Animation defaultCharacter;
 	private int lives;
 	
+	public MainCharacter() {
+		
+	}
+	
 	public void attack() {
 		
 	}
