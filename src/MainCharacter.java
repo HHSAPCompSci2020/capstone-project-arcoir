@@ -1,10 +1,10 @@
 
-public class MainCharacter {
+public class MainCharacter extends Character{
 	private Animation defaultCharacter;
 	private int lives;
 	
 	public MainCharacter() {
-		
+		super();
 	}
 	
 	public void attack() {
