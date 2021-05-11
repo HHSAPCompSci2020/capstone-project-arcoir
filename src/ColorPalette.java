@@ -1,7 +1,6 @@
 import java.awt.Color;
 
 /**
- * 
  * @author Lindsay Qin
  *
  */

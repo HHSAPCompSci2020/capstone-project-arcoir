@@ -1,8 +1,12 @@
-
 import java.util.List;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Nicole Spaulding
+ *
+ */
 public class Animation {
 	//FIELDS
 	
