@@ -5,13 +5,24 @@ public class Ground {
 	
 	// Fields
 	private Image image;
-	private Rectangle hitbox;
+	private Rectangle ground;
 	
 	// Constructor
 	
+	public Ground(Rectangle ground) {
+		this.ground = ground;
+	}
+	
 	// Methods 
+	
+	public void drawGround() {
+		
+	}
+	
 	public Boolean hasColided() {
 		return null;
 		
 	}
+
+	
 }
