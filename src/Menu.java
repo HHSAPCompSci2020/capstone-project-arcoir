@@ -7,12 +7,12 @@ import processing.core.PApplet;
 
 public class Menu {
 
-	private GameRunner runner;
+	private GameScreen runner;
 	private DrawingScreen surface;
 	private Dashboard board;
 	
 	public Menu() {
-		 runner = new GameRunner();
+		 runner = new GameScreen();
 		 surface = new DrawingScreen();
 		 board = new Dashboard();
 	}

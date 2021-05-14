@@ -1,5 +1,5 @@
 
-public class GameRunner {
+public class GameScreen {
 
 	//Fields
 	
