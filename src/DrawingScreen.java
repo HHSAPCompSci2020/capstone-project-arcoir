@@ -36,8 +36,8 @@ public class DrawingScreen extends Screen {
 			surface.background(255);
 			surface.fill(0);
 			
-			if (character != null)
-				drawGrid(surface.width/5, 0, (int)(surface.width * 0.8), surface.height);
+		
+			drawGrid(surface.width/5, 0, (int)(surface.width * 0.8), surface.height);
 			board.draw(surface);
 		}
 		
@@ -60,11 +60,14 @@ public class DrawingScreen extends Screen {
 					float rectX = x + j * rectWidth;
 					float rectY = y + i * rectHeight;
 					
-					Color current = character[i][j];
+					
+					if(character[i][j] != null) {
+						Color current = character[i][j];
 					
 					//draw grid here (not transparent background, but what is in the character array
 					surface.fill(current.getRGB());
 					surface.rect(rectX, rectY, rectWidth, rectHeight);
+					}
 				}
 			}
 		}
