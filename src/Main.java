@@ -1,3 +1,6 @@
+import java.awt.Toolkit;
+import java.awt.Dimension;
+import javax.swing.JFrame;
 
 public class Main {
 
@@ -9,8 +12,16 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("run game");
+		JFrame w = new JFrame("Arcoir");
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		w.setBounds(0, 0, screenSize.width, screenSize.height);
+		w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		menu.runGame();
+		
+		w.setResizable(true);
+		w.setVisible(true);
 	}
 	
 }
