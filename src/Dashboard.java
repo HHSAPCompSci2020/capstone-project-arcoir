@@ -25,7 +25,6 @@ public class Dashboard {
 	
 	public void draw(PApplet marker) {
 		//load images
-		System.out.println("h");
 		
 		//NULL ON BACKGROUND SEND HELP
 		marker.rect(help.x, help.y, help.width, help.height);
