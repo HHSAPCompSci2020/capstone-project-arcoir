@@ -17,11 +17,14 @@ public class GameScreen extends Screen{
 		super(800, 600);
 		this.surface = surface;
 		characterAnim =  new Animation(300);
-//		characterAnim.addFrame(loadImage("stickfigure.gif"));
-		c = new MainCharacter(characterAnim, 3, 100, 100);
+		
 		
 	}
 	// Methods
+	public void setup() {
+		characterAnim.addFrame(surface.loadImage("stickfigure.gif"));
+		c = new MainCharacter(characterAnim, 3, 100, 100);
+	}
 	
 	public void draw() {
 		surface.pushStyle();
