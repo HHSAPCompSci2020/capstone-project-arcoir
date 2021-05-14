@@ -1,9 +1,11 @@
+import processing.core.PApplet;
 
 public class Menu {
 
-	public GameRunner runner;
-	public DrawingSurface surface;
-	public Dashboard board;
+	PApplet marker = new PApplet();
+	private GameRunner runner;
+	private DrawingSurface surface;
+	private Dashboard board;
 	
 	public Menu() {
 		 runner = new GameRunner();
@@ -15,6 +17,7 @@ public class Menu {
 	 * 
 	 */
 	public void runGame() {
+		board.draw(marker);
 		System.out.println("game runs!");
 	}
 }

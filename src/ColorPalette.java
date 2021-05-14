@@ -6,23 +6,38 @@ import java.awt.Color;
  */
 public class ColorPalette {
 	private Color [] palette;
+	private Color selectedColor;
 	
 	/**
-	 * Initializes a new palette with 24 default colors.
+	 * Initializes a new palette with 24 default colors. Selects the first color.
 	 */
 	public ColorPalette () {
 		palette = new Color [24];
 		reset();
+		selectedColor = palette[0];
+	}
+	
+	/**
+	 * Gets a color on the palette.
+	 * 
+	 * @param index of chosen color in the palette
+	 * @return the chosen color
+	 */
+	public Color getColor(int index) {
+		return palette[index];
 	}
 	
 	/**
 	 * Selects a color on the palette.
 	 * 
 	 * @param index of selected color in the palette
-	 * @return the selected color
 	 */
-	public Color selectColor(int index) {
-		return palette[index];
+	public void selectColor(int index) {
+		selectedColor = palette[index];
+	}
+	
+	public Color getSelectedColor() {
+		return selectedColor;
 	}
 	
 	/**
