@@ -23,7 +23,7 @@ public class GameScreen extends Screen{
 	}
 	// Methods
 	public void setup() {
-		characterAnim.addFrame(surface.loadImage("stickfigure.gif"));
+		characterAnim.addFrame(surface.loadImage("resources/stickfigure.png"));
 		c = new MainCharacter(characterAnim, 3, 100, 100);
 	}
 	
