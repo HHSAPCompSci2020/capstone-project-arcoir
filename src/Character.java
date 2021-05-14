@@ -65,7 +65,7 @@ public class Character {
 	}
 	
 	public int getHeight() {
-		return hitBox.height
+		return hitBox.height;
 	}
 	
 

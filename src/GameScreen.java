@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 import processing.core.PApplet;
 
 public class GameScreen extends Screen{
@@ -36,6 +38,20 @@ public class GameScreen extends Screen{
 		surface.text("Menu: Space",10,50);
 
 		surface.popStyle();
+		
+//		if (surface.isPressed(KeyEvent.VK_LEFT))
+//			
+//		if (surface.isPressed(KeyEvent.VK_RIGHT))
+//			x += 5;
+//		if (surface.isPressed(KeyEvent.VK_UP))
+//			y -= 5;
+//		if (surface.isPressed(KeyEvent.VK_DOWN))
+//			y += 5;
+//
+//
+//		if (surface.isPressed(KeyEvent.VK_SPACE)) {
+//			surface.switchScreen(ScreenSwitcher.SCREEN1);
+//		}
 	}
 	
 	
