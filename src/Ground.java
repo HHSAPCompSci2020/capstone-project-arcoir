@@ -1,5 +1,6 @@
 import java.awt.Image;
 import java.awt.Rectangle;
+import processing.core.PApplet;
 
 public class Ground {
 	
@@ -15,7 +16,7 @@ public class Ground {
 	
 	// Methods 
 	
-	public void drawGround() {
+	public void drawGround(PApplet marker) {
 		
 	}
 	
