@@ -36,7 +36,8 @@ public class DrawingScreen extends Screen {
 			surface.background(255);
 			surface.fill(0);
 			
-			drawGrid(surface.width/5, 0, (int)(surface.width * 0.8), surface.height);
+			if (character != null)
+				drawGrid(surface.width/5, 0, (int)(surface.width * 0.8), surface.height);
 			board.draw(surface);
 		}
 		
