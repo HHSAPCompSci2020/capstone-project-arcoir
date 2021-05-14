@@ -15,6 +15,7 @@ public class Menu {
 	 * 
 	 */
 	public void runGame() {
+		board.draw();
 		System.out.println("game runs!");
 	}
 }

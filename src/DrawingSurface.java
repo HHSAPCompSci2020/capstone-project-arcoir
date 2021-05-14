@@ -7,7 +7,7 @@ public class DrawingSurface {
 	
 	public DrawingSurface() {
 		palette = new ColorPalette();
-		character = new Character();
+//		character = new Character();
 		board = new Dashboard();
 	}
 	
@@ -17,6 +17,10 @@ public class DrawingSurface {
 	
 	public void saveImage() {
 		
+	}
+	
+	public void draw () {
+		board.draw();
 	}
 	
 }
