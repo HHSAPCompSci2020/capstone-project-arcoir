@@ -69,7 +69,7 @@ public class GameScreen extends Screen{
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (switchButton.contains(p))
-			surface.switchScreen(ScreenSwitcher.GAMESCREEN);
+			surface.switchScreen(ScreenSwitcher.DRAWINGSCREEN);
 
 
 	}	
