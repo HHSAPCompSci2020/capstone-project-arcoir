@@ -7,23 +7,8 @@ public class MainCharacter extends Character{
 		super(a, lives, x, y);
 	}
 	
-	public void attack() {
+	public void act() {
 		
 	}
 	
-	public void jump() {
-		
-	}
-	
-	public void moveRight() {
-		
-	}
-	
-	public void moveLeft() {
-		
-	}
-	
-	public void duck() {
-		
-	}
 }
