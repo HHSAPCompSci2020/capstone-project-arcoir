@@ -60,8 +60,12 @@ public class Character {
 		return y;
 	}
 	
-	public void displayHitbox(Graphics g) {
-		g.drawRect((int)x, (int)y, hitBox.width, hitBox.height);
+	public int getWidth() {
+		return hitBox.width;
+	}
+	
+	public int getHeight() {
+		return hitBox.height
 	}
 	
 
