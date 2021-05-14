@@ -7,7 +7,6 @@ import processing.core.PApplet;
 
 public class Menu {
 
-	PApplet marker = new PApplet();
 	private GameRunner runner;
 	private DrawingSurface surface;
 	private Dashboard board;
@@ -22,7 +21,7 @@ public class Menu {
 	 * 
 	 */
 	public void runGame() {
-		board.draw(marker);
+		board.draw(surface);
 		System.out.println("game runs!");
 	}
 	
