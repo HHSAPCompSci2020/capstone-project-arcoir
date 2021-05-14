@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Rectangle;
 
 /**
  * @author Lindsay Qin
@@ -7,12 +8,14 @@ import java.awt.Color;
 public class ColorPalette {
 	private Color [] palette;
 	private Color selectedColor;
+	private Rectangle [] colors;
 	
 	/**
 	 * Initializes a new palette with 24 default colors. Selects the first color.
 	 */
 	public ColorPalette () {
 		palette = new Color [24];
+		colors = new Rectangle [24];
 		reset();
 		selectedColor = palette[0];
 	}
@@ -80,5 +83,9 @@ public class ColorPalette {
 		palette[21] = new Color (255,207,171); //peach
 		palette[22] = new Color (250,167,108); //tan
 		palette[23] = new Color (181, 101, 29); //light brown
+	}
+	
+	public void mousePressed (double x, double y) {
+		
 	}
 }
