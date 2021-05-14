@@ -17,8 +17,7 @@ public class Dashboard {
 	public Dashboard () {
 		help = new Rectangle(10, 10, 50, 50);
 		map = new Rectangle();
-		pause = new Rectangle();
-		
+		pause = new Rectangle();		
 	}
 	
 	//Methods

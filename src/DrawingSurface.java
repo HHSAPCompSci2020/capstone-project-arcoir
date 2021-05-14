@@ -8,6 +8,7 @@ public class DrawingSurface extends PApplet{
 //	public Character character;
 	public Dashboard board;
 	private Color[][] character;
+	private Point prevToggle;
 	
 	public DrawingSurface() {
 		palette = new ColorPalette();
@@ -31,6 +32,8 @@ public class DrawingSurface extends PApplet{
 	public void draw () {
 		background(255);
 		fill(0);
+		
+		drawGrid(width/5, 0, (int)(width * 0.8), height);
 		board.draw(this);
 	}
 	
@@ -53,7 +56,47 @@ public class DrawingSurface extends PApplet{
 				float rectX = x + j * rectWidth;
 				float rectY = y + i * rectHeight;
 				
+				Color current = character[i][j];
 				
+				//draw grid here (not transparent background, but what is in the character array
+				fill(current.getRGB());
+				rect(rectX, rectY, rectWidth, rectHeight);
+			}
+		}
+	}
+	
+	/**
+	 * (Graphical UI)
+	 * Draws a gray and white background on a PApplet.
+	 * 
+	 * @param x The x pixel coordinate of the upper left corner of the grid drawing. 
+	 * @param y The y pixel coordinate of the upper left corner of the grid drawing.
+	 * @param width The pixel width of the grid drawing.
+	 * @param height The pixel height of the grid drawing.
+	 */
+	public void drawBackGround(float x, float y, float width, float height) {
+		float rectWidth = width/character[0].length;
+		float rectHeight = height/character.length;
+		
+		boolean isWhite = true;
+		
+		for (int i = 0; i < character.length; i++) {
+			for (int j = 0; j < character[0].length; j++) {
+				float rectX = x + j * rectWidth;
+				float rectY = y + i * rectHeight;
+				
+				Color current;
+				
+				if (isWhite) {
+					current = Color.WHITE;
+				} else {
+					current = Color.LIGHT_GRAY;
+				}
+				
+				//draw grid here (not transparent background, but what is in the character array
+				fill(current.getRGB());
+				rect(rectX, rectY, rectWidth, rectHeight);
+				isWhite = !isWhite;
 			}
 		}
 	}
@@ -100,12 +143,32 @@ public class DrawingSurface extends PApplet{
 	public void toggleCell(int i, int j) {
 		character[i][j] = palette.getSelectedColor();
 	}
-
-	
-	
 	
 	public void mousePressed() {
+		if (mouseButton == LEFT) {
+			Point click = new Point(mouseX,mouseY);
+			float dimension = height;
+			Point coord = clickToIndex(click,0,0,dimension,dimension);
+			if (coord != null) {
+				toggleCell(coord.x, coord.y);
+				prevToggle = coord;
+			}
+		} 
+
 		board.mousePressed(mouseX, mouseY);
 	}
+	
+	public void mouseDragged() {
+		if (mouseButton == LEFT) {
+			Point click = new Point(mouseX,mouseY);
+			float dimension = height;
+			Point coord = clickToIndex(click,0,0,dimension,dimension);
+			if (coord != null && !coord.equals(prevToggle)) {
+				toggleCell(coord.x, coord.y);
+				prevToggle = coord;
+			}
+		} 
+	}
+
 	
 }

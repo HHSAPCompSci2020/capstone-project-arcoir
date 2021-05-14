@@ -2,6 +2,9 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+import processing.awt.PSurfaceAWT;
+import processing.core.PApplet;
+
 public class Main {
 
 	public static Menu menu = new Menu();
@@ -12,6 +15,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		JFrame w = new JFrame("Arcoir");
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
