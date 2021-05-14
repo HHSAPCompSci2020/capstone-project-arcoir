@@ -22,7 +22,7 @@ Talk with your group. Consider drawing some pictures of what you think your proj
 
 Arcoir
 Authors: Nicole Spaulding, Emily Zhang, Lindsay Qin
-Revision: 5/7/21
+Revision: 5/14/21
 
 
 Introduction: 
@@ -70,7 +70,7 @@ Right click the question mark at the bottom of the screen to get help.
 
 
 Drawing Screen
-Right click the colors to select a color. Click the grid to customize your character. [a]
+Right click the colors to select a color. Click the grid to customize your character. 
 Right click CHARACTER to customize the character you will be playing as. 
 Right click ENEMY to customize enemies. These can only be customized at the beginning of the game.
 Right click DOWNLOAD to download your customized character as a jpg or png.
@@ -86,7 +86,7 @@ Press the spacebar to jump.
 Press the right arrow to move right.
 Press the left arrow to move left.
 Go through coins to collect coins. 
-To avoid monsters, simply jump over them. To kill monsters, right-click anywhere on the screen once the monster comes into range.[b] 
+To avoid monsters, simply jump over them. To kill monsters, right-click anywhere on the screen once the monster comes into range. 
 Right click the treasure chest to collect the artifact and gain loot. 
 
 
@@ -101,6 +101,8 @@ Available lives, powerups, and the help button are always available to be access
 
 
 This is a side-view platformer game. The game will scroll as the player moves. 
+
+
 Features List (THE ONLY SECTION THAT CANNOT CHANGE LATER):
 Must-have Features:
 [These are features that we agree you will definitely have by the project due date. A good final project would have all of these completed. At least 5 are required. Each feature should be fully described (at least a few full sentences for each)]
@@ -221,6 +223,7 @@ UML Link
       * Animation: DefaultCharacter
       * Lives
    * Methods
+      * act
       * attack
       * jump
       * moveRight
@@ -236,10 +239,10 @@ UML Link
 
 * Animation
    * Fields
-      * ArrayList<Image> frames
+      * ArrayList<PImage> frames
       *    * Methods
       * Act()
-      * addFrame(Image image)
+      * addFrame(PImage image)
       * getFrame()
 * Character
    * Fields
@@ -257,8 +260,18 @@ Credits:
 
 
 Lindsay: Gameplay Elements, Enemies, Scenes 
+        ColorPalette, Map, Dashboard, DrawingSurface
 Nicole: Gameplay Elements, Character Control, Scenes
+        Animation, Character
 Emily: Gameplay Elements, GUI, Music
+Ground
+
+
+External Library: Processing
+Code from:
+        GameOfLife lab (Main, Grid methods, filereader)
+        Processing ScreenSwitcher demo
+        
 
 
 Fun things to do if we feel like it:
