@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.Rectangle;
 
 import processing.core.PApplet;
 // modfied from Mr. Shelby's SecondScreen class
@@ -13,11 +14,14 @@ public class GameScreen extends Screen{
 	private Dashboard dash;
 	private DrawingSurface surface;
 	Animation characterAnim;
+	private Rectangle switchButton;
+	
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
 		super(800, 600);
 		this.surface = surface;
 		characterAnim =  new Animation(300);
+		switchButton = new Rectangle (100, 100, 100, 100);
 		
 		
 	}
@@ -43,6 +47,8 @@ public class GameScreen extends Screen{
 
 		surface.popStyle();
 		
+		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
+		
 //		if (surface.isPressed(KeyEvent.VK_LEFT))
 //			
 //		if (surface.isPressed(KeyEvent.VK_RIGHT))
@@ -58,6 +64,14 @@ public class GameScreen extends Screen{
 //		}
 	}
 	
+	public void mousePressed() {
+		if (surface.mouseButton == surface.LEFT) {
 		
-	
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		if (switchButton.contains(p))
+			surface.switchScreen(ScreenSwitcher.GAMESCREEN);
+
+
+	}	
+	}	
 }

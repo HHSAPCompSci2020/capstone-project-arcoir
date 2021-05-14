@@ -37,6 +37,7 @@ public class DrawingScreen extends Screen {
 		
 		public void draw () {
 			surface.background(255);
+			
 			surface.fill(0);
 			
 			surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
