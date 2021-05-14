@@ -40,6 +40,8 @@ public class DrawingScreen extends Screen {
 			
 			surface.fill(0);
 			
+			surface.text( "click the black squares for help and screen switching", 500f, 70f);
+			
 			surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 			drawGrid(surface.width/5, 0, (int)(surface.width * 0.8), surface.height);
 			board.draw(surface);
