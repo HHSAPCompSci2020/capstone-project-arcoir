@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Point;
 
 
-public class DrawingSurface extends PApplet{
+public class DrawingSurface extends PApplet implements ScreenSwitcher{
 
 
 }
