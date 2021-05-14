@@ -1,5 +1,6 @@
+import processing.core.PApplet;
 
-public class DrawingSurface {
+public class DrawingSurface extends PApplet{
 
 	public ColorPalette palette;
 	public Character character;
@@ -20,7 +21,7 @@ public class DrawingSurface {
 	}
 	
 	public void draw () {
-		board.draw();
+		board.draw(this);
 	}
 	
 }

@@ -6,9 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 
-public class Dashboard extends PApplet{
+public class Dashboard {
 
 	// Fields
 	private Map realMap;
@@ -31,22 +30,23 @@ public class Dashboard extends PApplet{
 		
 	}
 	
-	public void draw() {
+	public void draw(PApplet marker) {
 		//load images
-		System.out.println("hi");
-		background(255);
-		fill(0);
-		rect(help.x, help.y, help.width, help.height);
+		System.out.println("h");
+		marker.background(255);
+		marker.fill(0);
+
+		marker.rect(help.x, help.y, help.width, help.height);
 	}
 	
-	public void mousePressed() {
-		if (help.contains(mouseX, mouseY)) {
+	public void mousePressed(double x, double y) {
+		if (help.contains(x, y)) {
 			JOptionPane.showMessageDialog(null, readData("resources/help/ArcoirHelp"));
 		}
-		if (map.contains(mouseX, mouseY)) {
+		if (map.contains(x, y)) {
 			
 		}
-		if (pause.contains(mouseX, mouseY)) {
+		if (pause.contains(x, y)) {
 			
 		}
 	}
