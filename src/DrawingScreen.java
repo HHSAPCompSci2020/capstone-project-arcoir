@@ -3,11 +3,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.Rectangle;
 
 public class DrawingScreen extends Screen {
 
 	public ColorPalette palette;
 	private DrawingSurface surface;
+	private Rectangle switchButton;
 
 //	public Character character;
 		public Dashboard board;
@@ -22,6 +24,7 @@ public class DrawingScreen extends Screen {
 //			character = new Character();
 			character = new Color [32][32];
 			board = new Dashboard();
+			switchButton = new Rectangle (50, 50, 100, 100);
 		}
 		
 		public void clickToFill() {
@@ -36,7 +39,7 @@ public class DrawingScreen extends Screen {
 			surface.background(255);
 			surface.fill(0);
 			
-		
+			surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 			drawGrid(surface.width/5, 0, (int)(surface.width * 0.8), surface.height);
 			board.draw(surface);
 		}
@@ -64,9 +67,9 @@ public class DrawingScreen extends Screen {
 					if(character[i][j] != null) {
 						Color current = character[i][j];
 					
-					//draw grid here (not transparent background, but what is in the character array
-					surface.fill(current.getRGB());
-					surface.rect(rectX, rectY, rectWidth, rectHeight);
+						//draw grid here (not transparent background, but what is in the character array
+						surface.fill(current.getRGB());
+						surface.rect(rectX, rectY, rectWidth, rectHeight);
 					}
 				}
 			}
@@ -161,6 +164,11 @@ public class DrawingScreen extends Screen {
 					prevToggle = coord;
 				}
 			} 
+			
+			Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+			if (switchButton.contains(p))
+				surface.switchScreen(ScreenSwitcher.GAMESCREEN);
+
 
 			board.mousePressed(surface.mouseX, surface.mouseY);
 		}
