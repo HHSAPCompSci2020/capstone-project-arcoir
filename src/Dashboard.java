@@ -22,20 +22,13 @@ public class Dashboard {
 	}
 	
 	//Methods
-	public void setup() {
-		
-	}
 	
-	public void settings() {
-		
-	}
 	
 	public void draw(PApplet marker) {
 		//load images
 		System.out.println("h");
-		marker.background(255);
-		marker.fill(0);
-
+		
+		//NULL ON BACKGROUND SEND HELP
 		marker.rect(help.x, help.y, help.width, help.height);
 	}
 	
