@@ -1,7 +1,7 @@
 import java.awt.event.KeyEvent;
 
 import processing.core.PApplet;
-
+// modfied from Mr. Shelby's SecondScreen class
 public class GameScreen extends Screen{
 
 	//Fields
