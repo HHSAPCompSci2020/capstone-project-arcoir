@@ -32,7 +32,7 @@ public class Dashboard {
 	
 	public void mousePressed(double x, double y) {
 		if (help.contains(x, y)) {
-			JOptionPane.showMessageDialog(null, readData("resources/help/ArcoirHelp"));
+			JOptionPane.showMessageDialog(null, readData("resources/help/ArcoirHelp.txt"));
 		}
 		if (map.contains(x, y)) {
 			

@@ -2,7 +2,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 
 import processing.core.PApplet;
-
+// modfied from Mr. Shelby's SecondScreen class
 public class GameScreen extends Screen{
 
 	//Fields
@@ -18,11 +18,14 @@ public class GameScreen extends Screen{
 		super(800, 600);
 		this.surface = surface;
 		characterAnim =  new Animation(300);
-//		characterAnim.addFrame(loadImage("stickfigure.gif"));
-		c = new MainCharacter(characterAnim, 3, 100, 100);
+		
 		
 	}
 	// Methods
+	public void setup() {
+		characterAnim.addFrame(surface.loadImage("stickfigure.gif"));
+		c = new MainCharacter(characterAnim, 3, 100, 100);
+	}
 	
 	public void draw() {
 		surface.pushStyle();
