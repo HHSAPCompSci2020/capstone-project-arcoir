@@ -23,7 +23,7 @@ public class Ground {
 		
 	}
 	
-	public Boolean hasColided() {
+	public Boolean hasColided(Rectangle R) {
 		return isACollision;
 		
 		
