@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
 
 public class DrawingScreen extends Screen {
 
@@ -12,9 +14,10 @@ public class DrawingScreen extends Screen {
 		private Color[][] character;
 		private Point prevToggle;
 		
-		public DrawingScreen(int width, int height) {
-			super (width, height);
+		public DrawingScreen(DrawingSurface surface) {
+			super (Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 			
+			this.surface = surface;
 			palette = new ColorPalette();
 //			character = new Character();
 			character = new Color [32][32];
