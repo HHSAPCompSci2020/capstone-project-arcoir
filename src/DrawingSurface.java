@@ -35,6 +35,7 @@ public class DrawingSurface extends PApplet{
 		
 		drawGrid(width/5, 0, (int)(width * 0.8), height);
 		board.draw(this);
+		
 	}
 	
 	/**

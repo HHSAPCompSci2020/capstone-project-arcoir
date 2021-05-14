@@ -13,19 +13,13 @@ public class Ground {
 	
 	public Ground(Rectangle ground) {
 		this.ground = ground;
-		isACollision = true;
 	}
 	
 	// Methods 
 	
+	
 	public void drawGround(PApplet marker, int topLeft, int topRight, int bottomLeft, int bottomRight) {
 		marker.rect(topLeft, topRight, bottomLeft, bottomRight);
-		
-	}
-	
-	public Boolean hasColided(Rectangle R) {
-		return isACollision;
-		
 		
 	}
 
