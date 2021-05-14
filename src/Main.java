@@ -6,9 +6,6 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
 public class Main {
-
-	public static Menu menu = new Menu();
-
 	
 	/**Runs the menu to start the game
 	 * 
