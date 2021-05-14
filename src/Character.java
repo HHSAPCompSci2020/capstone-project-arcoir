@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Character {
@@ -17,9 +18,17 @@ public class Character {
 		velY = 0;
 		this.x = x;
 		this.y = y;
-		hitBox = new Rectangle();
+		hitBox = new Rectangle(x, y, 20, 20);
 	}
 	//Methods
+	
+	public void jump() {
+		velY -= 5;
+	}
+	
+	public void duck() {
+		hitBox = new Rectangle((int)x, (int)y, 20, 10);
+	}
 	
 	public void translate(int xDir, int yDir){
 		x += xDir;
@@ -51,6 +60,9 @@ public class Character {
 		return y;
 	}
 	
+	public void displayHitbox(Graphics g) {
+		g.drawRect((int)x, (int)y, hitBox.width, hitBox.height);
+	}
 	
 
 }
