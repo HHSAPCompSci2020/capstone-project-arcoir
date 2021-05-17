@@ -1,6 +1,7 @@
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 import processing.core.PApplet;
 // modfied from Mr. Shelby's SecondScreen class
@@ -18,7 +19,7 @@ public class GameScreen extends Screen{
 	
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
-		super(800, 600);
+		super(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 		this.surface = surface;
 		characterAnim =  new Animation(300);
 		switchButton = new Rectangle (100, 100, 100, 100);

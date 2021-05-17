@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Rectangle;
+import java.awt.GraphicsEnvironment;
 
 public class DrawingScreen extends Screen {
 
@@ -17,8 +18,7 @@ public class DrawingScreen extends Screen {
 		private Point prevToggle;
 		
 		public DrawingScreen(DrawingSurface surface) {
-			super (Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
-			
+			super (Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);			
 			this.surface = surface;
 			palette = new ColorPalette();
 //			character = new Character();
