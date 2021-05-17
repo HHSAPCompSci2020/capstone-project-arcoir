@@ -18,12 +18,11 @@ public class DrawingScreen extends Screen {
 		private Point prevToggle;
 		
 		public DrawingScreen(DrawingSurface surface) {
-			super (Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);			
 			this.surface = surface;
 			palette = new ColorPalette();
 //			character = new Character();
 			character = new Color [32][32];
-			board = new Dashboard();
+			board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT);
 			switchButton = new Rectangle (50, 50, 100, 100);
 		}
 		

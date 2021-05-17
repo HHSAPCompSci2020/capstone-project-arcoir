@@ -19,7 +19,6 @@ public class GameScreen extends Screen{
 	
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
-		super(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 		this.surface = surface;
 		characterAnim =  new Animation(300);
 		switchButton = new Rectangle (100, 100, 100, 100);

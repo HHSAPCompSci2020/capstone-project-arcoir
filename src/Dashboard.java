@@ -9,10 +9,10 @@ public class Dashboard {
 	private Help helpWindow;
 	
 	// Constructor
-	public Dashboard () {
-		help = new Rectangle(10, 10, 50, 50);
-		map = new Rectangle();
-		pause = new Rectangle();	
+	public Dashboard (int x, int y, int width, int height) {
+		help = new Rectangle(x, y, width/20, width/20);
+		map = new Rectangle(x + width/20, y, width/20, width/20);
+		pause = new Rectangle(x + width/10, y, width/20, width/20);	
 		
 		helpWindow = new Help();
 	}
