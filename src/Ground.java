@@ -7,7 +7,6 @@ public class Ground {
 	// Fields
 	private Image image;
 	private Rectangle ground;
-	boolean isACollision;
 	
 	// Constructor
 	
@@ -18,8 +17,12 @@ public class Ground {
 	// Methods 
 	
 	
-	public void drawGround(PApplet marker, int topLeft, int topRight, int bottomLeft, int bottomRight) {
-		marker.rect(topLeft, topRight, bottomLeft, bottomRight);
+	public Rectangle getRect() {
+		return ground;
+	}
+	
+	public void drawGround(PApplet marker) {
+		marker.rect(ground.x, ground.y, ground.width, ground.height);
 		
 	}
 
