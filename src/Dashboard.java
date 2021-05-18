@@ -35,7 +35,7 @@ public class Dashboard {
 	public void draw(PApplet marker) {
 		//load images
 //		marker.popStyle();
-//		marker.noFill();
+		marker.noFill();
 //		marker.noStroke();
 		marker.rect(help.x, help.y, help.width, help.height);
 //		marker.pushStyle();
