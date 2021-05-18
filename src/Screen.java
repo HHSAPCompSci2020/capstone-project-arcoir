@@ -1,4 +1,3 @@
-import java.awt.Toolkit;
 
 public abstract class Screen {
 	
@@ -6,8 +5,8 @@ public final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
 	public Screen() {
 
-		this.DRAWING_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-		this.DRAWING_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+		this.DRAWING_WIDTH = 1000;
+		this.DRAWING_HEIGHT = 700;
 	
 	}
 	
