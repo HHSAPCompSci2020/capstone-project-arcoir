@@ -7,7 +7,6 @@ public class Ground {
 	// Fields
 	private Image image;
 	private Rectangle ground;
-	boolean isACollision;
 	
 	// Constructor
 	
