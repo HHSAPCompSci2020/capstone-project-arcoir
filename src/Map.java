@@ -1,5 +1,5 @@
 /**
- * @author Lindsay Qin
+ * @author lindsayqin
  *
  */
 public class Map {

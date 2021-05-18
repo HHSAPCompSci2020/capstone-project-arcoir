@@ -23,7 +23,6 @@ public class Help {
 		JTextArea text = new JTextArea(readData("resources/help/ArcoirHelp.txt"));
 		text.setSize(400, 400);
 	    text.setLineWrap(true);
-	    text.setWrapStyleWord(true);
 	    text.setEditable(false);
 	    text.setVisible(true);
 

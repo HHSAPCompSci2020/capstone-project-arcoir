@@ -1,18 +1,18 @@
-import processing.core.PApplet;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.Rectangle;
-import java.awt.GraphicsEnvironment;
 
+/**
+ * 
+ * @author lindsayqin
+ *
+ */
 public class DrawingScreen extends Screen {
 
 	public ColorPalette palette;
 	private DrawingSurface surface;
 	private Rectangle switchButton;
 
-//	public Character character;
 		public Dashboard board;
 		private Color[][] character;
 		private Point prevToggle;
@@ -20,7 +20,6 @@ public class DrawingScreen extends Screen {
 		public DrawingScreen(DrawingSurface surface) {
 			this.surface = surface;
 			palette = new ColorPalette();
-//			character = new Character();
 			character = new Color [32][32];
 			board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT);
 			switchButton = new Rectangle (50, 50, 100, 100);
@@ -35,6 +34,8 @@ public class DrawingScreen extends Screen {
 		}
 		
 		public void draw () {
+			int gridWidth = DRAWING_HEIGHT;
+			int gridHeight = DRAWING_HEIGHT;
 			surface.background(255);
 			
 			surface.fill(0);
@@ -42,7 +43,16 @@ public class DrawingScreen extends Screen {
 			surface.text( "click the black squares for help and screen switching", 500f, 70f);
 			
 			surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
-			drawGrid(surface.width/5, 0, (int)(surface.width * 0.8), surface.height);
+			
+			surface.noFill();
+			System.out.println(DRAWING_WIDTH);
+			System.out.println(DRAWING_HEIGHT);
+			
+			System.out.println(DRAWING_WIDTH/2 - gridWidth);
+			surface.rect(DRAWING_WIDTH/2 - gridWidth, 0, gridWidth, gridHeight);
+			drawBackground(DRAWING_WIDTH/2 - gridWidth, 0, gridHeight);
+			drawGrid(DRAWING_WIDTH/2 - gridWidth, 0, gridHeight);
+
 			board.draw(surface);
 		}
 		
@@ -56,22 +66,25 @@ public class DrawingScreen extends Screen {
 		 * @param width The pixel width of the grid drawing.
 		 * @param height The pixel height of the grid drawing.
 		 */
-		public void drawGrid(float x, float y, float width, float height) {
-			float rectWidth = width/character[0].length;
-			float rectHeight = height/character.length;
+		public void drawGrid(float x, float y, float side) {
+			float sideLength = side/character.length;
+		
 			
 			for (int i = 0; i < character.length; i++) {
 				for (int j = 0; j < character[0].length; j++) {
-					float rectX = x + j * rectWidth;
-					float rectY = y + i * rectHeight;
+					float rectX = x + j * sideLength;
+					float rectY = y + i * sideLength;
 					
 					
 					if(character[i][j] != null) {
 						Color current = character[i][j];
 					
 						//draw grid here (not transparent background, but what is in the character array
+						surface.pushStyle();
+						surface.noStroke();
 						surface.fill(current.getRGB());
-						surface.rect(rectX, rectY, rectWidth, rectHeight);
+						surface.rect(rectX, rectY, sideLength, sideLength);
+						surface.popStyle();
 					}
 				}
 			}
@@ -86,30 +99,33 @@ public class DrawingScreen extends Screen {
 		 * @param width The pixel width of the grid drawing.
 		 * @param height The pixel height of the grid drawing.
 		 */
-		public void drawBackGround(float x, float y, float width, float height) {
-			float rectWidth = width/character[0].length;
-			float rectHeight = height/character.length;
-			
-			boolean isWhite = true;
+		public void drawBackground(float x, float y, float side) {
+			float sideLength = side/character.length;
+			int gridCount = 0;
 			
 			for (int i = 0; i < character.length; i++) {
 				for (int j = 0; j < character[0].length; j++) {
-					float rectX = x + j * rectWidth;
-					float rectY = y + i * rectHeight;
+					float rectX = x + j * sideLength;
+					float rectY = y + i * sideLength;
 					
 					Color current;
 					
-					if (isWhite) {
+					if (gridCount % 2 == 0) {
 						current = Color.WHITE;
 					} else {
 						current = Color.LIGHT_GRAY;
 					}
 					
 					//draw grid here (not transparent background, but what is in the character array
+					surface.pushStyle();
+					surface.noStroke();
 					surface.fill(current.getRGB());
-					surface.rect(rectX, rectY, rectWidth, rectHeight);
-					isWhite = !isWhite;
+					surface.rect(rectX, rectY, sideLength, sideLength);
+					surface.popStyle();
+					
+					gridCount++;
 				}
+				gridCount++;
 			}
 		}
 		

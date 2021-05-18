@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 
 /**
- * @author Lindsay Qin
+ * @author lindsayqin
  *
  */
 public class ColorPalette {

@@ -1,6 +1,11 @@
 import processing.core.PApplet;
 import java.awt.Rectangle;
 
+/**
+ * 
+ * @author lindsayqin
+ *
+ */
 public class Dashboard {
 
 	// Fields
@@ -9,6 +14,13 @@ public class Dashboard {
 	private Help helpWindow;
 	
 	// Constructor
+	/**
+	 * 
+	 * @param x coordinate of top left corner of dashboard
+	 * @param y coordinate of top left corner of dashboard
+	 * @param width of dashboard
+	 * @param height of dashboard
+	 */
 	public Dashboard (int x, int y, int width, int height) {
 		help = new Rectangle(x, y, width/20, width/20);
 		map = new Rectangle(x + width/20, y, width/20, width/20);
@@ -23,7 +35,8 @@ public class Dashboard {
 	public void draw(PApplet marker) {
 		//load images
 		
-		marker.rect(help.x, help.y, help.width, help.height);
+//		marker.rect(help.x, help.y, help.width, help.height);
+//		marker.image(marker.loadImage("help icon.gif"), help.x, help.y);
 	}
 	
 	public void mousePressed(double x, double y) {
