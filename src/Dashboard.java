@@ -34,9 +34,12 @@ public class Dashboard {
 	
 	public void draw(PApplet marker) {
 		//load images
-		
+//		marker.popStyle();
+//		marker.noFill();
+//		marker.noStroke();
 		marker.rect(help.x, help.y, help.width, help.height);
-//		marker.image(marker.loadImage("help icon.gif"), help.x, help.y);
+//		marker.pushStyle();
+		marker.image(marker.loadImage("resources/help/helpIcon.gif"), help.x, help.y, help.width, help.height);
 	}
 	
 	public void mousePressed(double x, double y) {
