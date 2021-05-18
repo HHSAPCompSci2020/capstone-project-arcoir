@@ -24,7 +24,7 @@ public class DrawingScreen extends Screen {
 			character = new Color [32][32];
 			board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT);
 			switchButton = new Rectangle (50, 50, 100, 100);
-			gridStartX = DRAWING_WIDTH/2 - DRAWING_HEIGHT;
+			gridStartX = DRAWING_WIDTH/2 - DRAWING_HEIGHT/2;
 			gridStartY = 0;
 		}
 		
@@ -48,10 +48,7 @@ public class DrawingScreen extends Screen {
 			surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 			
 			surface.noFill();
-			System.out.println(DRAWING_WIDTH);
-			System.out.println(DRAWING_HEIGHT);
 			
-			System.out.println(gridStartX);
 			surface.rect(gridStartX, 0, gridWidth, gridHeight);
 			drawBackground(gridStartX, 0, gridHeight);
 			drawGrid(gridStartX, 0, gridHeight);
@@ -153,7 +150,7 @@ public class DrawingScreen extends Screen {
 			float y1 = p.y - y;
 			
 			if ((x <= p.x && p.x < x + width) && (y <= p.y && p.y < y + height)) {
-				a = (int)(y1/rectHeight) + (int)rectHeight;
+				a = (int)(y1/rectHeight);
 				b = (int)(x1/rectWidth);
 			}
 			
@@ -178,7 +175,7 @@ public class DrawingScreen extends Screen {
 		public void mousePressed() {
 			if (surface.mouseButton == surface.LEFT) {
 				Point click = new Point(surface.mouseX, surface.mouseY);
-				Point coord = clickToIndex(click,gridStartX,gridStartY, DRAWING_HEIGHT, DRAWING_HEIGHT);
+				Point coord = clickToIndex(click, gridStartX, gridStartY, DRAWING_HEIGHT, DRAWING_HEIGHT);
 				if (coord != null) {
 					toggleCell(coord.x, coord.y);
 					prevToggle = coord;
@@ -196,7 +193,7 @@ public class DrawingScreen extends Screen {
 		public void mouseDragged() {
 			if (surface.mouseButton == surface.LEFT) {
 				Point click = new Point(surface.mouseX, surface.mouseY);
-				Point coord = clickToIndex(click,gridStartX, gridStartY, DRAWING_HEIGHT, DRAWING_HEIGHT);
+				Point coord = clickToIndex(click, gridStartX, gridStartY, DRAWING_HEIGHT, DRAWING_HEIGHT);
 				if (coord != null && !coord.equals(prevToggle)) {
 					toggleCell(coord.x, coord.y);
 					prevToggle = coord;
