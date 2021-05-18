@@ -37,21 +37,19 @@ public class DrawingScreen extends Screen {
 		}
 		
 		public void draw () {
-			int gridWidth = DRAWING_HEIGHT;
-			int gridHeight = DRAWING_HEIGHT;
+			int gridSide = DRAWING_HEIGHT;
+			
 			surface.background(255);
 			
 			surface.fill(0);
-			
 			surface.text( "click the black squares for help and screen switching", 500f, 70f);
-			
 			surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 			
 			surface.noFill();
 			
-			surface.rect(gridStartX, 0, gridWidth, gridHeight);
-			drawBackground(gridStartX, 0, gridHeight);
-			drawGrid(gridStartX, 0, gridHeight);
+//			surface.rect(gridStartX, 0, gridWidth, gridHeight);
+			drawBackground(gridStartX, 0, gridSide);
+			drawGrid(gridStartX, 0, gridSide);
 
 			board.draw(surface);
 		}

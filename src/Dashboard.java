@@ -35,7 +35,7 @@ public class Dashboard {
 	public void draw(PApplet marker) {
 		//load images
 		
-//		marker.rect(help.x, help.y, help.width, help.height);
+		marker.rect(help.x, help.y, help.width, help.height);
 //		marker.image(marker.loadImage("help icon.gif"), help.x, help.y);
 	}
 	
