@@ -1,6 +1,8 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import processing.core.PApplet;
+
 public class Character {
 	// Fields
 	private Animation animation;
@@ -18,9 +20,13 @@ public class Character {
 		velY = 0;
 		this.x = x;
 		this.y = y;
-		hitBox = new Rectangle(x, y, 20, 20);
+		hitBox = new Rectangle(x, y, 200, 200);
 	}
 	//Methods
+	
+	public void draw(PApplet g) {
+		g.image(animation.getFrame(), (float)x, (float)y);
+	}
 	
 	public void jump() {
 		velY -= 5;
@@ -68,7 +74,8 @@ public class Character {
 		return hitBox.height;
 	}
 	
-
+	
+	
 }
 
 
