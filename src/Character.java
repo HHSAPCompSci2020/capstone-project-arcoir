@@ -81,7 +81,7 @@ public class Character {
 		// ***********X AXIS***********
 
 
-		velX *= friction;
+		//velX *= friction;
 
 		double xCoord2 = xCoord + velY;
 
@@ -134,9 +134,9 @@ public class Character {
 		hitBox = new Rectangle((int)x, (int)y, 20, 10);
 	}
 	
-	public void translate(int xDir, int yDir){
-		x += xDir;
-		y += yDir;
+	public void translate(int xDir){
+		if (velX <= 10 && velX >= -10)
+			velX += xDir;
 	}
 	
 	public void attack(Character other) {

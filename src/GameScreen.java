@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
@@ -9,9 +10,9 @@ public class GameScreen extends Screen{
 
 	//Fields
 	
-	private MainCharacter c;
+	private Character c;
 	private Enemy e;
-	private Ground g;
+	private ArrayList<Ground> g;
 	private Dashboard dash;
 	private DrawingSurface surface;
 	Animation characterAnim;
@@ -22,14 +23,15 @@ public class GameScreen extends Screen{
 		this.surface = surface;
 		characterAnim =  new Animation(300);
 		switchButton = new Rectangle (100, 100, 100, 100);
-		g = new Ground(new Rectangle(100, 500, 1000, 5));
+		g = new ArrayList<Ground>();
+		g.add(new Ground(new Rectangle(100, 500, 1000, 20)));
 		
 		
 	}
 	// Methods
 	public void setup() {
 		characterAnim.addFrame(surface.loadImage("resources/stickfigure.png"));
-		c = new MainCharacter(characterAnim, 3, 100, 100);
+		c = new Character(characterAnim, 3, 100, 100);
 	}
 	
 	public void draw() {
@@ -42,7 +44,10 @@ public class GameScreen extends Screen{
 //		surface.rect((float)c.getX(), (float)c.getY(), (float)c.getWidth(), (float)c.getHeight());
 //		surface.rect(x,y,30,30);
 		c.draw(surface);
-		g.drawGround(surface);
+		for(Ground ground: g) {
+			ground.drawGround(surface);
+		}
+		
 		
 		surface.fill(0);
 		surface.text("Move: Arrow keys",10,30);
@@ -56,15 +61,15 @@ public class GameScreen extends Screen{
 		
 		
 		if (surface.isPressed(KeyEvent.VK_LEFT))
-			c.translate(-5, 0);
+			c.translate(-5);
 		if (surface.isPressed(KeyEvent.VK_RIGHT))
-			c.translate(5, 0);
+			c.translate(5);
 		if (surface.isPressed(KeyEvent.VK_UP))
 			c.jump();
 		if (surface.isPressed(KeyEvent.VK_DOWN))
 			c.duck();
 		
-		c.act();
+		c.act(g);
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {
