@@ -48,8 +48,7 @@ public class Help {
 					
 					while (in.hasNext()) {
 						String line = in.nextLine();
-						for(int i = 0; i < line.length(); i++)
-							text += line.charAt(i);
+						text += line + "\n";
 					}
 
 			} catch (IOException ex) {

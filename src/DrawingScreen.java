@@ -13,7 +13,6 @@ public class DrawingScreen extends Screen {
 	private DrawingSurface surface;
 	private Rectangle switchButton;
 	private int gridStartX, gridStartY;
-
 		public Dashboard board;
 		private Color[][] character;
 		private Point prevToggle;
@@ -22,9 +21,8 @@ public class DrawingScreen extends Screen {
 			this.surface = surface;
 			palette = new ColorPalette();
 			character = new Color [32][32];
-			board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT);
 			switchButton = new Rectangle (50, 50, 100, 100);
-			gridStartX = DRAWING_WIDTH/2 - DRAWING_HEIGHT/2;
+			gridStartX = 150;
 			gridStartY = 0;
 		}
 		
@@ -36,8 +34,12 @@ public class DrawingScreen extends Screen {
 			
 		}
 		
+		public void setup () {
+			board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, surface.loadImage("resources/help/helpIcon.gif"));
+		}
+		
 		public void draw () {
-			int gridSide = DRAWING_HEIGHT;
+			int gridSide = 700;
 			
 			surface.background(255);
 			
@@ -173,7 +175,7 @@ public class DrawingScreen extends Screen {
 		public void mousePressed() {
 			if (surface.mouseButton == surface.LEFT) {
 				Point click = new Point(surface.mouseX, surface.mouseY);
-				Point coord = clickToIndex(click, gridStartX, gridStartY, DRAWING_HEIGHT, DRAWING_HEIGHT);
+				Point coord = clickToIndex(click, gridStartX, gridStartY, 700, 700);
 				if (coord != null) {
 					toggleCell(coord.x, coord.y);
 					prevToggle = coord;
@@ -191,7 +193,7 @@ public class DrawingScreen extends Screen {
 		public void mouseDragged() {
 			if (surface.mouseButton == surface.LEFT) {
 				Point click = new Point(surface.mouseX, surface.mouseY);
-				Point coord = clickToIndex(click, gridStartX, gridStartY, DRAWING_HEIGHT, DRAWING_HEIGHT);
+				Point coord = clickToIndex(click, gridStartX, gridStartY, 700, 700);
 				if (coord != null && !coord.equals(prevToggle)) {
 					toggleCell(coord.x, coord.y);
 					prevToggle = coord;

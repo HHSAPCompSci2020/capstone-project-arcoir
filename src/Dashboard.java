@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 import java.awt.Rectangle;
 
 /**
@@ -12,6 +13,7 @@ public class Dashboard {
 	private Map realMap;
 	private Rectangle help, map, pause; 
 	private Help helpWindow;
+	private PImage helpIcon;
 	
 	// Constructor
 	/**
@@ -21,10 +23,11 @@ public class Dashboard {
 	 * @param width of dashboard
 	 * @param height of dashboard
 	 */
-	public Dashboard (int x, int y, int width, int height) {
+	public Dashboard (int x, int y, int width, int height, PImage image) {
 		help = new Rectangle(x, y, width/20, width/20);
 		map = new Rectangle(x + width/20, y, width/20, width/20);
 		pause = new Rectangle(x + width/10, y, width/20, width/20);	
+		helpIcon = image;
 		
 		helpWindow = new Help();
 	}
@@ -35,11 +38,10 @@ public class Dashboard {
 	public void draw(PApplet marker) {
 		//load images
 //		marker.popStyle();
-		marker.noFill();
+//		marker.noFill();
 //		marker.noStroke();
-		marker.rect(help.x, help.y, help.width, help.height);
 //		marker.pushStyle();
-		marker.image(marker.loadImage("resources/help/helpIcon.gif"), help.x, help.y, help.width, help.height);
+		marker.image(helpIcon, 900, 900);
 	}
 	
 	public void mousePressed(double x, double y) {
