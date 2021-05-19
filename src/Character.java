@@ -11,7 +11,7 @@ public class Character {
 	private Animation animation;
 	private int lives;
 	private double x, y;
-	private float velX, velY;
+	private double velX, velY;
 	private Rectangle hitBox;
 	private boolean isAlive, onASurface;
 	private double friction;
@@ -27,7 +27,7 @@ public class Character {
 		velY = 0;
 		this.x = x;
 		this.y = y;
-		hitBox = new Rectangle(x, y, 200, 200);
+		hitBox = new Rectangle(x, y, 40, 90);
 		friction = 0.85;
 		gravity = 0.7;
 		jumpStrength = 15;
@@ -48,10 +48,11 @@ public class Character {
 		
 		onASurface = false;
 		
-		if (velX > 0) {
+		if (velY > 0) {
 			Ground standingSurface = null;
 			for (Ground s : obstacles) {
 				if (s.getRect().intersects(strechY)) {
+					System.out.println("made it");
 					onASurface = true;
 					standingSurface = s;
 					velY = 0;
@@ -81,9 +82,9 @@ public class Character {
 		// ***********X AXIS***********
 
 
-		//velX *= friction;
+		velX *= friction;
 
-		double xCoord2 = xCoord + velY;
+		double xCoord2 = xCoord + velX;
 
 		Rectangle2D.Double strechX = new Rectangle2D.Double(Math.min(xCoord,xCoord2),yCoord2,width+Math.abs(velX),height);
 
@@ -123,19 +124,20 @@ public class Character {
 	}
 	
 	public void draw(PApplet g) {
-		g.image(animation.getFrame(), (float)x, (float)y);
+		g.image(animation.getFrame(), (float)x-45, (float)y - 20);
 	}
 	
 	public void jump() {
-		velY -= jumpStrength;
+		if(onASurface)
+			velY -= jumpStrength;
 	}
 	
 	public void duck() {
-		hitBox = new Rectangle((int)x, (int)y, 20, 10);
+		//hitBox = new Rectangle((int)x, (int)y, 20, 10);
 	}
 	
 	public void translate(int xDir){
-		if (velX <= 10 && velX >= -10)
+		//if (velX <= 10 && velX >= -10)
 			velX += xDir;
 	}
 	
