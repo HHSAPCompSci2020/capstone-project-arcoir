@@ -77,10 +77,10 @@ public class GameScreen extends Screen{
 //		}
 	}
 	
-	public void mousePressed() {
+	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
 		
-		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+//		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (switchButton.contains(p))
 			surface.switchScreen(ScreenSwitcher.DRAWINGSCREEN);
 

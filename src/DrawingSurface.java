@@ -68,19 +68,23 @@ public float ratioX, ratioY;
 	}
 	
 	public void mousePressed() {
-		activeScreen.mousePressed();
+		Point p = new Point ((int)(mouseX/ratioX), (int)(mouseY/ratioY));
+		activeScreen.mousePressed(p);
 	}
 	
 	public void mouseMoved() {
-		activeScreen.mouseMoved();
+		Point p = new Point ((int)(mouseX/ratioX), (int)(mouseY/ratioY));
+		activeScreen.mouseMoved(p);
 	}
 	
 	public void mouseDragged() {
-		activeScreen.mouseDragged();
+		Point p = new Point ((int)(mouseX/ratioX), (int)(mouseY/ratioY));
+		activeScreen.mouseDragged(p);
 	}
 	
 	public void mouseReleased() {
-		activeScreen.mouseReleased();
+		Point p = new Point ((int)(mouseX/ratioX), (int)(mouseY/ratioY));
+		activeScreen.mouseReleased(p);
 	}
 	
 	public Point assumedCoordinatesToActual(Point assumed) {
