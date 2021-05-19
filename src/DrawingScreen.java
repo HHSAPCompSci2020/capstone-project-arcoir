@@ -20,7 +20,7 @@ public class DrawingScreen extends Screen {
 		public DrawingScreen(DrawingSurface surface) {
 			this.surface = surface;
 			palette = new ColorPalette();
-			character = new Color [32][32];
+			character = new Color [128][128];
 			switchButton = new Rectangle (50, 50, 50, 50);
 			gridStartX = 150;
 		}
