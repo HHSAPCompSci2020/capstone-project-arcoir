@@ -15,13 +15,16 @@ public class GameScreen extends Screen{
 	private ArrayList<Ground> g;
 	private Dashboard dash;
 	private DrawingSurface surface;
-	Animation characterAnim;
+	Animation characterAnim, cWR, cWL;
 	private Rectangle switchButton;
 	PImage bg;
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
 		this.surface = surface;
 		characterAnim =  new Animation(300);
+		cWR = new Animation (300);
+		cWL = new Animation (300);
+		
 		switchButton = new Rectangle (100, 100, 100, 100);
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
@@ -31,9 +34,17 @@ public class GameScreen extends Screen{
 	// Methods
 	public void setup() {
 		bg = surface.loadImage("resources/maincharacter/bg2.png");
-		
+		loadWalkCycles();
 		characterAnim.addFrame(surface.loadImage("resources/maincharacter/idle2.png"));
 		c = new Character(characterAnim, 3, 100, 100);
+	}
+	
+	private void loadWalkCycles() {
+		cWR.addFrame(surface.loadImage("resources/maincharacter/walkright/SMWalkRight1.png"));
+		cWR.addFrame(surface.loadImage("resources/maincharacter/walkright/SMWalkRight2.png"));
+		cWR.addFrame(surface.loadImage("resources/maincharacter/walkright/SMWalkRight3.png"));
+		cWR.addFrame(surface.loadImage("resources/maincharacter/walkright/SMWalkRight4.png"));
+
 	}
 	
 	public void draw() {
@@ -66,11 +77,13 @@ public class GameScreen extends Screen{
 		
 		
 		
-		if (surface.isPressed(KeyEvent.VK_LEFT))
+		if (surface.isPressed(KeyEvent.VK_LEFT)) {
+			//c.setAnimation(cWL);
 			c.translate(-1);
-		if (surface.isPressed(KeyEvent.VK_RIGHT))
+		} if (surface.isPressed(KeyEvent.VK_RIGHT)) {
 			c.translate(1);
-		if (surface.isPressed(KeyEvent.VK_UP))
+			c.setAnimation(cWR);
+		} if (surface.isPressed(KeyEvent.VK_UP))
 			c.jump();
 
 		
