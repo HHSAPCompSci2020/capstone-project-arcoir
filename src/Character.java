@@ -52,7 +52,7 @@ public class Character {
 			Ground standingSurface = null;
 			for (Ground s : obstacles) {
 				if (s.getRect().intersects(strechY)) {
-					System.out.println("made it");
+					//System.out.println("made it");
 					onASurface = true;
 					standingSurface = s;
 					velY = 0;
@@ -130,10 +130,6 @@ public class Character {
 	public void jump() {
 		if(onASurface)
 			velY -= jumpStrength;
-	}
-	
-	public void duck() {
-		//hitBox = new Rectangle((int)x, (int)y, 20, 10);
 	}
 	
 	public void translate(int xDir){

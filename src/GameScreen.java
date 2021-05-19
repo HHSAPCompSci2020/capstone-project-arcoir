@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 // modfied from Mr. Shelby's SecondScreen class
 public class GameScreen extends Screen{
 
@@ -17,7 +18,7 @@ public class GameScreen extends Screen{
 	private DrawingSurface surface;
 	Animation characterAnim;
 	private Rectangle switchButton;
-	
+	PImage bg;
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
 		this.surface = surface;
@@ -25,19 +26,25 @@ public class GameScreen extends Screen{
 		switchButton = new Rectangle (100, 100, 100, 100);
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(100, 500, 1000, 20)));
-		
+
 		
 	}
 	// Methods
 	public void setup() {
+		bg = surface.loadImage("resources/maincharacter/bg2.png");
+		
 		characterAnim.addFrame(surface.loadImage("resources/maincharacter/idle2.png"));
 		c = new Character(characterAnim, 3, 100, 100);
 	}
 	
 	public void draw() {
-		surface.pushStyle();
 		
-		surface.background(255);   // Clear the screen with a white background
+		surface.pushStyle();
+//		surface.image(bg, 0, 0);
+		bg.resize(surface.width, surface.height);
+
+		surface.background(bg);   // Clear the screen with a white background
+		
 		surface.stroke(0);     // Set line drawing color to white
 		surface.noFill();
 
@@ -66,8 +73,7 @@ public class GameScreen extends Screen{
 			c.translate(1);
 		if (surface.isPressed(KeyEvent.VK_UP))
 			c.jump();
-		if (surface.isPressed(KeyEvent.VK_DOWN))
-			c.duck();
+
 		
 		c.act(g);
 //
