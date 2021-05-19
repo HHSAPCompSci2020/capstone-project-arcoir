@@ -11,7 +11,7 @@ public class DrawingScreen extends Screen {
 
 	public ColorPalette palette;
 	private DrawingSurface surface;
-	private Rectangle switchButton;
+	private Rectangle switchButton, paletteRect;
 	private int gridStartX;
 		public Dashboard board;
 		private Color[][] character;
@@ -20,6 +20,7 @@ public class DrawingScreen extends Screen {
 		public DrawingScreen(DrawingSurface surface) {
 			this.surface = surface;
 			palette = new ColorPalette();
+			paletteRect = new Rectangle (650, 0, 40, 240);
 			character = new Color [128][128];
 			switchButton = new Rectangle (50, 50, 50, 50);
 			gridStartX = 150;
@@ -178,14 +179,15 @@ public class DrawingScreen extends Screen {
 					toggleCell(coord.x, coord.y);
 					prevToggle = coord;
 				}
+				
+				Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+				if (switchButton.contains(p))
+					surface.switchScreen(ScreenSwitcher.GAMESCREEN);
+				
+				if (paletteRect.contains(click.x, click.y))
+					palette.mousePressed(click);
+				board.mousePressed(click.x, click.y);
 			} 
-			
-			Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-			if (switchButton.contains(p))
-				surface.switchScreen(ScreenSwitcher.GAMESCREEN);
-
-
-			board.mousePressed(click.x, click.y);
 		}
 		
 		public void mouseDragged(Point click) {

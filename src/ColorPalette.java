@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Rectangle;
 import processing.core.PApplet;
 
@@ -119,7 +120,53 @@ public class ColorPalette {
 
 	}
 	
-	public void mousePressed (double x, double y) {
+	/**
+	 * (Graphical UI)
+	 * Determines which element of the palette matches with a particular pixel coordinate.
+	 * This supports interaction with the grid using mouse clicks in the window.
+	 * 
+	 * @param p A Point object containing a graphical pixel coordinate.
+	 * @param x The x pixel coordinate of the upper left corner of the grid drawing. 
+	 * @param y The y pixel coordinate of the upper left corner of the grid drawing.
+	 * @param width The pixel width of the grid drawing.
+	 * @param height The pixel height of the grid drawing.
+	 * @return A Point object representing a coordinate within the game of life grid.
+	 */
+	public int clickToIndex(Point p, float x, float y) {
+		int a = -1; //def not on the grid
+		int b = -1; //def not on the grid
+		float x1 = p.x - x;
+		float y1 = p.y - y;
+					
+		if ((x <= p.x && p.x < x + 40) && (y <= p.y && p.y < y + 240)) {
+			a = (int)(y1/20);
+			b = (int)(x1/20);
+		}
 		
+		System.out.println(a + " " + b);
+		int index = -1;
+		
+		if (b == 0) {
+			index = a;
+		} else {
+			index = 12 + a;
+		}
+		
+		return index;
+	}
+	
+	private void toggleCell(int i) {
+		selectedColor = palette[i];
+	}
+	
+	/**
+	 * (Graphical UI)
+	 * changes color of selected pixel.
+	 * 
+	 * @param p The point that the mouse was clicked on.
+	 */
+	public void mousePressed (Point p) {
+		int index = clickToIndex(p, 650, 0);
+		toggleCell(index);
 	}
 }
