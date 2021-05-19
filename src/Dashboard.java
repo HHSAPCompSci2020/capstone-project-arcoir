@@ -42,7 +42,6 @@ public class Dashboard {
 	
 	public void mousePressed(double x, double y) {
 		if (help.contains(x, y)) {
-			System.out.println("a");
 			helpWindow.show();
 		}
 		if (map.contains(x, y)) {

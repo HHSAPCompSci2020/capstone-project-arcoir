@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Rectangle;
+import processing.core.PApplet;
 
 /**
  * @author lindsayqin
@@ -17,6 +18,7 @@ public class ColorPalette {
 		palette = new Color [24];
 		colors = new Rectangle [24];
 		reset();
+		initializeRects();
 		selectedColor = palette[0];
 	}
 	
@@ -83,6 +85,38 @@ public class ColorPalette {
 		palette[21] = new Color (255,207,171); //peach
 		palette[22] = new Color (250,167,108); //tan
 		palette[23] = new Color (181, 101, 29); //light brown
+	}
+	
+	/**
+	 * Draws the PApplet.
+	 * 
+	 * @param marker PApplet to draw
+	 */
+	public void draw (PApplet marker) {
+		for (int i = 0; i < palette.length/2; i++) {
+			marker.fill(palette[i].getRGB());
+			marker.rect(colors[i].x, colors[i].y, colors[i].width, colors[i].height);
+		}
+		for (int k = 12; k < palette.length; k++) {
+			marker.fill(palette[k].getRGB());
+			marker.rect(colors[k].x, colors[k].y, colors[k].width, colors[k].height);
+		}
+
+	}
+	
+	private void initializeRects() {
+		float rectX = 650;
+		float sideLength = 20;
+		for (int i = 0; i < palette.length/2; i++) {
+			float rectY = i * sideLength;
+			colors[i] = new Rectangle((int)rectX, (int)rectY, (int)sideLength, (int)sideLength);
+		}
+		rectX = 670;
+		for (int k = 12; k < palette.length; k++) {
+			float rectY = (k-12) * sideLength;
+			colors[k] = new Rectangle((int)rectX, (int)rectY, (int)sideLength, (int)sideLength);
+		}
+
 	}
 	
 	public void mousePressed (double x, double y) {

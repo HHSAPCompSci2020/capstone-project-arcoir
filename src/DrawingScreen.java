@@ -21,7 +21,7 @@ public class DrawingScreen extends Screen {
 			this.surface = surface;
 			palette = new ColorPalette();
 			character = new Color [32][32];
-			switchButton = new Rectangle (50, 50, 100, 100);
+			switchButton = new Rectangle (50, 50, 50, 50);
 			gridStartX = 150;
 		}
 		
@@ -44,13 +44,14 @@ public class DrawingScreen extends Screen {
 			surface.background(255);
 			
 			surface.fill(0);
-			surface.text( "click the black squares for help and screen switching", 500f, 70f);
 			surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 			
 			surface.noFill();
 			
 			drawBackground(gridStartX, 0, gridSide);
 			drawGrid(gridStartX, 0, gridSide);
+			
+			palette.draw(surface);
 
 			board.draw(surface);
 		}
@@ -72,7 +73,6 @@ public class DrawingScreen extends Screen {
 				for (int j = 0; j < character[0].length; j++) {
 					float rectX = x + j * sideLength;
 					float rectY = y + i * sideLength;
-					
 					
 					if(character[i][j] != null) {
 						Color current = character[i][j];

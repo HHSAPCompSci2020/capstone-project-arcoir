@@ -31,7 +31,7 @@ public class Help {
 
 	    helpWindow.add(scroll);
 	    helpWindow.setVisible(true);
-	    helpWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    helpWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	private String readData(String fileName) {
