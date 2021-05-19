@@ -24,11 +24,10 @@ public class Dashboard {
 	 * @param height of dashboard
 	 */
 	public Dashboard (int x, int y, int width, int height, PImage image) {
-		help = new Rectangle(x, y, width/20, width/20);
+		help = new Rectangle(750, 450, 50, 50);
 		map = new Rectangle(x + width/20, y, width/20, width/20);
 		pause = new Rectangle(x + width/10, y, width/20, width/20);	
 		helpIcon = image;
-		
 		helpWindow = new Help();
 	}
 	
@@ -37,15 +36,13 @@ public class Dashboard {
 	
 	public void draw(PApplet marker) {
 		//load images
-//		marker.popStyle();
-//		marker.noFill();
-//		marker.noStroke();
-//		marker.pushStyle();
-		marker.image(helpIcon, 900, 900);
+//		marker.rect(help.x,  help.y,  help.width,  help.height);
+		marker.image(helpIcon, 750, 450, 50, 50);
 	}
 	
 	public void mousePressed(double x, double y) {
 		if (help.contains(x, y)) {
+			System.out.println("a");
 			helpWindow.show();
 		}
 		if (map.contains(x, y)) {

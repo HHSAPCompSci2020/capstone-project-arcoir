@@ -12,7 +12,7 @@ public class DrawingScreen extends Screen {
 	public ColorPalette palette;
 	private DrawingSurface surface;
 	private Rectangle switchButton;
-	private int gridStartX, gridStartY;
+	private int gridStartX;
 		public Dashboard board;
 		private Color[][] character;
 		private Point prevToggle;
@@ -23,7 +23,6 @@ public class DrawingScreen extends Screen {
 			character = new Color [32][32];
 			switchButton = new Rectangle (50, 50, 100, 100);
 			gridStartX = 150;
-			gridStartY = 0;
 		}
 		
 		public void clickToFill() {
@@ -35,11 +34,12 @@ public class DrawingScreen extends Screen {
 		}
 		
 		public void setup () {
-			board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, surface.loadImage("resources/help/helpIcon.gif"));
+			board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
+					surface.loadImage("resources/help/helpIcon.gif"));
 		}
 		
 		public void draw () {
-			int gridSide = 700;
+			int gridSide = 500;
 			
 			surface.background(255);
 			
@@ -49,7 +49,6 @@ public class DrawingScreen extends Screen {
 			
 			surface.noFill();
 			
-//			surface.rect(gridStartX, 0, gridWidth, gridHeight);
 			drawBackground(gridStartX, 0, gridSide);
 			drawGrid(gridStartX, 0, gridSide);
 
@@ -68,7 +67,6 @@ public class DrawingScreen extends Screen {
 		 */
 		public void drawGrid(float x, float y, float side) {
 			float sideLength = side/character.length;
-		
 			
 			for (int i = 0; i < character.length; i++) {
 				for (int j = 0; j < character[0].length; j++) {
@@ -148,7 +146,7 @@ public class DrawingScreen extends Screen {
 			int b = -1; //def not on the grid
 			float x1 = p.x - x;
 			float y1 = p.y - y;
-			
+						
 			if ((x <= p.x && p.x < x + width) && (y <= p.y && p.y < y + height)) {
 				a = (int)(y1/rectHeight);
 				b = (int)(x1/rectWidth);
@@ -158,6 +156,7 @@ public class DrawingScreen extends Screen {
 			if (a == -1 && b == -1) {
 				coordinate = null; //if point not on the grid
 			}
+			
 			return coordinate;
 		}
 		
@@ -172,10 +171,9 @@ public class DrawingScreen extends Screen {
 			character[i][j] = palette.getSelectedColor();
 		}
 		
-		public void mousePressed() {
+		public void mousePressed(Point click) {
 			if (surface.mouseButton == surface.LEFT) {
-				Point click = new Point(surface.mouseX, surface.mouseY);
-				Point coord = clickToIndex(click, gridStartX, gridStartY, 700, 700);
+				Point coord = clickToIndex(click, gridStartX, 0, 500, 500);
 				if (coord != null) {
 					toggleCell(coord.x, coord.y);
 					prevToggle = coord;
@@ -187,13 +185,12 @@ public class DrawingScreen extends Screen {
 				surface.switchScreen(ScreenSwitcher.GAMESCREEN);
 
 
-			board.mousePressed(surface.mouseX, surface.mouseY);
+			board.mousePressed(click.x, click.y);
 		}
 		
-		public void mouseDragged() {
+		public void mouseDragged(Point click) {
 			if (surface.mouseButton == surface.LEFT) {
-				Point click = new Point(surface.mouseX, surface.mouseY);
-				Point coord = clickToIndex(click, gridStartX, gridStartY, 700, 700);
+				Point coord = clickToIndex(click, gridStartX, 0, 500, 500);
 				if (coord != null && !coord.equals(prevToggle)) {
 					toggleCell(coord.x, coord.y);
 					prevToggle = coord;
