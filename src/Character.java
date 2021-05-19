@@ -124,6 +124,7 @@ public class Character {
 	}
 	
 	public void draw(PApplet g) {
+		animation.update();
 		g.image(animation.getFrame(), (float)x-45, (float)y - 20);
 	//	System.out.println("w: " + animation.getFrame().width+ " h: " + animation.getFrame().height);
 	}
