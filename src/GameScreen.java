@@ -30,7 +30,7 @@ public class GameScreen extends Screen{
 	}
 	// Methods
 	public void setup() {
-		characterAnim.addFrame(surface.loadImage("resources/stickfigure.png"));
+		characterAnim.addFrame(surface.loadImage("resources/maincharacter/idle2.png"));
 		c = new Character(characterAnim, 3, 100, 100);
 	}
 	
@@ -41,7 +41,7 @@ public class GameScreen extends Screen{
 		surface.stroke(0);     // Set line drawing color to white
 		surface.noFill();
 
-//		surface.rect((float)c.getX(), (float)c.getY(), (float)c.getWidth(), (float)c.getHeight());
+		surface.rect((float)c.getX(), (float)c.getY(), (float)c.getWidth(), (float)c.getHeight());
 //		surface.rect(x,y,30,30);
 		c.draw(surface);
 		for(Ground ground: g) {
@@ -61,9 +61,9 @@ public class GameScreen extends Screen{
 		
 		
 		if (surface.isPressed(KeyEvent.VK_LEFT))
-			c.translate(-5);
+			c.translate(-1);
 		if (surface.isPressed(KeyEvent.VK_RIGHT))
-			c.translate(5);
+			c.translate(1);
 		if (surface.isPressed(KeyEvent.VK_UP))
 			c.jump();
 		if (surface.isPressed(KeyEvent.VK_DOWN))
