@@ -125,6 +125,7 @@ public class Character {
 	
 	public void draw(PApplet g) {
 		g.image(animation.getFrame(), (float)x-45, (float)y - 20);
+	//	System.out.println("w: " + animation.getFrame().width+ " h: " + animation.getFrame().height);
 	}
 	
 	public void jump() {
@@ -172,7 +173,9 @@ public class Character {
 		return hitBox.height;
 	}
 	
-	
+	public void setAnimation(Animation a ) {
+		this.animation = a;
+	}
 	
 }
 

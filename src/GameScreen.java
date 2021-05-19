@@ -12,7 +12,6 @@ public class GameScreen extends Screen{
 	//Fields
 	
 	private Character c;
-	private Enemy e;
 	private ArrayList<Ground> g;
 	private Dashboard dash;
 	private DrawingSurface surface;
@@ -25,7 +24,7 @@ public class GameScreen extends Screen{
 		characterAnim =  new Animation(300);
 		switchButton = new Rectangle (100, 100, 100, 100);
 		g = new ArrayList<Ground>();
-		g.add(new Ground(new Rectangle(100, 500, 1000, 20)));
+		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 
 		
 	}
