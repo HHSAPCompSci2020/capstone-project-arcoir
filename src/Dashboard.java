@@ -29,14 +29,10 @@ public class Dashboard {
 		pause = new Rectangle(x + width/10, y, width/20, width/20);	
 		helpIcon = image;
 		helpWindow = new Help();
-	}
-	
-	//Methods
-	
+	}	
 	
 	public void draw(PApplet marker) {
 		//load images
-//		marker.rect(help.x,  help.y,  help.width,  help.height);
 		marker.image(helpIcon, 750, 450, 50, 50);
 	}
 	

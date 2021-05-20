@@ -106,13 +106,13 @@ public class ColorPalette {
 	}
 	
 	private void initializeRects() {
-		float rectX = 650;
+		float rectX = 660;
 		float sideLength = 20;
 		for (int i = 0; i < palette.length/2; i++) {
 			float rectY = i * sideLength;
 			colors[i] = new Rectangle((int)rectX, (int)rectY, (int)sideLength, (int)sideLength);
 		}
-		rectX = 670;
+		rectX = 680;
 		for (int k = 12; k < palette.length; k++) {
 			float rectY = (k-12) * sideLength;
 			colors[k] = new Rectangle((int)rectX, (int)rectY, (int)sideLength, (int)sideLength);
@@ -143,9 +143,7 @@ public class ColorPalette {
 			b = (int)(x1/20);
 		}
 		
-		System.out.println(a + " " + b);
-		int index = -1;
-		
+		int index = -1; //def not right
 		if (b == 0) {
 			index = a;
 		} else {
