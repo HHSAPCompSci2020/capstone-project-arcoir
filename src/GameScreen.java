@@ -22,8 +22,8 @@ public class GameScreen extends Screen{
 	public GameScreen(DrawingSurface surface) {
 		this.surface = surface;
 		characterAnim =  new Animation(300);
-		cWR = new Animation (300);
-		cWL = new Animation (300);
+		cWR = new Animation (100);
+		cWL = new Animation (100);
 		
 		switchButton = new Rectangle (100, 100, 100, 100);
 		g = new ArrayList<Ground>();
@@ -44,14 +44,21 @@ public class GameScreen extends Screen{
 		cWR.addFrame(surface.loadImage("resources/maincharacter/walkright/SMWalkRight2.png"));
 		cWR.addFrame(surface.loadImage("resources/maincharacter/walkright/SMWalkRight3.png"));
 		cWR.addFrame(surface.loadImage("resources/maincharacter/walkright/SMWalkRight4.png"));
-
+		
+		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft1.png"));
+		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft2.png"));
+		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft3.png"));
+		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft4.png"));
 	}
 	
 	public void draw() {
 		
 		surface.pushStyle();
-//		surface.image(bg, 0, 0);
-		bg.resize(surface.width, surface.height);
+
+		while(bg.width != this.surface.width || bg.height != this.surface.height)
+			bg.resize(this.surface.width, this.surface.height);
+		
+		
 
 		surface.background(bg);   // Clear the screen with a white background
 		
@@ -82,10 +89,18 @@ public class GameScreen extends Screen{
 			c.translate(-1);
 		} if (surface.isPressed(KeyEvent.VK_RIGHT)) {
 			c.translate(1);
-			c.setAnimation(cWR);
-		} if (surface.isPressed(KeyEvent.VK_UP))
+		} if (surface.isPressed(KeyEvent.VK_UP)) {
 			c.jump();
+		}
 
+		if(c.getVelX() > 0.5 && c.getSurfaceState()) {
+			c.setAnimation(cWR);
+		} else if(c.getVelX() < -0.5 && c.getSurfaceState()) {
+			c.setAnimation(cWL);
+		}	else {
+		
+			c.setAnimation(characterAnim);
+		}
 		
 		c.act(g);
 //

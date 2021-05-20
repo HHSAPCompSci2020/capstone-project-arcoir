@@ -174,6 +174,19 @@ public class Character {
 		return hitBox.height;
 	}
 	
+	public double getVelX() {
+		return velX;
+	}
+	
+	public double getVelY() {
+		return velY;
+	}
+	
+	public boolean getSurfaceState() {
+		return onASurface;
+	}
+	
+	
 	public void setAnimation(Animation a ) {
 		this.animation = a;
 	}
