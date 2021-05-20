@@ -70,7 +70,7 @@ public class ColorPalette {
 		palette[5] = new Color (255,223,0); //golden yellow
 		palette[6] = Color.YELLOW; //yellow
 		palette[7] = new Color (197,227,132); //yellow green
-		palette[8] = new Color (0, 168, 107); //jade green
+		palette[8] = new Color (10, 107, 13); //jade green
 		palette[9] = new Color (28,172,120); //green
 		palette[10] = new Color (25,158,189); //turquoise
 		palette[11] = new Color (128,218,235); //sky blue
@@ -164,7 +164,7 @@ public class ColorPalette {
 	 * @param p The point that the mouse was clicked on.
 	 */
 	public void mousePressed (Point p) {
-		int index = clickToIndex(p, 650, 0);
+		int index = clickToIndex(p, 660, 0);
 		toggleCell(index);
 	}
 }
