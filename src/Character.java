@@ -30,7 +30,7 @@ public class Character {
 		hitBox = new Rectangle(x, y, 40, 90);
 		friction = 0.85;
 		gravity = 0.7;
-		jumpStrength = 15;
+		jumpStrength = 12;
 		onASurface = false;
 	}
 	//Methods
