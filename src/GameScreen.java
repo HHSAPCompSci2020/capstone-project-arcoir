@@ -20,6 +20,7 @@ public class GameScreen extends Screen {
 	private Rectangle switchButton;
 	private PImage bg;
 	private boolean isRight;
+	private ArrayList <Character> enemies;
 
 
 	// Constructor
@@ -119,6 +120,22 @@ public class GameScreen extends Screen {
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {
 //			surface.switchScreen(ScreenSwitcher.SCREEN1);
 //		}
+	}
+	
+	public void drawEnemies(int i) {
+		surface.fill(0, 0, 0);
+		surface.rect(i, 100, 40, 90);
+		
+	}
+	
+	public void spawnEnenimes() {
+	
+		for(int i=0; i< enemies.size(); i++) {
+			enemies.add(this.c);
+			this.drawEnemies(i*10);
+			
+		}
+		
 	}
 
 	public void mousePressed(Point p) {
