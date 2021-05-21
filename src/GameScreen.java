@@ -84,7 +84,10 @@ public class GameScreen extends Screen {
 
 	public void draw() {
 		
-		windowBoundary(surface.width, surface.height);
+		windowBoundary(1440, 847);
+		
+		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
+
 
 		surface.pushStyle();
 
