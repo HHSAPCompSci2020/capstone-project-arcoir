@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -67,7 +68,9 @@ public class GameScreen extends Screen {
 		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft3.png"));
 		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft4.png"));
 		
-		ea.addFrame(surface.loadImage("resources/enemy/turtle.png"));
+		PImage eImg = surface.loadImage("resources/enemy/turtle.png");
+		eImg.resize(50, 50);
+		ea.addFrame(eImg);
 
 	}
 
@@ -126,6 +129,15 @@ public class GameScreen extends Screen {
 		}
 
 		c.act(g);
+		for(Character enm : enemies) {
+			if(c.getX() + c.getWidth() > enm.getX() + enm.getWidth()) {
+				enm.translate(0.3);
+			} else if (c.getX() + c.getWidth() < enm.getX() + enm.getWidth()) {
+				enm.translate(-0.3);
+			}
+			enm.act(g);
+			
+		}
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {

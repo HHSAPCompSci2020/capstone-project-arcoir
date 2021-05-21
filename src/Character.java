@@ -115,7 +115,7 @@ public class Character {
 		}
 
 
-		if (Math.abs(velX) < .5)
+		if (Math.abs(velX) < 0.25)
 			velX = 0;
 
 		setX(xCoord2);
@@ -125,7 +125,7 @@ public class Character {
 	
 	public void draw(PApplet g) {
 		animation.update();
-		g.image(animation.getFrame(), (float)x-45, (float)y - 20);
+		g.image(animation.getFrame(), (float)x - 45, (float)y - 20);
 	//	System.out.println("w: " + animation.getFrame().width+ " h: " + animation.getFrame().height);
 	}
 	
@@ -134,7 +134,7 @@ public class Character {
 			velY -= jumpStrength;
 	}
 	
-	public void translate(int xDir){
+	public void translate(double xDir){
 		//if (velX <= 10 && velX >= -10)
 			velX += xDir;
 	}
@@ -166,6 +166,10 @@ public class Character {
 		return y;
 	}
 	
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+	
 	public int getWidth() {
 		return hitBox.width;
 	}
@@ -186,6 +190,12 @@ public class Character {
 		return onASurface;
 	}
 	
+	public boolean intersects(Character other) {
+		if(hitBox.intersects(other.getHitBox())) {
+			return true;
+		}
+		return false;
+	}
 	
 	public void setAnimation(Animation a ) {
 		this.animation = a;
