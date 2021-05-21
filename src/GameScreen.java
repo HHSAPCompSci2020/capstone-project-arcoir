@@ -24,6 +24,7 @@ public class GameScreen extends Screen {
 	private ArrayList <Character> enemies;
 	private Character enemy;
 	private Animation ea;
+	private int cLives;
 
 
 	// Constructor
@@ -40,6 +41,7 @@ public class GameScreen extends Screen {
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 
+		cLives = 0;
 	}
 
 	// Methods
@@ -145,19 +147,17 @@ public class GameScreen extends Screen {
 //		}
 	}
 	
-	public void drawEnemies(int i) {
-		surface.fill(0, 0, 0);
-		surface.rect(i, 100, 40, 90);
+	public boolean characterIntersect() {
 		
-	}
-	
-	public void spawnEnenimes() {
-	
-		for(int i=0; i< enemies.size(); i++) {
-			enemies.add(this.c);
-			this.drawEnemies(i*10);
-			
+		boolean hitboxIntersection = false;
+		
+		if((enemy.getHitBox().intersects(c.getHitBox()) || c.getHitBox().intersects(enemy.getHitBox())) && cLives >=0){
+			cLives--;
+			hitboxIntersection = true;
+		} else {
+			hitboxIntersection = false;
 		}
+		return hitboxIntersection;
 		
 	}
 
