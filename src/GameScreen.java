@@ -23,6 +23,7 @@ public class GameScreen extends Screen {
 	private boolean isRight;
 	private ArrayList <Character> enemies;
 	private Character enemy;
+	
 	private int cLives;
 
 
