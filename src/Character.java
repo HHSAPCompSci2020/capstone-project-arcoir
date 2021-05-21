@@ -130,7 +130,7 @@ public class Character {
 	public void draw(PApplet g) {
 		animation.update();
 		//g.rect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
-		//g.image(animation.getFrame(), (float)(x  + imgShiftX), (float)(y + imgShiftY));
+		g.image(animation.getFrame(), (float)(x  + imgShiftX), (float)(y + imgShiftY));
 	//	System.out.println("w: " + animation.getFrame().width+ " h: " + animation.getFrame().height);
 	}
 	
