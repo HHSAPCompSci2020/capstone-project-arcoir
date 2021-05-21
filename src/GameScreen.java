@@ -84,9 +84,9 @@ public class GameScreen extends Screen {
 
 	public void draw() {
 		
-		windowBoundary(1440, 847);
+		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
-		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
+//		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
 
 
 		surface.pushStyle();
@@ -181,28 +181,7 @@ public class GameScreen extends Screen {
 		
 	}
 	
-	public void windowBoundary(double width, double height) {
-		
-		if(c.getX()>width) {
-			c.setX(width);
-			c.setY(c.getY());
-		}
-		
-		if(c.getX()<0) {
-			c.setX(0);
-			c.setY(c.getY());
-		}
-		
-		if(c.getY()> height) {
-			c.setX(c.getX());
-			c.setY(height);
-		}
-		
-		if(c.getY()<0) {
-			c.setX(c.getX());
-			c.setY(0);
-		}
-	}
+	
 
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
