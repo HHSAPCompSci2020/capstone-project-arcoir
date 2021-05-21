@@ -60,6 +60,10 @@ public float ratioX, ratioY;
 		return frames;
 	}
 	
+	public boolean framesDone() {
+		return ((DrawingScreen)screens.get(0)).framesDone();
+	}
+	
 	public void keyPressed() {
 		keys.add(keyCode);
 	}

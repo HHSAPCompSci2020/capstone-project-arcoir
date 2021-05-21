@@ -25,7 +25,8 @@ public class DrawingScreen extends Screen {
 	private int index, prevIndex;
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon;
-	private String selectedTool;
+	private String selectedTool, currentFrame;
+	private boolean move1, move2, move3, realIdle;
 
 	public DrawingScreen(DrawingSurface surface) {
 		this.surface = surface;
@@ -41,7 +42,12 @@ public class DrawingScreen extends Screen {
 		paintCanRect = new Rectangle (710, 0, 40, 40);
 		saveRect = new Rectangle  (755, 0, 40, 40);
 		frameSelect = new Rectangle (710, 220, 80, 20);
+		move1 = false;
+		move2 = false;
+		move3 = false;
+		realIdle = false;
 		selectedTool = "";
+		currentFrame = "";
 		
 		characters = new Color [][][] {character1, character2, character3, idle};
 		frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, {frame1L, frame2L, frame3L, frame4L}, {idleL}};
@@ -63,6 +69,7 @@ public class DrawingScreen extends Screen {
 			frame1R.updatePixels();
 			frame1L = reflect(frame1R);
 			frame1L.updatePixels();
+			move1 = true;
 		} else if (index == 1) {
 			frame2R.loadPixels();
 			int i = 0;
@@ -75,6 +82,7 @@ public class DrawingScreen extends Screen {
 			frame2R.updatePixels();
 			frame2L = reflect(frame2R);
 			frame2L.updatePixels();
+			move2 = true;
 		} else if (index == 4){
 			frame3R.loadPixels();
 			int i = 0;
@@ -87,6 +95,7 @@ public class DrawingScreen extends Screen {
 			frame3R.updatePixels();
 			frame3L = reflect(frame3R);
 			frame3L.updatePixels();
+			move3 = true;
 		} else {
 			idleR.loadPixels();
 			int i = 0;
@@ -99,6 +108,7 @@ public class DrawingScreen extends Screen {
 			idleR.updatePixels();
 			idleL = reflect(idleR);
 			idleL.updatePixels();
+			realIdle = true;
 		}
 	}
 	
@@ -117,6 +127,10 @@ public class DrawingScreen extends Screen {
 	 */
 	public PImage[][] getFrames() {
 		return frames;
+	}
+	
+	public boolean framesDone() {
+		return move1 && move2 && move3 && realIdle;
 	}
 	
 	public void setup () {
@@ -139,7 +153,6 @@ public class DrawingScreen extends Screen {
 		drawBackground(150, 0, gridSide);
 		drawGrid(150, 0, gridSide);
 
-		System.out.println("a");
 		palette.draw(surface);
 		surface.image(paintCanIcon, paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		surface.image(saveIcon, saveRect.x, saveRect.y, saveRect.width, saveRect.height);
