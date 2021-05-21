@@ -21,6 +21,8 @@ public class GameScreen extends Screen {
 	private PImage bg;
 	private boolean isRight;
 	private ArrayList <Character> enemies;
+	private Character enemy;
+	private Animation ea;
 
 
 	// Constructor
@@ -31,6 +33,7 @@ public class GameScreen extends Screen {
 		idleL = new Animation(300);
 		cWR = new Animation(100);
 		cWL = new Animation(100);
+		ea = new Animation(300);
 
 		switchButton = new Rectangle(100, 100, 100, 100);
 		g = new ArrayList<Ground>();
@@ -44,6 +47,9 @@ public class GameScreen extends Screen {
 		loadCAnims();
 		
 		c = new Character(idleR, 3, 100, 100);
+		enemies = new ArrayList<>();
+		enemy = new Character(ea, 1, 100, 100);
+		enemies.add(enemy);
 	}
 
 	private void loadCAnims() {
@@ -60,6 +66,9 @@ public class GameScreen extends Screen {
 		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft2.png"));
 		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft3.png"));
 		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft4.png"));
+		
+		ea.addFrame(surface.loadImage("resources/enemy/turtle.png"));
+
 	}
 
 	public void draw() {
@@ -77,6 +86,8 @@ public class GameScreen extends Screen {
 //		surface.rect((float) c.getX(), (float) c.getY(), (float) c.getWidth(), (float) c.getHeight());
 //		surface.rect(x,y,30,30);
 		c.draw(surface);
+		enemy.draw(surface);
+
 		for (Ground ground : g) {
 	//		ground.drawGround(surface);
 		}
