@@ -201,6 +201,10 @@ public class Character {
 		this.animation = a;
 	}
 	
+	public Animation getAnimation() {
+		return animation;
+	}
+	
 }
 
 

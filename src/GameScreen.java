@@ -17,13 +17,12 @@ public class GameScreen extends Screen {
 	private ArrayList<Ground> g;
 	private Dashboard dash;
 	private DrawingSurface surface;
-	private Animation idleR, idleL, cWR, cWL;
+	private Animation idleR, idleL, cWR, cWL, eR, eL;
 	private Rectangle switchButton;
 	private PImage bg;
 	private boolean isRight;
 	private ArrayList <Character> enemies;
 	private Character enemy;
-	private Animation ea;
 	private int cLives;
 
 
@@ -35,7 +34,8 @@ public class GameScreen extends Screen {
 		idleL = new Animation(300);
 		cWR = new Animation(100);
 		cWL = new Animation(100);
-		ea = new Animation(300);
+		eR = new Animation(300);
+		eL = new Animation(300);
 
 		switchButton = new Rectangle(100, 100, 100, 100);
 		g = new ArrayList<Ground>();
@@ -51,7 +51,7 @@ public class GameScreen extends Screen {
 		
 		c = new Character(idleR, 3, 100, 100);
 		enemies = new ArrayList<>();
-		enemy = new Character(ea, 1, 100, 100);
+		enemy = new Character(eR, 1, 100, 100);
 		enemies.add(enemy);
 	}
 
@@ -70,9 +70,11 @@ public class GameScreen extends Screen {
 		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft3.png"));
 		cWL.addFrame(surface.loadImage("resources/maincharacter/walkleft/SMWalkLeft4.png"));
 		
-		PImage eImg = surface.loadImage("resources/enemy/turtle.png");
-		eImg.resize(50, 50);
-		ea.addFrame(eImg);
+		eR.addFrame(surface.loadImage("resources/enemy/EnemyRunRight1.png"));
+		eR.addFrame(surface.loadImage("resources/enemy/EnemyRunRight2.png"));
+		
+		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft1.png"));
+		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft2.png"));
 
 	}
 
@@ -106,7 +108,6 @@ public class GameScreen extends Screen {
 		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
-			// c.setAnimation(cWL);
 			c.translate(-1);
 		}
 		if (surface.isPressed(KeyEvent.VK_RIGHT)) {
@@ -132,11 +133,15 @@ public class GameScreen extends Screen {
 
 		c.act(g);
 		for(Character enm : enemies) {
-			if(c.getX() + c.getWidth() > enm.getX() + enm.getWidth()) {
+			if(c.getX()  > enm.getX() - 10 ) {
 				enm.translate(0.3);
-			} else if (c.getX() + c.getWidth() < enm.getX() + enm.getWidth()) {
+				enemy.setAnimation(eR);
+			} else if (c.getX()  < enm.getX() + 10) {
 				enm.translate(-0.3);
+				enemy.setAnimation(eL);
 			}
+			
+			
 			enm.act(g);
 			
 		}
