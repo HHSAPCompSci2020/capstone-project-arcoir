@@ -139,16 +139,17 @@ public class DrawingScreen extends Screen {
 		drawBackground(150, 0, gridSide);
 		drawGrid(150, 0, gridSide);
 
+		System.out.println("a");
 		palette.draw(surface);
 		surface.image(paintCanIcon, paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		surface.image(saveIcon, saveRect.x, saveRect.y, saveRect.width, saveRect.height);
 		
-		surface.popStyle();
+		surface.pushStyle();
 		surface.noFill();
 		surface.stroke(91, 15, 0);
 		surface.strokeWeight(4);
 		surface.rect(frameSelect.x, frameSelect.y, frameSelect.width, frameSelect.height);
-		surface.pushStyle();
+		surface.popStyle();
 
 		board.draw(surface);
 	}
