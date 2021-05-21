@@ -15,9 +15,9 @@ public class DrawingScreen extends Screen {
 	private Rectangle switchButton, paletteRect, paintCanRect, saveRect;
 	private Dashboard board;
 	private Color [][][] characters;
-	private Color[][] character1, character2, character3;
-	private PImage [] frames;
-	private PImage frame1, frame2, frame3;
+	private Color[][] character1, character2, character3, idle;
+	private PImage [][] frames;
+	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
 	private int index;
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon;
@@ -36,39 +36,80 @@ public class DrawingScreen extends Screen {
 		saveRect = new Rectangle  (755, 0, 45, 45);
 		selectedTool = "";
 		
-		characters = new Color [][][] {character1, character2, character3};
-		frames = new PImage[] {frame1, frame2, frame3};
+		characters = new Color [][][] {character1, character2, character3, idle};
+		frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, {frame1L, frame2L, frame3L, frame4L}, {idleL}};
 	}
 
+	/**
+	 * Saves the frame from the drawing interface as an actual frame to be used in an animation.
+	 */
 	public void saveImage() {
 		if (index == 0) {
-			frame1.loadPixels();
+			frame1R.loadPixels();
 			int i = 0;
 			for (int r = 0; r < character1.length; r++) {
 				for (int c = 0; c < character1.length; c++) {
-					frame1.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
+					frame1R.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
 					i++;
 				}
 			}
+			frame1R.updatePixels();
+			frame1L = reflect(frame1R);
+			frame1L.updatePixels();
 		} else if (index == 1) {
-			frame2.loadPixels();
+			frame2R.loadPixels();
 			int i = 0;
 			for (int r = 0; r < character2.length; r++) {
 				for (int c = 0; c < character2.length; c++) {
-					frame2.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
+					frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
 					i++;
 				}
 			}
-		} else {
-			frame3.loadPixels();
+			frame2R.updatePixels();
+			frame2L = reflect(frame2R);
+			frame2L.updatePixels();
+		} else if (index == 4){
+			frame3R.loadPixels();
 			int i = 0;
 			for (int r = 0; r < character3.length; r++) {
 				for (int c = 0; c < character3.length; c++) {
-					frame3.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
+					frame3R.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
 					i++;
 				}
 			}
+			frame3R.updatePixels();
+			frame3L = reflect(frame3R);
+			frame3L.updatePixels();
+		} else {
+			idleR.loadPixels();
+			int i = 0;
+			for (int r = 0; r < idle.length; r++) {
+				for (int c = 0; c < idle.length; c++) {
+					idleR.pixels[i] = surface.color(idle[r][c].getRed(), idle[r][c].getGreen(), idle[r][c].getBlue());
+					i++;
+				}
+			}
+			idleR.updatePixels();
+			idleL = reflect(idleR);
+			idleL.updatePixels();
 		}
+	}
+	
+	private PImage reflect (PImage img) {
+		PImage reflected = surface.createImage(128, 128, surface.RGB);
+		img.loadPixels();
+		for (int i = img.pixels.length - 1; i >= 0; i--) {
+			reflected.pixels[i] = img.pixels[img.pixels.length - i - 1];
+		}
+		return reflected;
+	}
+	
+	/**
+	 * 
+	 * @return the animation frames.
+	 */
+	public PImage[][] getFrames() {
+		return frames;
 	}
 	
 	public void setup () {
