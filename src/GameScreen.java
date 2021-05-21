@@ -96,8 +96,8 @@ public class GameScreen extends Screen {
 		
 		
 		
-		surface.rect((float) c.getX(), (float) c.getY(), (float) c.getWidth(), (float) c.getHeight());
-		surface.rect((float) enemy.getX(), (float) enemy.getY(), (float) enemy.getWidth(), (float) enemy.getHeight());
+	//	surface.rect((float) c.getX(), (float) c.getY(), (float) c.getWidth(), (float) c.getHeight());
+	//	surface.rect((float) enemy.getX(), (float) enemy.getY(), (float) enemy.getWidth(), (float) enemy.getHeight());
 
 		//		surface.rect(x,y,30,30);
 		c.draw(surface);
