@@ -1,7 +1,11 @@
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
+
+import javax.swing.JOptionPane;
+
 import processing.core.PImage;
+import processing.core.PConstants;
 
 /**
  * 
@@ -9,19 +13,20 @@ import processing.core.PImage;
  *
  */
 public class DrawingScreen extends Screen {
-
+//need to fix switching between drawings, UI
 	private ColorPalette palette;
 	private DrawingSurface surface;
-	private Rectangle switchButton, paletteRect, paintCanRect, saveRect;
+	private Rectangle switchButton, paletteRect, paintCanRect, saveRect, frameSelect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
 	private PImage [][] frames;
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
-	private int index;
+	private int index, prevIndex;
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon;
-	private String selectedTool;
+	private String selectedTool, currentFrame;
+	private boolean move1, move2, move3, realIdle;
 
 	public DrawingScreen(DrawingSurface surface) {
 		this.surface = surface;
@@ -30,11 +35,19 @@ public class DrawingScreen extends Screen {
 		character1 = new Color [128][128];
 		character2 = new Color [128][128];
 		character3 = new Color [128][128];
-		index = 0;
+		idle = new Color [128][128];
+		index = 3;
+		prevIndex = 0;
 		switchButton = new Rectangle (50, 50, 50, 50);
-		paintCanRect = new Rectangle (710, 0, 45, 45);
-		saveRect = new Rectangle  (755, 0, 45, 45);
+		paintCanRect = new Rectangle (710, 0, 40, 40);
+		saveRect = new Rectangle  (755, 0, 40, 40);
+		frameSelect = new Rectangle (710, 220, 80, 20);
+		move1 = false;
+		move2 = false;
+		move3 = false;
+		realIdle = false;
 		selectedTool = "";
+		currentFrame = "";
 		
 		characters = new Color [][][] {character1, character2, character3, idle};
 		frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, {frame1L, frame2L, frame3L, frame4L}, {idleL}};
@@ -56,6 +69,7 @@ public class DrawingScreen extends Screen {
 			frame1R.updatePixels();
 			frame1L = reflect(frame1R);
 			frame1L.updatePixels();
+			move1 = true;
 		} else if (index == 1) {
 			frame2R.loadPixels();
 			int i = 0;
@@ -68,6 +82,7 @@ public class DrawingScreen extends Screen {
 			frame2R.updatePixels();
 			frame2L = reflect(frame2R);
 			frame2L.updatePixels();
+			move2 = true;
 		} else if (index == 4){
 			frame3R.loadPixels();
 			int i = 0;
@@ -80,6 +95,7 @@ public class DrawingScreen extends Screen {
 			frame3R.updatePixels();
 			frame3L = reflect(frame3R);
 			frame3L.updatePixels();
+			move3 = true;
 		} else {
 			idleR.loadPixels();
 			int i = 0;
@@ -92,11 +108,12 @@ public class DrawingScreen extends Screen {
 			idleR.updatePixels();
 			idleL = reflect(idleR);
 			idleL.updatePixels();
+			realIdle = true;
 		}
 	}
 	
 	private PImage reflect (PImage img) {
-		PImage reflected = surface.createImage(128, 128, surface.RGB);
+		PImage reflected = surface.createImage(128, 128, PConstants.RGB);
 		img.loadPixels();
 		for (int i = img.pixels.length - 1; i >= 0; i--) {
 			reflected.pixels[i] = img.pixels[img.pixels.length - i - 1];
@@ -110,6 +127,10 @@ public class DrawingScreen extends Screen {
 	 */
 	public PImage[][] getFrames() {
 		return frames;
+	}
+	
+	public boolean framesDone() {
+		return move1 && move2 && move3 && realIdle;
 	}
 	
 	public void setup () {
@@ -135,8 +156,42 @@ public class DrawingScreen extends Screen {
 		palette.draw(surface);
 		surface.image(paintCanIcon, paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		surface.image(saveIcon, saveRect.x, saveRect.y, saveRect.width, saveRect.height);
+		
+		surface.pushStyle();
+		surface.noFill();
+		surface.stroke(91, 15, 0);
+		surface.strokeWeight(4);
+		surface.rect(frameSelect.x, frameSelect.y, frameSelect.width, frameSelect.height);
+		surface.popStyle();
 
 		board.draw(surface);
+	}
+	
+	private void showFrameSelect() {
+		String [] realFrames = new String [] {"Idle", "Move 1", "Move 2", "Move 3"};
+		String input = (String)JOptionPane.showInputDialog(null, "Choose a frame to draw", "Which frame?", JOptionPane.QUESTION_MESSAGE, null, 
+				realFrames, realFrames[prevIndex]);
+		
+		if (input == null)
+			return;
+		
+		selectFrame(input);
+	}
+	
+	private void selectFrame(String input) {
+		if (input.equals("Idle")) {
+			index = 3;
+			prevIndex = 0;
+		} else if (input.equals("Move 1")) {
+			index = 0;
+			prevIndex = 1;
+		} else if (input.equals("Move 2")) {
+			index = 1;
+			prevIndex = 2;
+		} else {
+			index = 2;
+			prevIndex = 3;
+		}
 	}
 
 	/**
@@ -181,7 +236,7 @@ public class DrawingScreen extends Screen {
 	 * @param height The pixel height of the grid drawing.
 	 */
 	public void drawBackground(float x, float y, float side) {
-		float sideLength = side/characters[index].length;
+		float sideLength = side/characters[index][0].length;
 		int gridCount = 0;
 
 		for (int i = 0; i < characters[index].length; i++) {
@@ -300,6 +355,10 @@ public class DrawingScreen extends Screen {
 			
 			if (paintCanRect.contains(click.x, click.y)) {
 				selectedTool = "PAINTCAN";
+			}
+			
+			if (frameSelect.contains(click.x, click.y) ) {
+				showFrameSelect();
 			}
 			board.mousePressed(click.x, click.y);
 		} 
