@@ -205,6 +205,10 @@ public class Character {
 		return animation;
 	}
 	
+	public boolean getLiveState() {
+		return isAlive;
+	}
+	
 }
 
 
