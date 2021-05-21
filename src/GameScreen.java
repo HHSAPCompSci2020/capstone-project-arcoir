@@ -50,8 +50,12 @@ public class GameScreen extends Screen {
 		loadCAnims();
 		
 		c = new Character(idleR, 3, 100, 100);
+		c.adjustImgShift(-45, -20);
+		
 		enemies = new ArrayList<>();
 		enemy = new Character(eR, 1, 100, 100);
+		enemy.adjustImgShift(-8, -10);
+		enemy.setHeight(40);
 		enemies.add(enemy);
 	}
 
@@ -89,9 +93,13 @@ public class GameScreen extends Screen {
 
 		surface.stroke(0); // Set line drawing color to white
 		surface.noFill();
+		
+		
+		
+	//	surface.rect((float) c.getX(), (float) c.getY(), (float) c.getWidth(), (float) c.getHeight());
+	//	surface.rect((float) enemy.getX(), (float) enemy.getY(), (float) enemy.getWidth(), (float) enemy.getHeight());
 
-//		surface.rect((float) c.getX(), (float) c.getY(), (float) c.getWidth(), (float) c.getHeight());
-//		surface.rect(x,y,30,30);
+		//		surface.rect(x,y,30,30);
 		c.draw(surface);
 		enemy.draw(surface);
 
