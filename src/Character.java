@@ -17,9 +17,12 @@ public class Character {
 	private double friction;
 	private double gravity;
 	private double jumpStrength;
+	private double imgShiftX, imgShiftY;
 	
 	// Constructor
 	public Character(Animation a, int lives, int x, int y) {
+		imgShiftX = 0;
+		imgShiftY = 0;
 		animation = a;
 		isAlive = true;
 		this.lives = lives;
@@ -125,7 +128,7 @@ public class Character {
 	
 	public void draw(PApplet g) {
 		animation.update();
-		g.image(animation.getFrame(), (float)x - 45, (float)y - 20);
+		g.image(animation.getFrame(), (float)(x  + imgShiftX), (float)(y + imgShiftY));
 	//	System.out.println("w: " + animation.getFrame().width+ " h: " + animation.getFrame().height);
 	}
 	
@@ -207,6 +210,19 @@ public class Character {
 	
 	public boolean getLiveState() {
 		return isAlive;
+	}
+	
+	public void setWidth(int w) {
+		hitBox.setRect(x, y, w, getHeight());
+	}
+	
+	public void setHeight(int h) {
+		hitBox.setRect(x, y, getWidth(), h);
+	}
+	
+	public void adjustImgShift(int x, int y) {
+		imgShiftX = x;
+		imgShiftY = y;
 	}
 	
 }
