@@ -84,10 +84,10 @@ public class GameScreen extends Screen {
 	}
 
 	public void draw() {
+		assignFrames();
+		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
-		windowBoundary(1440, 847);
-		
-		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
+//		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
 
 
 		surface.pushStyle();
@@ -176,28 +176,28 @@ public class GameScreen extends Screen {
 	
 	
 	
-	public void windowBoundary(double width, double height) {
-		
-		if(c.getX()>width) {
-			c.setX(width);
-			c.setY(c.getY());
+	private void assignFrames() {
+		PImage[][] frames = surface.getFrames();
+		if(surface.framesDone()) {
+			for(int i = 0; i < frames.length; i++) {
+				for(int j = 0; j < frames[i].length; j++) {
+					if(i == 0) {
+						cWR = new Animation(100);
+						cWR.addFrame(frames[i][j]);
+					} else if(i == 1) {
+						idleR = new Animation(300);
+						idleR.addFrame(frames[i][j]);
+					} else if(i == 2) {
+						cWL = new Animation(100);
+						cWL.addFrame(frames[i][j]);
+					} else if(i == 3) {
+						idleL = new Animation(300);
+						idleL.addFrame(frames[i][j]);
+					}
+				}
+			}
 		}
-		
-		if(c.getX()<0) {
-			c.setX(0);
-			c.setY(c.getY());
-		}
-		
-		if(c.getY()> height) {
-			c.setX(c.getX());
-			c.setY(height);
-		}
-		
-		if(c.getY()<0) {
-			c.setX(c.getX());
-			c.setY(0);
-		}
-	}
+	} 
 
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {

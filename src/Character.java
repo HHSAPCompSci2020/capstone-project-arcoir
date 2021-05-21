@@ -232,6 +232,28 @@ public class Character {
 		imgShiftY = y;
 	}
 	
+	public void windowBoundary(double width, double height) {
+		
+		if(getX()+this.getWidth()>width) {
+			setX(width-this.getWidth());
+			setY(getY());
+		}
+		
+		if(getX()<0) {
+			setX(0);
+			setY(getY());
+		}
+		
+		if(getY()+this.getHeight()> height) {
+			setX(getX());
+			setY(height-this.getHeight());
+		}
+		
+		if(getY()<0) {
+			setX(getX());
+			setY(0);
+		}
+	}
 }
 
 
