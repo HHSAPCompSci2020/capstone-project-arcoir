@@ -41,13 +41,13 @@ public class DrawingScreen extends Screen {
 		switchButton = new Rectangle (50, 50, 50, 50);
 		paintCanRect = new Rectangle (710, 0, 40, 40);
 		saveRect = new Rectangle  (755, 0, 40, 40);
-		frameSelect = new Rectangle (710, 220, 80, 20);
+		frameSelect = new Rectangle (710, 210, 80, 30);
 		move1 = false;
 		move2 = false;
 		move3 = false;
 		realIdle = false;
 		selectedTool = "";
-		currentFrame = "";
+		currentFrame = "Idle";
 		
 		characters = new Color [][][] {character1, character2, character3, idle};
 		frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, {frame1L, frame2L, frame3L, frame4L}, {idleL}};
@@ -160,8 +160,16 @@ public class DrawingScreen extends Screen {
 		surface.pushStyle();
 		surface.noFill();
 		surface.stroke(91, 15, 0);
-		surface.strokeWeight(4);
+		surface.strokeWeight(2);
 		surface.rect(frameSelect.x, frameSelect.y, frameSelect.width, frameSelect.height);
+		surface.popStyle();
+		
+		surface.pushStyle();
+		surface.fill(91, 15, 0);
+		surface.textSize(10);
+		surface.textLeading(13);
+		surface.textAlign(PConstants.CENTER, PConstants.CENTER);
+		surface.text("Current Frame: \n" + currentFrame, frameSelect.x + 42, frameSelect.y + 12);
 		surface.popStyle();
 
 		board.draw(surface);
@@ -181,15 +189,19 @@ public class DrawingScreen extends Screen {
 	private void selectFrame(String input) {
 		if (input.equals("Idle")) {
 			index = 3;
+			currentFrame = "Idle";
 			prevIndex = 0;
 		} else if (input.equals("Move 1")) {
 			index = 0;
+			currentFrame = "Move 1";
 			prevIndex = 1;
 		} else if (input.equals("Move 2")) {
 			index = 1;
+			currentFrame = "Move 2";
 			prevIndex = 2;
 		} else {
 			index = 2;
+			currentFrame = "Move 3";
 			prevIndex = 3;
 		}
 	}
