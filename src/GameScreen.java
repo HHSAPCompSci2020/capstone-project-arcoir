@@ -84,7 +84,7 @@ public class GameScreen extends Screen {
 	}
 
 	public void draw() {
-		
+		assignFrames();
 		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
 //		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
@@ -176,7 +176,28 @@ public class GameScreen extends Screen {
 	
 	
 	
-	
+	private void assignFrames() {
+		PImage[][] frames = surface.getFrames();
+		if(surface.framesDone()) {
+			for(int i = 0; i < frames.length; i++) {
+				for(int j = 0; j < frames[i].length; j++) {
+					if(i == 0) {
+						cWR = new Animation(100);
+						cWR.addFrame(frames[i][j]);
+					} else if(i == 1) {
+						idleR = new Animation(300);
+						idleR.addFrame(frames[i][j]);
+					} else if(i == 2) {
+						cWL = new Animation(100);
+						cWL.addFrame(frames[i][j]);
+					} else if(i == 3) {
+						idleL = new Animation(300);
+						idleL.addFrame(frames[i][j]);
+					}
+				}
+			}
+		}
+	} 
 
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
