@@ -79,6 +79,8 @@ public class GameScreen extends Screen {
 	}
 
 	public void draw() {
+		
+		windowBoundary(surface.width, surface.height);
 
 		surface.pushStyle();
 
@@ -145,6 +147,8 @@ public class GameScreen extends Screen {
 			enm.act(g);
 			
 		}
+		
+		
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {
@@ -164,6 +168,29 @@ public class GameScreen extends Screen {
 		}
 		return hitboxIntersection;
 		
+	}
+	
+	public void windowBoundary(double width, double height) {
+		
+		if(c.getX()>width) {
+			c.setX(width);
+			c.setY(c.getY());
+		}
+		
+		if(c.getX()<0) {
+			c.setX(0);
+			c.setY(c.getY());
+		}
+		
+		if(c.getY()> height) {
+			c.setX(c.getX());
+			c.setY(height);
+		}
+		
+		if(c.getY()<0) {
+			c.setX(c.getX());
+			c.setY(0);
+		}
 	}
 
 	public void mousePressed(Point p) {
