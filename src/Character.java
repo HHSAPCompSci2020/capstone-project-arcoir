@@ -124,11 +124,13 @@ public class Character {
 		setX(xCoord2);
 		setY(yCoord2);
 		
+		updateHitbox();
 	}
 	
 	public void draw(PApplet g) {
 		animation.update();
-		g.image(animation.getFrame(), (float)(x  + imgShiftX), (float)(y + imgShiftY));
+		//g.rect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
+		//g.image(animation.getFrame(), (float)(x  + imgShiftX), (float)(y + imgShiftY));
 	//	System.out.println("w: " + animation.getFrame().width+ " h: " + animation.getFrame().height);
 	}
 	
@@ -213,11 +215,16 @@ public class Character {
 	}
 	
 	public void setWidth(int w) {
-		hitBox.setRect(x, y, w, getHeight());
+		hitBox = new Rectangle((int)x, (int)y, w, getHeight());
 	}
 	
 	public void setHeight(int h) {
-		hitBox.setRect(x, y, getWidth(), h);
+		hitBox = new Rectangle((int)getX(), (int)getY(), getWidth(), h);
+	}
+	
+	
+	public void updateHitbox() {
+		hitBox = new Rectangle((int)getX(), (int)getY(), getWidth(), getHeight() );
 	}
 	
 	public void adjustImgShift(int x, int y) {
