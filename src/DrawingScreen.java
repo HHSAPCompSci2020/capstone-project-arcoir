@@ -22,7 +22,7 @@ public class DrawingScreen extends Screen {
 	private Color[][] character1, character2, character3, idle;
 	private PImage [][] frames;
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
-	private int index;
+	private int index, prevIndex;
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon;
 	private String selectedTool;
@@ -36,6 +36,7 @@ public class DrawingScreen extends Screen {
 		character3 = new Color [128][128];
 		idle = new Color [128][128];
 		index = 3;
+		prevIndex = 0;
 		switchButton = new Rectangle (50, 50, 50, 50);
 		paintCanRect = new Rectangle (710, 0, 40, 40);
 		saveRect = new Rectangle  (755, 0, 40, 40);
@@ -119,7 +120,6 @@ public class DrawingScreen extends Screen {
 	}
 	
 	public void setup () {
-		System.out.println("h");
 		board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
 				surface.loadImage("resources/help/helpIcon.gif"));
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
@@ -139,11 +139,17 @@ public class DrawingScreen extends Screen {
 		drawBackground(150, 0, gridSide);
 		drawGrid(150, 0, gridSide);
 
+		System.out.println("a");
 		palette.draw(surface);
 		surface.image(paintCanIcon, paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		surface.image(saveIcon, saveRect.x, saveRect.y, saveRect.width, saveRect.height);
 		
+		surface.pushStyle();
+		surface.noFill();
+		surface.stroke(91, 15, 0);
+		surface.strokeWeight(4);
 		surface.rect(frameSelect.x, frameSelect.y, frameSelect.width, frameSelect.height);
+		surface.popStyle();
 
 		board.draw(surface);
 	}
@@ -151,7 +157,7 @@ public class DrawingScreen extends Screen {
 	private void showFrameSelect() {
 		String [] realFrames = new String [] {"Idle", "Move 1", "Move 2", "Move 3"};
 		String input = (String)JOptionPane.showInputDialog(null, "Choose a frame to draw", "Which frame?", JOptionPane.QUESTION_MESSAGE, null, 
-				realFrames, realFrames[0]);
+				realFrames, realFrames[prevIndex]);
 		
 		if (input == null)
 			return;
@@ -162,12 +168,16 @@ public class DrawingScreen extends Screen {
 	private void selectFrame(String input) {
 		if (input.equals("Idle")) {
 			index = 3;
+			prevIndex = 0;
 		} else if (input.equals("Move 1")) {
 			index = 0;
+			prevIndex = 1;
 		} else if (input.equals("Move 2")) {
 			index = 1;
+			prevIndex = 2;
 		} else {
 			index = 2;
+			prevIndex = 3;
 		}
 	}
 

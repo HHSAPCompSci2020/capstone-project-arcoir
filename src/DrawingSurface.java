@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -52,6 +53,11 @@ public float ratioX, ratioY;
 		activeScreen.draw();
 		
 		popMatrix();
+	}
+	
+	public PImage[][] getFrames() {
+		PImage[][] frames = ((DrawingScreen)(screens.get(0))).getFrames();
+		return frames;
 	}
 	
 	public void keyPressed() {
