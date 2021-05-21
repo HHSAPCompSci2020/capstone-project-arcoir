@@ -53,7 +53,7 @@ public class GameScreen extends Screen {
 		c.adjustImgShift(-45, -20);
 		
 		enemies = new ArrayList<>();
-		enemy = new Character(eR, 1, 100, 100);
+		enemy = new Character(eR, 1, 600, 100);
 		enemy.adjustImgShift(-8, -10);
 		enemy.setHeight(40);
 		enemies.add(enemy);
@@ -143,6 +143,8 @@ public class GameScreen extends Screen {
 				c.setAnimation(idleL);
 
 		}
+		
+		
 
 		c.act(g);
 		for(Character enm : enemies) {
@@ -154,6 +156,10 @@ public class GameScreen extends Screen {
 				enemy.setAnimation(eL);
 			}
 			
+			if(c.intersects(enm)) {
+				enm.attack(c);
+				System.out.println(c.getLiveState());
+			}
 			
 			enm.act(g);
 			
@@ -167,19 +173,7 @@ public class GameScreen extends Screen {
 //		}
 	}
 	
-	public boolean characterIntersect() {
-		
-		boolean hitboxIntersection = false;
-		
-		if((enemy.getHitBox().intersects(c.getHitBox()) || c.getHitBox().intersects(enemy.getHitBox())) && cLives >=0){
-			cLives--;
-			hitboxIntersection = true;
-		} else {
-			hitboxIntersection = false;
-		}
-		return hitboxIntersection;
-		
-	}
+	
 	
 	public void windowBoundary(double width, double height) {
 		
