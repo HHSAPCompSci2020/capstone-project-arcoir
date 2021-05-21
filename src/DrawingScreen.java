@@ -34,6 +34,7 @@ public class DrawingScreen extends Screen {
 		character1 = new Color [128][128];
 		character2 = new Color [128][128];
 		character3 = new Color [128][128];
+		idle = new Color [128][128];
 		index = 3;
 		switchButton = new Rectangle (50, 50, 50, 50);
 		paintCanRect = new Rectangle (710, 0, 40, 40);
@@ -118,6 +119,7 @@ public class DrawingScreen extends Screen {
 	}
 	
 	public void setup () {
+		System.out.println("h");
 		board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
 				surface.loadImage("resources/help/helpIcon.gif"));
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
@@ -211,7 +213,7 @@ public class DrawingScreen extends Screen {
 	 * @param height The pixel height of the grid drawing.
 	 */
 	public void drawBackground(float x, float y, float side) {
-		float sideLength = side/characters[index].length;
+		float sideLength = side/characters[index][0].length;
 		int gridCount = 0;
 
 		for (int i = 0; i < characters[index].length; i++) {
