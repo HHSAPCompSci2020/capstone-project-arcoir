@@ -126,6 +126,9 @@ public class GameScreen extends Screen {
 		surface.fill(0);
 		surface.text("Move: Arrow keys", 10, 30);
 		surface.text("Menu: Space", 10, 50);
+		
+		surface.text("Score: " + score, 700, 30);
+		surface.text("Level: " + level, 700, 50);
 		surface.popStyle();
 		
 		background.setSpeed(0);
@@ -185,9 +188,10 @@ public class GameScreen extends Screen {
 		while (numEnemies<level) {
 			spawnEnemy();
 		}
-		System.out.println("num: " + numEnemies);
-		System.out.println("score: " + score);
-		System.out.println("level: " + level);
+		
+//		System.out.println("num: " + numEnemies);
+//		System.out.println("score: " + score);
+//		System.out.println("level: " + level);
 		
 		updateLevel();
 		
