@@ -13,7 +13,7 @@ public class Character {
 	private double x, y;
 	private double velX, velY;
 	private Rectangle hitBox;
-	private boolean isAlive, onASurface;
+	private boolean isAlive, onASurface, movesXAxis;
 	private double friction;
 	private double gravity;
 	private double jumpStrength;
@@ -35,6 +35,7 @@ public class Character {
 		gravity = 0.7;
 		jumpStrength = 12;
 		onASurface = false;
+		movesXAxis = true;
 	}
 	//Methods
 	
@@ -121,7 +122,8 @@ public class Character {
 		if (Math.abs(velX) < 0.25)
 			velX = 0;
 
-		setX(xCoord2);
+		if(movesXAxis)
+			setX(xCoord2);
 		setY(yCoord2);
 		
 		updateHitbox();
@@ -204,6 +206,10 @@ public class Character {
 	
 	public void setAnimation(Animation a ) {
 		this.animation = a;
+	}
+	
+	public void setMovesXAxis(boolean moves) {
+		movesXAxis = moves;
 	}
 	
 	public Animation getAnimation() {

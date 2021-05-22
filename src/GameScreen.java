@@ -51,10 +51,11 @@ public class GameScreen extends Screen {
 		bg = surface.loadImage("resources/maincharacter/bg2.png");
 		loadCAnims();
 		bg.resize(this.surface.width, this.surface.height);
-		background = new Scrollable(0, bg, surface.width,0);
+		background = new Scrollable(0, bg, 0, surface);
 		
-		c = new Character(idleR, 3, 100, 100);
+		c = new Character(idleR, 3, surface.width/2, 100);
 		c.adjustImgShift(-45, -20);
+		c.setMovesXAxis(false);
 		
 		enemies = new ArrayList<>();
 		enemy = new Character(eL, 1, 600, 100);
@@ -92,12 +93,12 @@ public class GameScreen extends Screen {
 		
 //		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
 
-
+		background.update();
+		background.draw(surface);
 		surface.pushStyle();
 
 	//	while (bg.width != this.surface.width || bg.height != this.surface.height)
-		bg.resize(this.surface.width, this.surface.height);
-		background.draw(surface);
+	//	bg.resize(this.surface.width, this.surface.height);
 		//surface.background(bg); // Clear the screen with a white background
 
 		surface.stroke(0); // Set line drawing color to white
@@ -119,17 +120,25 @@ public class GameScreen extends Screen {
 		
 		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 		background.setSpeed(0);
+		double currentX = c.getX();
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
+			for(Character enm : enemies) {
+				//enm.translate(0.2);
+			}
 			c.translate(-1);
 			background.setSpeed(-3);
 		}
 		if (surface.isPressed(KeyEvent.VK_RIGHT)) {
+			for(Character enm : enemies) {
+				//enm.translate(-0.2);
+			}
 			c.translate(1);
 			background.setSpeed(3);
 		}
 		if (surface.isPressed(KeyEvent.VK_UP)) {
 			c.jump();
 		}
+		
 		
 
 		if (c.getVelX() > 0.5 && c.getSurfaceState()) {
@@ -147,7 +156,7 @@ public class GameScreen extends Screen {
 		}
 		
 		
-		background.update();
+
 		c.act(g);
 		for(Character enm : enemies) {
 			if(c.getX()  > enm.getX() - 10  && Math.abs(c.getX() - enm.getX()) < 350) {
