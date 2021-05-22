@@ -3,6 +3,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import processing.core.PImage;
+import processing.core.PGraphics;
 import processing.core.PConstants;
 
 /**
@@ -19,6 +20,7 @@ public class DrawingScreen extends Screen {
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
+	private PGraphics gframe1R, gframe2R, gframe3R, gframe4R, gidleR, gframe1L, gframe2L, gframe4L, gidleL;
 	private int index, prevIndex;
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon;
@@ -60,8 +62,12 @@ public class DrawingScreen extends Screen {
 				int i = 0;
 				for (int r = 0; r < character1.length; r++) {
 					for (int c = 0; c < character1.length; c++) {
-						if (character1[r][c] != null)
+						if (!character1[r][c].equals(null))
 							frame1R.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
+						else {
+							frame1R.pixels[i] = surface.color(2, 2, 2, 0);
+						}
+							
 						i++;
 					}
 				}
@@ -75,8 +81,11 @@ public class DrawingScreen extends Screen {
 				int i = 0;
 				for (int r = 0; r < character2.length; r++) {
 					for (int c = 0; c < character2.length; c++) {
-							if (character2[r][c] != null)
-								frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
+						if (character2[r][c] != null)
+							frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
+						else {
+							frame2R.pixels[i] = surface.color(2, 2, 2, 0);
+						}
 						i++;
 					}
 				}
@@ -92,6 +101,9 @@ public class DrawingScreen extends Screen {
 					for (int c = 0; c < character3.length; c++) {
 						if (character3[r][c] != null)
 							frame3R.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
+						else {
+							frame3R.pixels[i] = surface.color(2, 2, 2, 0);
+						}
 						i++;
 					}
 				}
@@ -105,8 +117,11 @@ public class DrawingScreen extends Screen {
 				int i = 0;
 				for (int r = 0; r < idle.length; r++) {
 					for (int c = 0; c < idle.length; c++) {
-						if (idle[r][c] != null)
+						if (idle[r][c] != null) {
 							idleR.pixels[i] = surface.color(idle[r][c].getRed(), idle[r][c].getGreen(), idle[r][c].getBlue());
+						} else {
+							idleR.pixels[i] = surface.color(2, 2, 2, 0);
+						}
 						i++;
 					}
 				}
@@ -165,6 +180,7 @@ public class DrawingScreen extends Screen {
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
 		saveIcon = surface.loadImage("resources/drawingIcons/save.gif");
 		createFrames();
+
 	}
 
 	public void draw () {
@@ -181,6 +197,7 @@ public class DrawingScreen extends Screen {
 		drawGrid(150, 0, gridSide);
 
 		palette.draw(surface);
+		select(selectedTool);
 		surface.image(paintCanIcon, paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		surface.image(saveIcon, saveRect.x, saveRect.y, saveRect.width, saveRect.height);
 		
@@ -358,12 +375,22 @@ public class DrawingScreen extends Screen {
 		fill(x, y);
 	}
 	
+	public void select (String name) {
+		if (name.equals("")) {
+			//do nothing
+		} else if (name.equals("PAINTCAN")) {
+			surface.fill(168, 166, 166);
+			surface.rect(paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
+		}
+	}
+	
 	private void fill (int x, int y) {
 		if (x < 0 || x >= characters[index][0].length || y < 0 || y >= characters[index].length) {
 			//do nothing
 		} else if (characters[index][x][y] != null && characters[index][x][y].equals(palette.getSelectedColor())) {
 			//do nothing
 		} else {
+			
 			characters[index][x][y] = palette.getSelectedColor();
 
 			fill(x + 1, y);
@@ -388,13 +415,17 @@ public class DrawingScreen extends Screen {
 
 			Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 			if (switchButton.contains(p))
-				surface.switchScreen(ScreenSwitcher.GAMESCREEN);
+				surface.switchScreen(ScreenSwitcher.MENUSCREEN);
 
 			if (paletteRect.contains(click.x, click.y))
 				palette.mousePressed(click);
 			
 			if (paintCanRect.contains(click.x, click.y)) {
-				selectedTool = "PAINTCAN";
+				if (selectedTool.equals("PAINTCAN")) {
+					selectedTool = "";
+				} else {
+					selectedTool = "PAINTCAN";
+				}
 			}
 			
 			if (saveRect.contains(click.x, click.y)) {
