@@ -213,7 +213,7 @@ public class GameScreen extends Screen {
 		if (surface.mouseButton == surface.LEFT) {
 
 			if (switchButton.contains(p))
-				surface.switchScreen(ScreenSwitcher.DRAWINGSCREEN);
+				surface.switchScreen(ScreenSwitcher.MENUSCREEN);
 
 		}
 	}

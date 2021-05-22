@@ -20,13 +20,13 @@ public float ratioX, ratioY;
 		
 		keys = new ArrayList<Integer>();
 		
-		DrawingScreen screen1 = new DrawingScreen(this);
+		MenuScreen screen1 = new MenuScreen(this);
 		screens.add(screen1);
 		
-		GameScreen screen2 = new GameScreen(this);
+		DrawingScreen screen2 = new DrawingScreen(this);
 		screens.add(screen2);
 		
-		MenuScreen screen3 = new MenuScreen(this);
+		GameScreen screen3 = new GameScreen(this);
 		screens.add(screen3);
 		
 		activeScreen = screens.get(0);
@@ -58,12 +58,12 @@ public float ratioX, ratioY;
 	}
 	
 	public PImage[][] getFrames() {
-		PImage[][] frames = ((DrawingScreen)(screens.get(0))).getFrames();
+		PImage[][] frames = ((DrawingScreen)(screens.get(1))).getFrames();
 		return frames;
 	}
 	
 	public boolean framesDone() {
-		return ((DrawingScreen)screens.get(0)).framesDone();
+		return ((DrawingScreen)screens.get(1)).framesDone();
 	}
 	
 	public void keyPressed() {
