@@ -23,7 +23,7 @@ public class GameScreen extends Screen {
 	private boolean isRight;
 	private ArrayList <Character> enemies;
 	private Character enemy;
-	
+	private Scrollable background;
 	private int cLives;
 
 
@@ -37,6 +37,7 @@ public class GameScreen extends Screen {
 		cWL = new Animation(100);
 		eR = new Animation(300);
 		eL = new Animation(300);
+		
 
 		switchButton = new Rectangle(100, 100, 100, 100);
 		g = new ArrayList<Ground>();
@@ -49,8 +50,8 @@ public class GameScreen extends Screen {
 	public void setup() {
 		bg = surface.loadImage("resources/maincharacter/bg2.png");
 		loadCAnims();
-		
-	
+		bg.resize(this.surface.width, this.surface.height);
+		background = new Scrollable(0, bg, surface.width,0);
 		
 		c = new Character(idleR, 3, 100, 100);
 		c.adjustImgShift(-45, -20);
@@ -94,10 +95,10 @@ public class GameScreen extends Screen {
 
 		surface.pushStyle();
 
-		while (bg.width != this.surface.width || bg.height != this.surface.height)
-			bg.resize(this.surface.width, this.surface.height);
-
-		surface.background(bg); // Clear the screen with a white background
+	//	while (bg.width != this.surface.width || bg.height != this.surface.height)
+		bg.resize(this.surface.width, this.surface.height);
+		background.draw(surface);
+		//surface.background(bg); // Clear the screen with a white background
 
 		surface.stroke(0); // Set line drawing color to white
 		surface.noFill();
@@ -117,17 +118,19 @@ public class GameScreen extends Screen {
 		
 		
 		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
-
+		background.setSpeed(0);
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
 			c.translate(-1);
-			
+			background.setSpeed(-3);
 		}
 		if (surface.isPressed(KeyEvent.VK_RIGHT)) {
 			c.translate(1);
+			background.setSpeed(3);
 		}
 		if (surface.isPressed(KeyEvent.VK_UP)) {
 			c.jump();
 		}
+		
 
 		if (c.getVelX() > 0.5 && c.getSurfaceState()) {
 			c.setAnimation(cWR);
@@ -144,7 +147,7 @@ public class GameScreen extends Screen {
 		}
 		
 		
-
+		background.update();
 		c.act(g);
 		for(Character enm : enemies) {
 			if(c.getX()  > enm.getX() - 10  && Math.abs(c.getX() - enm.getX()) < 350) {
