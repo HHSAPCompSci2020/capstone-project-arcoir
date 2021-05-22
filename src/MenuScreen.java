@@ -8,6 +8,7 @@ public class MenuScreen extends Screen {
 	private PImage initial, credits;
 	private boolean clicked;
 	private Rectangle start, customize, play;
+	private Dashboard dash;
 	
 	public MenuScreen (DrawingSurface surface) {
 		this.surface = surface;
@@ -20,6 +21,10 @@ public class MenuScreen extends Screen {
 	public void setup() {
 		initial = surface.loadImage("resources/menu/arcoir.gif");
 		credits = surface.loadImage("resources/menu/arcoirCredits.gif");
+		
+		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
+				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+
 	}
 	
 	public void settings() {
@@ -55,6 +60,13 @@ public class MenuScreen extends Screen {
 			surface.text("CUSTOMIZE", customize.x + 23, customize.y + 27);
 			surface.text("PLAY", play.x + 55, play.y + 27);
 			surface.popStyle();
+			
+			surface.pushStyle();
+			surface.fill(255);
+			surface.rect(760, 460, 30, 30);
+			surface.rect(10, 460, 30, 30);
+			dash.draw(surface);
+			surface.popStyle();
 		}
 	}
 	
@@ -69,6 +81,9 @@ public class MenuScreen extends Screen {
 					surface.switchScreen(ScreenSwitcher.GAMESCREEN);
 				}
 			}
+			dash.mousePressed(click.x, click.y, surface);
+			if (new Rectangle(10, 460, 30, 30).contains(click.x, click.y))
+				clicked = false;
 		}
 	}
 }
