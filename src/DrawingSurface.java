@@ -1,6 +1,5 @@
 import processing.core.PApplet;
 import processing.core.PImage;
-import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -26,6 +25,9 @@ public float ratioX, ratioY;
 		
 		GameScreen screen2 = new GameScreen(this);
 		screens.add(screen2);
+		
+		MenuScreen screen3 = new MenuScreen(this);
+		screens.add(screen3);
 		
 		activeScreen = screens.get(0);
 		

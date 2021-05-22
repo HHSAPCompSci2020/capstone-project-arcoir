@@ -1,9 +1,7 @@
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
-
 import javax.swing.JOptionPane;
-
 import processing.core.PImage;
 import processing.core.PConstants;
 
@@ -13,20 +11,20 @@ import processing.core.PConstants;
  *
  */
 public class DrawingScreen extends Screen {
-//need to fix switching between drawings, UI
+//need to fix UI, input RGB, frames show up
 	private ColorPalette palette;
 	private DrawingSurface surface;
 	private Rectangle switchButton, paletteRect, paintCanRect, saveRect, frameSelect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
-	private PImage [][] frames;
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
 	private int index, prevIndex;
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon;
 	private String selectedTool, currentFrame;
 	private boolean move1, move2, move3, realIdle;
+	boolean [] check;
 
 	public DrawingScreen(DrawingSurface surface) {
 		this.surface = surface;
@@ -36,6 +34,7 @@ public class DrawingScreen extends Screen {
 		character2 = new Color [128][128];
 		character3 = new Color [128][128];
 		idle = new Color [128][128];
+		check = new boolean [4];
 		index = 3;
 		prevIndex = 0;
 		switchButton = new Rectangle (50, 50, 50, 50);
@@ -48,67 +47,75 @@ public class DrawingScreen extends Screen {
 		realIdle = false;
 		selectedTool = "";
 		currentFrame = "Idle";
-		
 		characters = new Color [][][] {character1, character2, character3, idle};
-		frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, {frame1L, frame2L, frame3L, frame4L}, {idleL}};
 	}
 
 	/**
 	 * Saves the frame from the drawing interface as an actual frame to be used in an animation.
 	 */
 	public void saveImage() {
-		if (index == 0) {
-			frame1R.loadPixels();
-			int i = 0;
-			for (int r = 0; r < character1.length; r++) {
-				for (int c = 0; c < character1.length; c++) {
-					frame1R.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
-					i++;
+		if (characters[index] != null && check[index] != false) {
+			if (index == 0) {
+				frame1R.loadPixels();
+				int i = 0;
+				for (int r = 0; r < character1.length; r++) {
+					for (int c = 0; c < character1.length; c++) {
+						if (character1[r][c] != null)
+							frame1R.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
+						i++;
+					}
 				}
-			}
-			frame1R.updatePixels();
-			frame1L = reflect(frame1R);
-			frame1L.updatePixels();
-			move1 = true;
-		} else if (index == 1) {
-			frame2R.loadPixels();
-			int i = 0;
-			for (int r = 0; r < character2.length; r++) {
-				for (int c = 0; c < character2.length; c++) {
-					frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
-					i++;
+				frame1R.updatePixels();
+				frame1L = reflect(frame1R);
+				frame1L.updatePixels();
+				move1 = true;
+				JOptionPane.showMessageDialog(null, "Move 1 successfully saved");
+			} else if (index == 1) {
+				frame2R.loadPixels();
+				int i = 0;
+				for (int r = 0; r < character2.length; r++) {
+					for (int c = 0; c < character2.length; c++) {
+							if (character2[r][c] != null)
+								frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
+						i++;
+					}
 				}
-			}
-			frame2R.updatePixels();
-			frame2L = reflect(frame2R);
-			frame2L.updatePixels();
-			move2 = true;
-		} else if (index == 4){
-			frame3R.loadPixels();
-			int i = 0;
-			for (int r = 0; r < character3.length; r++) {
-				for (int c = 0; c < character3.length; c++) {
-					frame3R.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
-					i++;
+				frame2R.updatePixels();
+				frame2L = reflect(frame2R);
+				frame2L.updatePixels();
+				move2 = true;
+				JOptionPane.showMessageDialog(null, "Move 2 successfully saved");
+			} else if (index == 2){
+				frame3R.loadPixels();
+				int i = 0;
+				for (int r = 0; r < character3.length; r++) {
+					for (int c = 0; c < character3.length; c++) {
+						if (character3[r][c] != null)
+							frame3R.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
+						i++;
+					}
 				}
-			}
-			frame3R.updatePixels();
-			frame3L = reflect(frame3R);
-			frame3L.updatePixels();
-			move3 = true;
-		} else {
-			idleR.loadPixels();
-			int i = 0;
-			for (int r = 0; r < idle.length; r++) {
-				for (int c = 0; c < idle.length; c++) {
-					idleR.pixels[i] = surface.color(idle[r][c].getRed(), idle[r][c].getGreen(), idle[r][c].getBlue());
-					i++;
+				frame3R.updatePixels();
+				frame3L = reflect(frame3R);
+				frame3L.updatePixels();
+				move3 = true;
+				JOptionPane.showMessageDialog(null, "Move 3 successfully saved");
+			} else {
+				idleR.loadPixels();
+				int i = 0;
+				for (int r = 0; r < idle.length; r++) {
+					for (int c = 0; c < idle.length; c++) {
+						if (idle[r][c] != null)
+							idleR.pixels[i] = surface.color(idle[r][c].getRed(), idle[r][c].getGreen(), idle[r][c].getBlue());
+						i++;
+					}
 				}
+				idleR.updatePixels();
+				idleL = reflect(idleR);
+				idleL.updatePixels();
+				realIdle = true;
+				JOptionPane.showMessageDialog(null, "Idle successfully saved");
 			}
-			idleR.updatePixels();
-			idleL = reflect(idleR);
-			idleL.updatePixels();
-			realIdle = true;
 		}
 	}
 	
@@ -121,14 +128,33 @@ public class DrawingScreen extends Screen {
 		return reflected;
 	}
 	
+	//initializes the frames
+	private void createFrames() {
+		frame1R = surface.createImage(128,  128,  PConstants.RGB);
+		frame2R = surface.createImage(128,  128,  PConstants.RGB);
+		frame3R = surface.createImage(128,  128,  PConstants.RGB);
+		frame4R = surface.createImage(128,  128,  PConstants.RGB);
+		idleR = surface.createImage(128,  128,  PConstants.RGB);
+		frame1L = surface.createImage(128,  128,  PConstants.RGB);
+		frame2L = surface.createImage(128,  128,  PConstants.RGB);
+		frame3L = surface.createImage(128,  128,  PConstants.RGB);
+		frame4L = surface.createImage(128,  128,  PConstants.RGB);
+		idleL = surface.createImage(128,  128,  PConstants.RGB);
+	}
 	/**
 	 * 
 	 * @return the animation frames.
 	 */
 	public PImage[][] getFrames() {
+		PImage [][] frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, 
+			{frame1L, frame2L, frame3L, frame4L}, {idleL}};
 		return frames;
 	}
 	
+	/**
+	 * 
+	 * @return whether all frames have been saved or not
+	 */
 	public boolean framesDone() {
 		return move1 && move2 && move3 && realIdle;
 	}
@@ -138,6 +164,7 @@ public class DrawingScreen extends Screen {
 				surface.loadImage("resources/help/helpIcon.gif"));
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
 		saveIcon = surface.loadImage("resources/drawingIcons/save.gif");
+		createFrames();
 	}
 
 	public void draw () {
@@ -177,8 +204,8 @@ public class DrawingScreen extends Screen {
 	
 	private void showFrameSelect() {
 		String [] realFrames = new String [] {"Idle", "Move 1", "Move 2", "Move 3"};
-		String input = (String)JOptionPane.showInputDialog(null, "Choose a frame to draw", "Which frame?", JOptionPane.QUESTION_MESSAGE, null, 
-				realFrames, realFrames[prevIndex]);
+		String input = (String)JOptionPane.showInputDialog(null, "Choose a frame to draw", "Which frame?", 
+				JOptionPane.QUESTION_MESSAGE, null, realFrames, realFrames[prevIndex]);
 		
 		if (input == null)
 			return;
@@ -354,6 +381,7 @@ public class DrawingScreen extends Screen {
 					paintCanFill(coord.x, coord.y);
 				} else {
 					toggleCell(coord.x, coord.y);
+					check[index] = true;
 				}
 				prevToggle = coord;
 			}
@@ -367,6 +395,10 @@ public class DrawingScreen extends Screen {
 			
 			if (paintCanRect.contains(click.x, click.y)) {
 				selectedTool = "PAINTCAN";
+			}
+			
+			if (saveRect.contains(click.x, click.y)) {
+				saveImage();
 			}
 			
 			if (frameSelect.contains(click.x, click.y) ) {
