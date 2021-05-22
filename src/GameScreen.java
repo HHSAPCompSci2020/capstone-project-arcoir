@@ -18,7 +18,6 @@ public class GameScreen extends Screen {
 	private Dashboard dash;
 	private DrawingSurface surface;
 	private Animation idleR, idleL, cWR, cWL, eR, eL;
-	private Rectangle switchButton;
 	private PImage bg;
 	private boolean isRight;
 	private ArrayList <Character> enemies;
@@ -41,7 +40,6 @@ public class GameScreen extends Screen {
 		eL = new Animation(300);
 		
 
-		switchButton = new Rectangle(100, 100, 100, 100);
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 

@@ -3,7 +3,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import processing.core.PImage;
-import processing.core.PGraphics;
 import processing.core.PConstants;
 
 /**
@@ -15,15 +14,14 @@ public class DrawingScreen extends Screen {
 //need to fix UI, input RGB, frames show up
 	private ColorPalette palette;
 	private DrawingSurface surface;
-	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect;
+	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
-	private PGraphics gframe1R, gframe2R, gframe3R, gframe4R, gidleR, gframe1L, gframe2L, gframe4L, gidleL;
 	private int index, prevIndex;
 	private Point prevToggle;
-	private PImage paintCanIcon, saveIcon;
+	private PImage paintCanIcon, saveIcon, refreshIcon;
 	private String selectedTool, currentFrame;
 	private boolean move1, move2, move3, realIdle;
 	boolean [] check;
@@ -41,6 +39,7 @@ public class DrawingScreen extends Screen {
 		prevIndex = 0;
 		paintCanRect = new Rectangle (710, 0, 40, 40);
 		saveRect = new Rectangle  (755, 0, 40, 40);
+		refreshRect = new Rectangle (755, 45, 40, 40);
 		frameSelect = new Rectangle (710, 210, 80, 30);
 		move1 = false;
 		move2 = false;
@@ -178,6 +177,7 @@ public class DrawingScreen extends Screen {
 				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
 		saveIcon = surface.loadImage("resources/drawingIcons/save.gif");
+		refreshIcon = surface.loadImage("resources/drawingIcons/refresh.gif");
 		createFrames();
 
 	}
@@ -198,6 +198,7 @@ public class DrawingScreen extends Screen {
 		select(selectedTool);
 		surface.image(paintCanIcon, paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		surface.image(saveIcon, saveRect.x, saveRect.y, saveRect.width, saveRect.height);
+		surface.image(refreshIcon, refreshRect.x,  refreshRect.y, refreshRect.width, refreshRect.height);
 		
 		surface.pushStyle();
 		surface.noFill();
@@ -373,6 +374,11 @@ public class DrawingScreen extends Screen {
 		fill(x, y);
 	}
 	
+	/**
+	 * Selects a drawing tool to be used. 
+	 * 
+	 * @param name of tool to be used
+	 */
 	public void select (String name) {
 		if (name.equals("")) {
 			//do nothing
@@ -380,6 +386,13 @@ public class DrawingScreen extends Screen {
 			surface.fill(168, 166, 166);
 			surface.rect(paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		}
+	}
+	
+	/**
+	 * Resets the frame to its default state.
+	 */
+	public void reset() {
+		characters[index] = new Color [128][128];
 	}
 	
 	private void fill (int x, int y) {
@@ -420,6 +433,10 @@ public class DrawingScreen extends Screen {
 				} else {
 					selectedTool = "PAINTCAN";
 				}
+			}
+			
+			if (refreshRect.contains(click.x, click.y)) {
+				reset();
 			}
 			
 			if (saveRect.contains(click.x, click.y)) {
