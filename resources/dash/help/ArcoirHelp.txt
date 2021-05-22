@@ -1,0 +1,31 @@
+﻿Starting Screen
+Left click START to begin the game.
+
+Main Menu
+Left click CUSTOMIZE to customize characters and enemies.
+Left click PLAY to begin playing the game.
+
+
+Help
+Left click the question mark at the bottom right of the screen to get help.
+
+Back
+Left click the arrow at the bottom left of the screen to go back to the previous screen.
+
+
+Drawing Screen
+Left click the colors to select a color. Click the grid to customize your character. 
+Left click the paint can to use the paint can tool. Right click again to turn it off. 
+Left click the save icon to save your edits.
+Left click the refresh icon to reset the frame.
+Left click the "Current Frame" button to move between frames. 
+
+Gameplay Controls
+Press the space bar to kill enemies.
+Press the right arrow to move right.
+Press the left arrow to move left.
+Press the up arrow to jump up.
+Go through coins to collect coins. 
+To avoid monsters, simply jump over them. 
+
+This is a side-view platformer game. The game will scroll as the player moves.

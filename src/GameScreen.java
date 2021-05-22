@@ -18,7 +18,6 @@ public class GameScreen extends Screen {
 	private Dashboard dash;
 	private DrawingSurface surface;
 	private Animation idleR, idleL, cWR, cWL, eR, eL;
-	private Rectangle switchButton;
 	private PImage bg;
 	private boolean isRight;
 	private ArrayList <Character> enemies;
@@ -41,7 +40,6 @@ public class GameScreen extends Screen {
 		eL = new Animation(300);
 		
 
-		switchButton = new Rectangle(100, 100, 100, 100);
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 
@@ -62,7 +60,15 @@ public class GameScreen extends Screen {
 		c.setMovesXAxis(false);
 		
 		enemies = new ArrayList<>();
+		enemy = new Character(eL, 1, 600, 100);
+		enemy.adjustImgShift(-8, -10);
+		enemy.setHeight(40);
+		enemies.add(enemy);
+		
 		spawnEnemy();
+		
+		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
+				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 	}
 
 	private void loadCAnims() {
@@ -125,8 +131,6 @@ public class GameScreen extends Screen {
 		surface.text("Level: " + level, 700, 50);
 		surface.popStyle();
 		
-		
-		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 		background.setSpeed(0);
 		
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
@@ -202,6 +206,8 @@ public class GameScreen extends Screen {
 		}
 		
 		background.update();
+		
+		dash.draw(surface);
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {
@@ -236,10 +242,7 @@ public class GameScreen extends Screen {
 
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
-
-			if (switchButton.contains(p))
-				surface.switchScreen(ScreenSwitcher.MENUSCREEN);
-
+			dash.mousePressed(p.x, p.y, surface);
 		}
 	}
 	
