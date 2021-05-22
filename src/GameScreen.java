@@ -50,11 +50,13 @@ public class GameScreen extends Screen {
 		bg = surface.loadImage("resources/maincharacter/bg2.png");
 		loadCAnims();
 		
+	
+		
 		c = new Character(idleR, 3, 100, 100);
 		c.adjustImgShift(-45, -20);
 		
 		enemies = new ArrayList<>();
-		enemy = new Character(eR, 1, 600, 100);
+		enemy = new Character(eL, 1, 600, 100);
 		enemy.adjustImgShift(-8, -10);
 		enemy.setHeight(40);
 		enemies.add(enemy);
@@ -100,12 +102,7 @@ public class GameScreen extends Screen {
 		surface.stroke(0); // Set line drawing color to white
 		surface.noFill();
 		
-		
-		
-	//	surface.rect((float) c.getX(), (float) c.getY(), (float) c.getWidth(), (float) c.getHeight());
-	//	surface.rect((float) enemy.getX(), (float) enemy.getY(), (float) enemy.getWidth(), (float) enemy.getHeight());
-
-		//		surface.rect(x,y,30,30);
+	
 		c.draw(surface);
 		enemy.draw(surface);
 
@@ -116,13 +113,14 @@ public class GameScreen extends Screen {
 		surface.fill(0);
 		surface.text("Move: Arrow keys", 10, 30);
 		surface.text("Menu: Space", 10, 50);
-
 		surface.popStyle();
-
+		
+		
 		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
 			c.translate(-1);
+			
 		}
 		if (surface.isPressed(KeyEvent.VK_RIGHT)) {
 			c.translate(1);
@@ -149,10 +147,10 @@ public class GameScreen extends Screen {
 
 		c.act(g);
 		for(Character enm : enemies) {
-			if(c.getX()  > enm.getX() - 10 ) {
+			if(c.getX()  > enm.getX() - 10  && Math.abs(c.getX() - enm.getX()) < 350) {
 				enm.translate(0.3);
 				enemy.setAnimation(eR);
-			} else if (c.getX()  < enm.getX() + 10) {
+			} else if (c.getX()  < enm.getX()  && Math.abs(c.getX() - enm.getX()) < 350) {
 				enm.translate(-0.3);
 				enemy.setAnimation(eL);
 			}
