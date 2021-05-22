@@ -22,10 +22,12 @@ public class GameScreen extends Screen {
 	private PImage bg;
 	private boolean isRight;
 	private ArrayList <Character> enemies;
+	private int numEnemies;
 	private Character enemy;
 	private Scrollable background;
 	private int cLives;
-
+	private int level;
+	private int score;
 
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
@@ -44,6 +46,8 @@ public class GameScreen extends Screen {
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 
 		cLives = 0;
+		score = 0;
+		level = 1;
 	}
 
 	// Methods
@@ -63,8 +67,8 @@ public class GameScreen extends Screen {
 		enemy.setHeight(40);
 		enemies.add(enemy);
 		
-		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+		
+		spawnEnemy();
 	}
 
 	private void loadCAnims() {
@@ -110,7 +114,10 @@ public class GameScreen extends Screen {
 		
 	
 		c.draw(surface);
-		enemy.draw(surface);
+		for (Character e : enemies) {
+			e.draw(surface);
+			//System.out.println("drawing an enemy");
+		}
 
 		for (Ground ground : g) {
 	//		ground.drawGround(surface);
@@ -140,8 +147,6 @@ public class GameScreen extends Screen {
 		if (surface.isPressed(KeyEvent.VK_UP)) {
 			c.jump();
 		}
-		
-		
 
 		if (c.getVelX() > 0.5 && c.getSurfaceState()) {
 			c.setAnimation(cWR);
@@ -155,18 +160,17 @@ public class GameScreen extends Screen {
 			else
 				c.setAnimation(idleL);
 
-		}
-		
+		}	
 		
 
 		c.act(g);
 		for(Character enm : enemies) {
 			if(c.getX()  > enm.getX() - 10  && Math.abs(c.getX() - enm.getX()) < 350) {
 				enm.translate(0.4);
-				enemy.setAnimation(eR);
+				enm.setAnimation(eR);
 			} else if (c.getX()  < enm.getX()  && Math.abs(c.getX() - enm.getX()) < 350) {
 				enm.translate(-0.4);
-				enemy.setAnimation(eL);
+				enm.setAnimation(eL);
 			}
 			
 			if(c.intersects(enm)) {
@@ -176,6 +180,25 @@ public class GameScreen extends Screen {
 			
 			enm.act(g);
 			
+		}
+		
+		while (numEnemies<level) {
+			spawnEnemy();
+		}
+		System.out.println("num: " + numEnemies);
+		System.out.println("score: " + score);
+		System.out.println("level: " + level);
+		
+		updateLevel();
+		
+		if (surface.isPressed(KeyEvent.VK_SPACE)) {
+			for (int i = 0; i<enemies.size(); i++) {
+				if (c.intersects(enemies.get(i))) {
+					enemies.remove(i);
+					numEnemies--;
+					score++;
+				}
+			}
 		}
 		
 		background.update();
@@ -217,5 +240,20 @@ public class GameScreen extends Screen {
 		if (surface.mouseButton == surface.LEFT) {
 			dash.mousePressed(p.x, p.y, surface);
 		}
+	}
+	
+	public void updateLevel() {
+		if (score >= level) {
+			level++;
+			score = 0;
+		}
+	}
+	
+	public void spawnEnemy() {
+		Character spawnedEnemy = new Character(eL, 1, (int)(Math.random()*500+100), 100);
+		spawnedEnemy.adjustImgShift(-8, -10);
+		spawnedEnemy.setHeight(40);
+		enemies.add(spawnedEnemy);
+		numEnemies++;
 	}
 }
