@@ -153,7 +153,7 @@ public class ColorPalette {
 		return index;
 	}
 	
-	private void toggleCell(int i) {
+	public void toggleCell(int i) {
 		selectedColor = palette[i];
 	}
 	

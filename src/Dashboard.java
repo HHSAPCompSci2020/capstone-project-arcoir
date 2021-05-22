@@ -10,7 +10,6 @@ import java.awt.Rectangle;
 public class Dashboard {
 
 	// Fields
-	private Map realMap;
 	private Rectangle help, back; 
 	private Help helpWindow;
 	private PImage helpIcon, backIcon;
