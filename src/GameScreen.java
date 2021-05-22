@@ -67,8 +67,10 @@ public class GameScreen extends Screen {
 		enemy.setHeight(40);
 		enemies.add(enemy);
 		
-		
 		spawnEnemy();
+		
+		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
+				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 	}
 
 	private void loadCAnims() {
