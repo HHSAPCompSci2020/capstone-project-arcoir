@@ -20,7 +20,7 @@ public class Help {
 		helpWindow.setAlwaysOnTop(true);
 		helpWindow.setLocationRelativeTo(null);  
 		
-		JTextArea text = new JTextArea(readData("resources/help/ArcoirHelp.txt"));
+		JTextArea text = new JTextArea(readData("resources/dash/help/ArcoirHelp.txt"));
 		text.setSize(400, 400);
 	    text.setLineWrap(true);
 	    text.setEditable(false);

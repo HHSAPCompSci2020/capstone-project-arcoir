@@ -62,6 +62,9 @@ public class GameScreen extends Screen {
 		enemy.adjustImgShift(-8, -10);
 		enemy.setHeight(40);
 		enemies.add(enemy);
+		
+		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
+				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 	}
 
 	private void loadCAnims() {
@@ -118,8 +121,6 @@ public class GameScreen extends Screen {
 		surface.text("Menu: Space", 10, 50);
 		surface.popStyle();
 		
-		
-		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 		background.setSpeed(0);
 		
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
@@ -178,6 +179,8 @@ public class GameScreen extends Screen {
 		}
 		
 		background.update();
+		
+		dash.draw(surface);
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {
@@ -212,10 +215,7 @@ public class GameScreen extends Screen {
 
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
-
-			if (switchButton.contains(p))
-				surface.switchScreen(ScreenSwitcher.MENUSCREEN);
-
+			dash.mousePressed(p.x, p.y, surface);
 		}
 	}
 }

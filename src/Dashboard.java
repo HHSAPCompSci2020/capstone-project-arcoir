@@ -11,9 +11,9 @@ public class Dashboard {
 
 	// Fields
 	private Map realMap;
-	private Rectangle help, map, pause; 
+	private Rectangle help, back; 
 	private Help helpWindow;
-	private PImage helpIcon;
+	private PImage helpIcon, backIcon;
 	
 	// Constructor
 	/**
@@ -23,29 +23,28 @@ public class Dashboard {
 	 * @param width of dashboard
 	 * @param height of dashboard
 	 */
-	public Dashboard (int x, int y, int width, int height, PImage image) {
-		help = new Rectangle(750, 450, 50, 50);
-		map = new Rectangle(x + width/20, y, width/20, width/20);
-		pause = new Rectangle(x + width/10, y, width/20, width/20);	
-		helpIcon = image;
+	public Dashboard (int x, int y, int width, int height, PImage image1, PImage image2) {
+		help = new Rectangle(760, 460, 30, 30);
+		back = new Rectangle (10, 460, 30, 30);
+		helpIcon = image1;
 		helpWindow = new Help();
+		backIcon = image2;
 	}	
 	
 	public void draw(PApplet marker) {
 		//load images
-		marker.image(helpIcon, 750, 450, 50, 50);
+		marker.image(helpIcon, help.x, help.y, help.width, help.height);
+		marker.image(backIcon, back.x, back.y, back.width, back.height);
 	}
 	
-	public void mousePressed(double x, double y) {
+	public void mousePressed(double x, double y, DrawingSurface surface) {
 		if (help.contains(x, y)) {
 			helpWindow.show();
 		}
-		if (map.contains(x, y)) {
-			
+		if (back.contains(x, y)) {
+			surface.switchScreen(ScreenSwitcher.MENUSCREEN);
 		}
-		if (pause.contains(x, y)) {
-			
-		}
+		
 	}
 			
 	}

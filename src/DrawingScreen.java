@@ -15,7 +15,7 @@ public class DrawingScreen extends Screen {
 //need to fix UI, input RGB, frames show up
 	private ColorPalette palette;
 	private DrawingSurface surface;
-	private Rectangle switchButton, paletteRect, paintCanRect, saveRect, frameSelect;
+	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
@@ -39,7 +39,6 @@ public class DrawingScreen extends Screen {
 		check = new boolean [4];
 		index = 3;
 		prevIndex = 0;
-		switchButton = new Rectangle (50, 50, 50, 50);
 		paintCanRect = new Rectangle (710, 0, 40, 40);
 		saveRect = new Rectangle  (755, 0, 40, 40);
 		frameSelect = new Rectangle (710, 210, 80, 30);
@@ -176,7 +175,7 @@ public class DrawingScreen extends Screen {
 	
 	public void setup () {
 		board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				surface.loadImage("resources/help/helpIcon.gif"));
+				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
 		saveIcon = surface.loadImage("resources/drawingIcons/save.gif");
 		createFrames();
@@ -189,7 +188,6 @@ public class DrawingScreen extends Screen {
 		surface.background(255);
 
 		surface.fill(0);
-		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 
 		surface.noFill();
 
@@ -413,10 +411,6 @@ public class DrawingScreen extends Screen {
 				prevToggle = coord;
 			}
 
-			Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-			if (switchButton.contains(p))
-				surface.switchScreen(ScreenSwitcher.MENUSCREEN);
-
 			if (paletteRect.contains(click.x, click.y))
 				palette.mousePressed(click);
 			
@@ -435,7 +429,8 @@ public class DrawingScreen extends Screen {
 			if (frameSelect.contains(click.x, click.y) ) {
 				showFrameSelect();
 			}
-			board.mousePressed(click.x, click.y);
+			
+			board.mousePressed(click.x, click.y, surface);
 		} 
 	}
 
