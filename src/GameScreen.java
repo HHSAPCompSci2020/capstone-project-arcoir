@@ -48,9 +48,9 @@ public class GameScreen extends Screen {
 
 	// Methods
 	public void setup() {
-		bg = surface.loadImage("resources/maincharacter/bg2.png");
+		
 		loadCAnims();
-		bg.resize(this.surface.width, this.surface.height);
+		bg.resize(surface.width/2, surface.height);
 		background = new Scrollable(0, bg, 0, surface);
 		
 		c = new Character(idleR, 3, surface.width/2, 100);
@@ -65,6 +65,7 @@ public class GameScreen extends Screen {
 	}
 
 	private void loadCAnims() {
+		bg = surface.loadImage("resources/bgs/bg2.jpeg");
 		idleR.addFrame(surface.loadImage("resources/maincharacter/idleR.png"));
 		
 		idleL.addFrame(surface.loadImage("resources/maincharacter/idleL.png"));
@@ -93,7 +94,7 @@ public class GameScreen extends Screen {
 		
 //		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
 
-		background.update();
+		
 		background.draw(surface);
 		surface.pushStyle();
 
@@ -120,17 +121,17 @@ public class GameScreen extends Screen {
 		
 		surface.rect(switchButton.x, switchButton.y, switchButton.width, switchButton.height);
 		background.setSpeed(0);
-		double currentX = c.getX();
+		
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
 			for(Character enm : enemies) {
-				//enm.translate(0.2);
+				enm.translate(0.8);
 			}
 			c.translate(-1);
 			background.setSpeed(-3);
 		}
 		if (surface.isPressed(KeyEvent.VK_RIGHT)) {
 			for(Character enm : enemies) {
-				//enm.translate(-0.2);
+				enm.translate(-0.8);
 			}
 			c.translate(1);
 			background.setSpeed(3);
@@ -160,10 +161,10 @@ public class GameScreen extends Screen {
 		c.act(g);
 		for(Character enm : enemies) {
 			if(c.getX()  > enm.getX() - 10  && Math.abs(c.getX() - enm.getX()) < 350) {
-				enm.translate(0.3);
+				enm.translate(0.4);
 				enemy.setAnimation(eR);
 			} else if (c.getX()  < enm.getX()  && Math.abs(c.getX() - enm.getX()) < 350) {
-				enm.translate(-0.3);
+				enm.translate(-0.4);
 				enemy.setAnimation(eL);
 			}
 			
@@ -176,7 +177,7 @@ public class GameScreen extends Screen {
 			
 		}
 		
-		
+		background.update();
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {
