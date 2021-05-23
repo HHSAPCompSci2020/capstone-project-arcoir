@@ -27,6 +27,7 @@ public class GameScreen extends Screen {
 	private int cLives;
 	private int level;
 	private int score;
+	private GameOverScreen gameOver;
 
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
@@ -46,6 +47,8 @@ public class GameScreen extends Screen {
 		cLives = 3;
 		score = 0;
 		level = 1;
+		
+		
 	}
 
 	// Methods
@@ -212,6 +215,8 @@ public class GameScreen extends Screen {
 
 		dash.draw(surface);
 		
+		
+		
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {
@@ -276,6 +281,10 @@ public class GameScreen extends Screen {
 			if(enemies.size() == 0) {
 				spawnEnemy();
 			}
+		}
+		
+		if(cLives==0) {
+			surface.switchScreen(3);
 		}
 	}
 }

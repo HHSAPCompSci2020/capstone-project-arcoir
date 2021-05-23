@@ -1,10 +1,8 @@
+import processing.core.PImage;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import processing.core.PImage;
-
 public class GameOverScreen extends Screen {
-
 	
 	private DrawingSurface surface;
 	private PImage initial, credits;
@@ -12,7 +10,7 @@ public class GameOverScreen extends Screen {
 	private Rectangle start, customize, play;
 	private Dashboard dash;
 	
-	public GameOverScreen(DrawingSurface surface) {
+	public GameOverScreen (DrawingSurface surface) {
 		this.surface = surface;
 		clicked = false;
 		start = new Rectangle(320, 260, 160, 40);
@@ -30,14 +28,21 @@ public class GameOverScreen extends Screen {
 	}
 	
 	public void draw () {
-		
+		if (!clicked) {
 			surface.image(initial, 0, 0);
 			
 			surface.pushStyle();
+			surface.noFill();
+			surface.stroke(255);
+			surface.strokeWeight(4);
+			surface.rect(start.x, start.y, start.width, start.height);
 			
 			surface.fill(255);
 			surface.textSize(20);
-			surface.text("Game Over!", start.x + 46, start.y + 27);
+			surface.text("GAME OVER!", start.x + 24, start.y + 27);
+			surface.popStyle();
+		} else {
+			surface.image(credits, 0, 0);
 			
 			surface.pushStyle();
 			surface.noFill();
@@ -49,7 +54,7 @@ public class GameOverScreen extends Screen {
 			surface.fill(255);
 			surface.textSize(20);
 			surface.text("CUSTOMIZE", customize.x + 23, customize.y + 27);
-			surface.text("PLAY AGAIN", play.x + 55, play.y + 27);
+			surface.text("PLAY", play.x + 55, play.y + 27);
 			surface.popStyle();
 			
 			surface.pushStyle();
@@ -57,9 +62,8 @@ public class GameOverScreen extends Screen {
 			surface.rect(760, 460, 30, 30);
 			surface.rect(10, 460, 30, 30);
 			dash.draw(surface);
-			
 			surface.popStyle();
-	
+		}
 	}
 	
 	public void mousePressed(Point click) {
@@ -71,7 +75,7 @@ public class GameOverScreen extends Screen {
 					surface.switchScreen(ScreenSwitcher.DRAWINGSCREEN);
 				} else if (play.contains(click.x, click.y)) {
 					surface.switchScreen(ScreenSwitcher.GAMESCREEN);
-				}
+				} 
 			}
 			dash.mousePressed(click.x, click.y, surface, 0, false);
 			if (new Rectangle(10, 460, 30, 30).contains(click.x, click.y))
