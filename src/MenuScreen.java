@@ -19,8 +19,8 @@ public class MenuScreen extends Screen {
 	}
 	
 	public void setup() {
-		initial = surface.loadImage("resources/menu/arcoir.gif");
-		credits = surface.loadImage("resources/menu/arcoirCredits.gif");
+		initial = surface.loadImage("resources/arcoir/arcoir.gif");
+		credits = surface.loadImage("resources/arcoir/arcoirCredits.gif");
 		
 		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
 				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
