@@ -50,7 +50,7 @@ public class Scrollable {
 
 	public void draw(PApplet p) {
 		//for(int i = 0; i < listImage.size(); i++) {
-		image.resize(surface.width, surface.height);
+		image.resize(800, 500);
 		for(int xPos: imagePos) {
 			p.image(image, xPos, posY);
 		}
