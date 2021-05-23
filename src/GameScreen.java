@@ -60,12 +60,12 @@ public class GameScreen extends Screen {
 		loadCAnims();
 		background = new Scrollable(0, bg, 0, surface);
 		
-		c = new Entity(idleR, 3, 64, 100);
+		c = new Entity(idleR, "HERO", 3, 64, 100);
 		c.adjustImgShift(-45, -20);
 		c.setMovesXAxis(false);
 		
 		enemies = new ArrayList<>();
-		enemy = new Entity(eL, 1, 600, 100);
+		enemy = new Entity(eL, "ENEMY", 1, 600, 100);
 		enemy.adjustImgShift(-8, -10);
 		enemy.setHeight(40);
 		enemies.add(enemy);
@@ -136,7 +136,7 @@ public class GameScreen extends Screen {
 		
 		surface.text("Score: " + score, 700, 30);
 		surface.text("Level: " + level, 700, 50);
-		surface.text("Lives: " + c.getLives(), 700, 70);
+		surface.text("Lives: " + (int)c.getLives(), 700, 70);
 		surface.popStyle();
 		
 		background.setSpeed(0);
@@ -203,7 +203,8 @@ public class GameScreen extends Screen {
 		
 		updateLevel();
 		
-		countLives();
+		updateEnemyState();
+		enemyAttack();
 
 		if (surface.isPressed(KeyEvent.VK_SPACE)) {
 			for (int i = 0; i<enemies.size(); i++) {
@@ -215,19 +216,18 @@ public class GameScreen extends Screen {
 			}
 		}
 		
+		if(!c.getLiveState()) {
+			surface.switchScreen(3);
+			c.setLives(3);
+			isRight = true;
+			level = 0;
+			score = 0;
+		}
 		
 		background.update();
 		
 
 		dash.draw(surface);
-		
-		
-		
-//
-//
-//		if (surface.isPressed(KeyEvent.VK_SPACE)) {
-//			surface.switchScreen(ScreenSwitcher.SCREEN1);
-//		}
 	}
 	
 	
@@ -271,49 +271,31 @@ public class GameScreen extends Screen {
 	}
 	
 	public void spawnEnemy() {
-		Entity spawnedEnemy = new Entity(eL, 1, (int)(Math.random()*500+100), 100);
+		Entity spawnedEnemy = new Entity(eL, "ENEMY", 1, (int)(Math.random()*500+100), 100);
 		spawnedEnemy.adjustImgShift(-8, -10);
 		spawnedEnemy.setHeight(40);
 		enemies.add(spawnedEnemy);
 		numEnemies++;
 	}
 	
-	public void countLives() {
+	public void updateEnemyState() {
 		for(int i=0; i<enemies.size(); i++) {
-//			if(enemies.get(i).getX() > this.DRAWING_WIDTH || enemies.get(i).getX() <0) {
-//				cLives--;
-//				enemies.remove(i);
-//				i++;
-//			}
 			if(enemies.get(i).getX() > this.DRAWING_WIDTH || enemies.get(i).getX() <0) {
 				enemies.remove(i);
 				i--;
 			}
-			
-			if(enemies.get(i).intersects(c)) {
-//				enemies.remove(i);
-//				t++;
-//				System.out.println(t);
-//				if (t > 60) {
-				enemies.get(i).attack(c);
-//				cLives--;
-//				i++;
-				//}
-			}
-			
-			t = 0;
-			
+						
 			if(enemies.size() == 0) {
 				spawnEnemy();
 			}
 		}
-		
-		if(!c.getLiveState()) {
-			surface.switchScreen(3);
-			c.setLives(3);
-			isRight = true;
-			level = 0;
-			score = 0;
+	}
+	
+	public void enemyAttack() {
+		for(int i=0; i<enemies.size(); i++) {
+			if(enemies.get(i).intersects(c)) {
+				enemies.get(i).attack(c);
+			}
 		}
 	}
 }

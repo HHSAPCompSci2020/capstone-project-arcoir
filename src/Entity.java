@@ -9,7 +9,7 @@ import processing.core.PApplet;
 public class Entity {
 	// Fields
 	private Animation animation;
-	private int lives;
+	private double lives;
 	private double x, y;
 	private double velX, velY;
 	private Rectangle hitBox;
@@ -18,13 +18,15 @@ public class Entity {
 	private double gravity;
 	private double jumpStrength;
 	private double imgShiftX, imgShiftY;
+	private String type;
 	
 	// Constructor
-	public Entity(Animation a, int lives, int x, int y) {
+	public Entity(Animation a, String type, int lives, int x, int y) {
 		imgShiftX = 0;
 		imgShiftY = 0;
 		animation = a;
 		isAlive = true;
+		this.type = type;
 		this.lives = lives;
 		velX = 0;
 		velY = 0;
@@ -149,21 +151,36 @@ public class Entity {
 	}
 	
 	public void attack(Entity other) {
-		other.takeDamage();
+		if (other.getType().equals("ENEMY"))
+			other.takeDamage();
+		else {
+			other.takeDamage(0.02);
+		}
 	}
 	
 	public void takeDamage() {
 		lives--;
-		if(lives == 0) {
+		if(lives <= 0) {
 			isAlive = false;
 		}
 	}
 	
-	public int getLives() {
+	public void takeDamage(double i) {
+		lives -= i;
+		if (lives <= 0) {
+			isAlive = false;
+		}
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public double getLives() {
 		return lives;
 	}
 	
-	public void setLives(int num) {
+	public void setLives(double num) {
 		lives = num;
 	}
 	
