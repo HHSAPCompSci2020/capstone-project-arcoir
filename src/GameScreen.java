@@ -43,7 +43,7 @@ public class GameScreen extends Screen {
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 
-		cLives = 0;
+		cLives = 3;
 		score = 0;
 		level = 1;
 	}
@@ -129,6 +129,7 @@ public class GameScreen extends Screen {
 		
 		surface.text("Score: " + score, 700, 30);
 		surface.text("Level: " + level, 700, 50);
+		surface.text("Lives: " + cLives, 700, 70);
 		surface.popStyle();
 		
 		background.setSpeed(0);
@@ -205,8 +206,11 @@ public class GameScreen extends Screen {
 			}
 		}
 		
+		countLives();
+		
 		background.update();
 		
+
 		dash.draw(surface);
 //
 //
@@ -259,5 +263,19 @@ public class GameScreen extends Screen {
 		spawnedEnemy.setHeight(40);
 		enemies.add(spawnedEnemy);
 		numEnemies++;
+	}
+	
+	public void countLives() {
+		for(int i=0; i<enemies.size(); i++) {
+			if(enemies.get(i).getX() > this.DRAWING_WIDTH || enemies.get(i).getX() <0) {
+				cLives--;
+				enemies.remove(i);
+				i++;
+			}
+			
+			if(enemies.size() == 0) {
+				spawnEnemy();
+			}
+		}
 	}
 }
