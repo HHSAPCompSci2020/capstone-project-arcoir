@@ -30,7 +30,7 @@ public class GameScreen extends Screen {
 	private boolean doneLoading;
 	private boolean leveledUp;
 	private int displayCount;
-	private ArrayList<PImage> artifacts;
+	private ArrayList<PImage> artifacts, backgrounds;
 	
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
@@ -44,6 +44,7 @@ public class GameScreen extends Screen {
 		eL = new Animation(300);
 		
 		artifacts =  new ArrayList<PImage>();
+		backgrounds = new ArrayList<PImage>();
 		leveledUp = false;
 		displayCount = 0;
 		
@@ -83,7 +84,7 @@ public class GameScreen extends Screen {
 	}
 
 	private void loadCAnims() {
-		bg = surface.loadImage("resources/bgs/bg2.jpeg");
+		bg = surface.loadImage("resources/bgs/bgGrey.jpeg");
 		idleR.addFrame(surface.loadImage("resources/maincharacter/idleR.png"));
 		
 		idleL.addFrame(surface.loadImage("resources/maincharacter/idleL.png"));
@@ -103,6 +104,14 @@ public class GameScreen extends Screen {
 		
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft1.png"));
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft2.png"));
+		
+		
+		backgrounds.add(surface.loadImage("resources/bgs/bgRed.gif"));
+		backgrounds.add(surface.loadImage("resources/bgs/bgOrange.gif"));
+		backgrounds.add(surface.loadImage("resources/bgs/bgYellow.gif"));
+		backgrounds.add(surface.loadImage("resources/bgs/bgGreen.gif"));
+		backgrounds.add(surface.loadImage("resources/bgs/bgBlue.gif"));
+		backgrounds.add(surface.loadImage("resources/bgs/bgPurple.gif"));
 		
 		artifacts.add(surface.loadImage("resources/artifacts/artifactRed.gif"));
 		artifacts.add(surface.loadImage("resources/artifacts/artifactOrange.gif"));
@@ -221,9 +230,13 @@ public class GameScreen extends Screen {
 		enemyAttack();
 		
 		if(leveledUp && level < 8) {
+			
+			if(displayCount == 10 && level < 7) {
+				background.setImage(backgrounds.get(level - 1));
+			}
+			
 			if(displayCount > 0) {
 				surface.image(artifacts.get(level-1), 400 - artifacts.get(level-1).width/2, 250 - artifacts.get(level-1).height/2);
-				
 				displayCount--;
 			}
 		}
