@@ -211,6 +211,7 @@ public class GameScreen extends Screen {
 		
 
 		dash.draw(surface);
+		
 //
 //
 //		if (surface.isPressed(KeyEvent.VK_SPACE)) {

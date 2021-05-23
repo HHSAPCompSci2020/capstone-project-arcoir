@@ -29,6 +29,9 @@ public float ratioX, ratioY;
 		GameScreen screen3 = new GameScreen(this);
 		screens.add(screen3);
 		
+		GameOverScreen screen4 = new GameOverScreen(this);
+		screens.add(screen4);
+		
 		activeScreen = screens.get(0);
 		
 	}
