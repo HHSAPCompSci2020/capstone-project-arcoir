@@ -55,7 +55,7 @@ public class GameScreen extends Screen {
 		bg.resize(surface.width/2, surface.height);
 		background = new Scrollable(0, bg, 0, surface);
 		
-		c = new Character(idleR, 3, surface.width/2, 100);
+		c = new Character(idleR, 3, DRAWING_WIDTH/2 - 64, 100);
 		c.adjustImgShift(-45, -20);
 		c.setMovesXAxis(false);
 		

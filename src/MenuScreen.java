@@ -27,10 +27,6 @@ public class MenuScreen extends Screen {
 
 	}
 	
-	public void settings() {
-		
-	}
-	
 	public void draw () {
 		if (!clicked) {
 			surface.image(initial, 0, 0);
