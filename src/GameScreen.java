@@ -66,7 +66,7 @@ public class GameScreen extends Screen {
 		loadCAnims();
 		background = new Scrollable(0, bg, 0, surface);
 		
-		c = new Entity(idleR, "HERO", 3, 64, 100);
+		c = new Entity(idleR, "HERO", 3, 336, 100);
 		c.adjustImgShift(-45, -20);
 		c.setMovesXAxis(false);
 		

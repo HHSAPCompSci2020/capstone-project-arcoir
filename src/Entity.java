@@ -179,6 +179,7 @@ public class Entity {
 	
 	public void setLives(double num) {
 		lives = num;
+		isAlive = true;
 	}
 	
 	public void setX(double xCoord) {
