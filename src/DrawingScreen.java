@@ -14,14 +14,14 @@ public class DrawingScreen extends Screen {
 //need to fix UI, input RGB, frames show up
 	private ColorPalette palette;
 	private DrawingSurface surface;
-	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect;
+	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect, colorRect, addRect, resetRect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
 	private int index, prevIndex;
 	private Point prevToggle;
-	private PImage paintCanIcon, saveIcon, refreshIcon;
+	private PImage paintCanIcon, saveIcon, refreshIcon, addIcon, resetIcon;
 	private String selectedTool, currentFrame;
 	private boolean move1, move2, move3, realIdle;
 	boolean [] check;
@@ -41,6 +41,9 @@ public class DrawingScreen extends Screen {
 		saveRect = new Rectangle  (755, 0, 40, 40);
 		refreshRect = new Rectangle (755, 45, 40, 40);
 		frameSelect = new Rectangle (710, 210, 80, 30);
+		colorRect = new Rectangle (710, 135, 40, 38);
+		addRect = new Rectangle(710, 45, 40, 40);
+		resetRect = new Rectangle(710, 90, 40, 40);
 		move1 = false;
 		move2 = false;
 		move3 = false;
@@ -178,6 +181,8 @@ public class DrawingScreen extends Screen {
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
 		saveIcon = surface.loadImage("resources/drawingIcons/save.gif");
 		refreshIcon = surface.loadImage("resources/drawingIcons/refresh.gif");
+		addIcon = surface.loadImage("resources/drawingIcons/add.gif");
+		resetIcon = surface.loadImage("resources/drawingIcons/reset.gif");
 		createFrames();
 
 	}
@@ -199,6 +204,8 @@ public class DrawingScreen extends Screen {
 		surface.image(paintCanIcon, paintCanRect.x, paintCanRect.y, paintCanRect.width, paintCanRect.height);
 		surface.image(saveIcon, saveRect.x, saveRect.y, saveRect.width, saveRect.height);
 		surface.image(refreshIcon, refreshRect.x,  refreshRect.y, refreshRect.width, refreshRect.height);
+		surface.image(addIcon, addRect.x, addRect.y, addRect.width, addRect.height);
+		surface.image(resetIcon, resetRect.x,  resetRect.y, resetRect.width, resetRect.height);
 		
 		surface.pushStyle();
 		surface.noFill();
@@ -213,6 +220,13 @@ public class DrawingScreen extends Screen {
 		surface.textLeading(13);
 		surface.textAlign(PConstants.CENTER, PConstants.CENTER);
 		surface.text("Current Frame: \n" + currentFrame, frameSelect.x + 42, frameSelect.y + 12);
+		surface.popStyle();
+		
+		surface.pushStyle();
+		surface.fill(palette.getSelectedColor().getRGB());
+		surface.strokeWeight(2);
+		surface.stroke(91, 15, 0);
+		surface.rect(colorRect.x, colorRect.y, colorRect.width, colorRect.height);
 		surface.popStyle();
 
 		board.draw(surface);
@@ -249,6 +263,15 @@ public class DrawingScreen extends Screen {
 		}
 	}
 
+	public void changeColor() {
+		String first = JOptionPane.showInputDialog(null, "Enter r value.");
+		int r = Integer.parseInt(first);
+		String second = JOptionPane.showInputDialog(null, "Enter g value.");
+		int g = Integer.parseInt(second);
+		String third = JOptionPane.showInputDialog(null, "Enter b value.");
+		int b = Integer.parseInt(third);
+		palette.changeColor(palette.getCurrentIndex(), r, g, b);
+	}
 	/**
 	 * (Graphical UI)
 	 * Draws the grid on a PApplet.
@@ -396,12 +419,11 @@ public class DrawingScreen extends Screen {
 	}
 	
 	private void fill (int x, int y) {
-		if (x < 0 || x >= characters[index][0].length || y < 0 || y >= characters[index].length) {
+		if (x < 0 || x >= 128 || y < 0 || y >= 128) {
 			//do nothing
 		} else if (characters[index][x][y] != null && characters[index][x][y].equals(palette.getSelectedColor())) {
 			//do nothing
 		} else {
-			
 			characters[index][x][y] = palette.getSelectedColor();
 
 			fill(x + 1, y);
@@ -445,6 +467,14 @@ public class DrawingScreen extends Screen {
 			
 			if (frameSelect.contains(click.x, click.y) ) {
 				showFrameSelect();
+			}
+			
+			if (addRect.contains(click.x, click.y)) {
+				changeColor();
+			}
+			
+			if (resetRect.contains(click.x, click.y)) {
+				palette.reset();
 			}
 			
 			board.mousePressed(click.x, click.y, surface, 1, framesDone());

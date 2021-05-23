@@ -52,7 +52,6 @@ public class GameScreen extends Screen {
 	public void setup() {
 		
 		loadCAnims();
-//		bg.resize(surface.width/2, surface.height);
 		background = new Scrollable(0, bg, 0, surface);
 		
 		c = new Character(idleR, 3, DRAWING_WIDTH/2 - 64, 100);
