@@ -77,7 +77,7 @@ public class MenuScreen extends Screen {
 					surface.switchScreen(ScreenSwitcher.GAMESCREEN);
 				}
 			}
-			dash.mousePressed(click.x, click.y, surface);
+			dash.mousePressed(click.x, click.y, surface, 0, false);
 			if (new Rectangle(10, 460, 30, 30).contains(click.x, click.y))
 				clicked = false;
 		}

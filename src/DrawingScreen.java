@@ -447,7 +447,7 @@ public class DrawingScreen extends Screen {
 				showFrameSelect();
 			}
 			
-			board.mousePressed(click.x, click.y, surface);
+			board.mousePressed(click.x, click.y, surface, 1, framesDone());
 		} 
 	}
 

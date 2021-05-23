@@ -242,7 +242,7 @@ public class GameScreen extends Screen {
 
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
-			dash.mousePressed(p.x, p.y, surface);
+			dash.mousePressed(p.x, p.y, surface, 2, false);
 		}
 	}
 	
