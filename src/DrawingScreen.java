@@ -60,10 +60,10 @@ public class DrawingScreen extends Screen {
 				int i = 0;
 				for (int r = 0; r < character1.length; r++) {
 					for (int c = 0; c < character1.length; c++) {
-						if (!character1[r][c].equals(null))
+						if (character1[r][c] != null)
 							frame1R.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
 						else {
-							frame1R.pixels[i] = surface.color(2, 2, 2, 0);
+							frame1R.pixels[i] = surface.color(0, 0, 0, 0); //transparent
 						}
 							
 						i++;
@@ -82,7 +82,7 @@ public class DrawingScreen extends Screen {
 						if (character2[r][c] != null)
 							frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
 						else {
-							frame2R.pixels[i] = surface.color(2, 2, 2, 0);
+							frame2R.pixels[i] = surface.color(0, 0, 0, 0);
 						}
 						i++;
 					}
@@ -100,7 +100,7 @@ public class DrawingScreen extends Screen {
 						if (character3[r][c] != null)
 							frame3R.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
 						else {
-							frame3R.pixels[i] = surface.color(2, 2, 2, 0);
+							frame3R.pixels[i] = surface.color(0, 0, 0, 0);
 						}
 						i++;
 					}
@@ -118,7 +118,7 @@ public class DrawingScreen extends Screen {
 						if (idle[r][c] != null) {
 							idleR.pixels[i] = surface.color(idle[r][c].getRed(), idle[r][c].getGreen(), idle[r][c].getBlue());
 						} else {
-							idleR.pixels[i] = surface.color(2, 2, 2, 0);
+							idleR.pixels[i] = surface.color(0, 0, 0, 0);
 						}
 						i++;
 					}
@@ -143,16 +143,16 @@ public class DrawingScreen extends Screen {
 	
 	//initializes the frames
 	private void createFrames() {
-		frame1R = surface.createImage(128,  128,  PConstants.RGB);
-		frame2R = surface.createImage(128,  128,  PConstants.RGB);
-		frame3R = surface.createImage(128,  128,  PConstants.RGB);
-		frame4R = surface.createImage(128,  128,  PConstants.RGB);
-		idleR = surface.createImage(128,  128,  PConstants.RGB);
-		frame1L = surface.createImage(128,  128,  PConstants.RGB);
-		frame2L = surface.createImage(128,  128,  PConstants.RGB);
-		frame3L = surface.createImage(128,  128,  PConstants.RGB);
-		frame4L = surface.createImage(128,  128,  PConstants.RGB);
-		idleL = surface.createImage(128,  128,  PConstants.RGB);
+		frame1R = surface.createImage(128,  128,  PConstants.ARGB);
+		frame2R = surface.createImage(128,  128,  PConstants.ARGB);
+		frame3R = surface.createImage(128,  128,  PConstants.ARGB);
+		frame4R = surface.createImage(128,  128,  PConstants.ARGB);
+		idleR = surface.createImage(128,  128,  PConstants.ARGB);
+		frame1L = surface.createImage(128,  128,  PConstants.ARGB);
+		frame2L = surface.createImage(128,  128,  PConstants.ARGB);
+		frame3L = surface.createImage(128,  128,  PConstants.ARGB);
+		frame4L = surface.createImage(128,  128,  PConstants.ARGB);
+		idleL = surface.createImage(128,  128,  PConstants.ARGB);
 	}
 	/**
 	 * 
