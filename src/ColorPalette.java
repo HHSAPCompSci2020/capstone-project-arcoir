@@ -11,6 +11,7 @@ public class ColorPalette {
 	private Color [] palette;
 	private Color selectedColor;
 	private Rectangle [] colors;
+	private int colorIndex;
 	
 	/**
 	 * Initializes a new palette with 24 default colors. Selects the first color.
@@ -21,6 +22,7 @@ public class ColorPalette {
 		reset();
 		initializeRects();
 		selectedColor = palette[0];
+		colorIndex = 0;
 	}
 	
 	/**
@@ -40,10 +42,23 @@ public class ColorPalette {
 	 */
 	public void selectColor(int index) {
 		selectedColor = palette[index];
+		colorIndex = index;
 	}
 	
+	/**
+	 * 
+	 * @return the currently selected color.
+	 */
 	public Color getSelectedColor() {
 		return selectedColor;
+	}
+	
+	/**
+	 * 
+	 * @return the index of the currently selected color.
+	 */
+	public int getCurrentIndex() {
+		return colorIndex;
 	}
 	
 	/**
@@ -56,6 +71,7 @@ public class ColorPalette {
 	 */
 	public void changeColor(int index, int r, int g, int b) {
 		palette[index] = new Color(r, g, b);
+		selectedColor = palette[index];
 	}
 	
 	/**
