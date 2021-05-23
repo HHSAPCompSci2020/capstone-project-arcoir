@@ -21,7 +21,6 @@ public class GameScreen extends Screen {
 	private PImage bg;
 	private boolean isRight;
 	private ArrayList <Entity> enemies;
-	private int numEnemies;
 	private Entity enemy;
 	private Scrollable background;
 	private int level;
@@ -70,7 +69,7 @@ public class GameScreen extends Screen {
 		c.adjustImgShift(-45, -20);
 		c.setMovesXAxis(false);
 		
-		enemies = new ArrayList<>();
+		enemies = new ArrayList<Entity>();
 		enemy = new Entity(eL, "ENEMY", 1, 600, 100);
 		enemy.adjustImgShift(-8, -10);
 		enemy.setHeight(40);
@@ -120,9 +119,6 @@ public class GameScreen extends Screen {
 		} 
 		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
-//		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
-
-		
 		surface.pushStyle();
 
 //		while (bg.width != this.surface.width || bg.height != this.surface.height)
@@ -137,11 +133,6 @@ public class GameScreen extends Screen {
 		c.draw(surface);
 		for (Entity e : enemies) {
 			e.draw(surface);
-			//System.out.println("drawing an enemy");
-		}
-
-		for (Ground ground : g) {
-	//		ground.drawGround(surface);
 		}
 
 		surface.fill(0);
@@ -207,13 +198,9 @@ public class GameScreen extends Screen {
 			
 		}
 		
-		while (numEnemies<level) {
+		while (enemies.size()<level) {
 			spawnEnemy();
 		}
-		
-//		System.out.println("num: " + numEnemies);
-//		System.out.println("score: " + score);
-//		System.out.println("level: " + level);
 		
 		updateLevel();
 		
@@ -232,7 +219,6 @@ public class GameScreen extends Screen {
 			for (int i = 0; i<enemies.size(); i++) {
 				if (c.intersects(enemies.get(i))) {
 					enemies.remove(i);
-					numEnemies--;
 					score++;
 				}
 			}
@@ -240,10 +226,7 @@ public class GameScreen extends Screen {
 		
 		if(!c.getLiveState()) {
 			surface.switchScreen(3);
-			c.setLives(3);
-			isRight = true;
-			level = 0;
-			score = 0;
+			reset();
 		}
 		
 		background.update();
@@ -252,7 +235,20 @@ public class GameScreen extends Screen {
 		dash.draw(surface);
 	}
 	
-	
+	public void reset () {
+		c.setLives(3);
+		isRight = true;
+		level = 0;
+		score = 0;
+		
+		enemies = new ArrayList<Entity>();
+		enemy = new Entity(eL, "ENEMY", 1, 600, 100);
+		enemy.adjustImgShift(-8, -10);
+		enemy.setHeight(40);
+		enemies.add(enemy);
+		
+		spawnEnemy();
+	}
 	
 	private void assignFrames() {
 		PImage[][] frames = surface.getFrames();
@@ -299,7 +295,6 @@ public class GameScreen extends Screen {
 		spawnedEnemy.adjustImgShift(-8, -10);
 		spawnedEnemy.setHeight(40);
 		enemies.add(spawnedEnemy);
-		numEnemies++;
 	}
 	
 	public void updateEnemyState() {
@@ -309,9 +304,9 @@ public class GameScreen extends Screen {
 				i--;
 			}
 						
-			if(enemies.size() == 0) {
-				spawnEnemy();
-			}
+//			if(enemies.size() == 0) {
+//				spawnEnemy();
+//			}
 		}
 	}
 	

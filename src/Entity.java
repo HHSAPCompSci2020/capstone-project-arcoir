@@ -151,7 +151,7 @@ public class Entity {
 		if (other.getType().equals("ENEMY"))
 			other.takeDamage();
 		else {
-			other.takeDamage(0.02);
+			other.takeDamage(0.01);
 		}
 	}
 	
