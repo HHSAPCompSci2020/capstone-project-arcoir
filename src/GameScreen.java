@@ -28,6 +28,9 @@ public class GameScreen extends Screen {
 	private int score;
 	private int t;
 	private boolean doneLoading;
+	private boolean leveledUp;
+	private int displayCount;
+	private ArrayList<PImage> artifacts;
 	
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
@@ -40,7 +43,10 @@ public class GameScreen extends Screen {
 		eR = new Animation(300);
 		eL = new Animation(300);
 		
-
+		artifacts =  new ArrayList<PImage>();
+		leveledUp = false;
+		displayCount = 0;
+		
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 
@@ -97,6 +103,14 @@ public class GameScreen extends Screen {
 		
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft1.png"));
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft2.png"));
+		
+		artifacts.add(surface.loadImage("resources/artifacts/artifactRed.gif"));
+		artifacts.add(surface.loadImage("resources/artifacts/artifactOrange.gif"));
+		artifacts.add(surface.loadImage("resources/artifacts/artifactYellow.gif"));
+		artifacts.add(surface.loadImage("resources/artifacts/artifactGreen.gif"));
+		artifacts.add(surface.loadImage("resources/artifacts/artifactBlue.gif"));
+		artifacts.add(surface.loadImage("resources/artifacts/artifactPurple.gif"));
+		artifacts.add(surface.loadImage("resources/artifacts/artifactRainbow.gif"));
 
 	}
 
@@ -205,6 +219,14 @@ public class GameScreen extends Screen {
 		
 		updateEnemyState();
 		enemyAttack();
+		
+		if(leveledUp && level < 8) {
+			if(displayCount > 0) {
+				surface.image(artifacts.get(level-1), 400 - artifacts.get(level-1).width/2, 250 - artifacts.get(level-1).height/2);
+				
+				displayCount--;
+			}
+		}
 
 		if (surface.isPressed(KeyEvent.VK_SPACE)) {
 			for (int i = 0; i<enemies.size(); i++) {
@@ -267,6 +289,8 @@ public class GameScreen extends Screen {
 		if (score >= level) {
 			level++;
 			score = 0;
+			leveledUp = true;
+			displayCount = 10;
 		}
 	}
 	
