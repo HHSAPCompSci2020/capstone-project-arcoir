@@ -13,22 +13,21 @@ public class GameScreen extends Screen {
 
 	// Fields
 
-	private Character c;
+	private Entity c;
 	private ArrayList<Ground> g;
 	private Dashboard dash;
 	private DrawingSurface surface;
 	private Animation idleR, idleL, cWR, cWL, eR, eL;
 	private PImage bg;
 	private boolean isRight;
-	private ArrayList <Character> enemies;
+	private ArrayList <Entity> enemies;
 	private int numEnemies;
-	private Character enemy;
+	private Entity enemy;
 	private Scrollable background;
 	private int cLives;
 	private int level;
 	private int score;
-	private GameOverScreen gameOver;
-
+	
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
 		isRight = true;
@@ -57,12 +56,12 @@ public class GameScreen extends Screen {
 		loadCAnims();
 		background = new Scrollable(0, bg, 0, surface);
 		
-		c = new Character(idleR, 3, DRAWING_WIDTH/2 - 64, 100);
+		c = new Entity(idleR, 3, DRAWING_WIDTH/2 - 64, 100);
 		c.adjustImgShift(-45, -20);
 		c.setMovesXAxis(false);
 		
 		enemies = new ArrayList<>();
-		enemy = new Character(eL, 1, 600, 100);
+		enemy = new Entity(eL, 1, 600, 100);
 		enemy.adjustImgShift(-8, -10);
 		enemy.setHeight(40);
 		enemies.add(enemy);
@@ -116,7 +115,7 @@ public class GameScreen extends Screen {
 		
 	
 		c.draw(surface);
-		for (Character e : enemies) {
+		for (Entity e : enemies) {
 			e.draw(surface);
 			//System.out.println("drawing an enemy");
 		}
@@ -137,14 +136,14 @@ public class GameScreen extends Screen {
 		background.setSpeed(0);
 		
 		if (surface.isPressed(KeyEvent.VK_LEFT)) {
-			for(Character enm : enemies) {
+			for(Entity enm : enemies) {
 				enm.translate(0.8);
 			}
 			c.translate(-1);
 			background.setSpeed(-3);
 		}
 		if (surface.isPressed(KeyEvent.VK_RIGHT)) {
-			for(Character enm : enemies) {
+			for(Entity enm : enemies) {
 				enm.translate(-0.8);
 			}
 			c.translate(1);
@@ -170,7 +169,7 @@ public class GameScreen extends Screen {
 		
 
 		c.act(g);
-		for(Character enm : enemies) {
+		for(Entity enm : enemies) {
 			if(c.getX()  > enm.getX() - 10  && Math.abs(c.getX() - enm.getX()) < 350) {
 				enm.translate(0.4);
 				enm.setAnimation(eR);
@@ -232,16 +231,16 @@ public class GameScreen extends Screen {
 			for(int i = 0; i < frames.length; i++) {
 				for(int j = 0; j < frames[i].length; j++) {
 					if(i == 0) {
-						cWR = new Animation(100);
+//						cWR = new Animation(100);
 						cWR.addFrame(frames[i][j]);
 					} else if(i == 1) {
-						idleR = new Animation(300);
+//						idleR = new Animation(300);
 						idleR.addFrame(frames[i][j]);
 					} else if(i == 2) {
-						cWL = new Animation(100);
+//						cWL = new Animation(100);
 						cWL.addFrame(frames[i][j]);
 					} else if(i == 3) {
-						idleL = new Animation(300);
+//						idleL = new Animation(300);
 						idleL.addFrame(frames[i][j]);
 					}
 				}
@@ -263,7 +262,7 @@ public class GameScreen extends Screen {
 	}
 	
 	public void spawnEnemy() {
-		Character spawnedEnemy = new Character(eL, 1, (int)(Math.random()*500+100), 100);
+		Entity spawnedEnemy = new Entity(eL, 1, (int)(Math.random()*500+100), 100);
 		spawnedEnemy.adjustImgShift(-8, -10);
 		spawnedEnemy.setHeight(40);
 		enemies.add(spawnedEnemy);

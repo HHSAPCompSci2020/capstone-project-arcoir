@@ -23,7 +23,7 @@ public class DrawingScreen extends Screen {
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon, refreshIcon, addIcon, resetIcon;
 	private String selectedTool, currentFrame;
-	private boolean move1, move2, move3, realIdle;
+	private boolean move1, move2, move3, realIdle, allDone;
 	boolean [] check;
 
 	public DrawingScreen(DrawingSurface surface) {
@@ -133,6 +133,9 @@ public class DrawingScreen extends Screen {
 				JOptionPane.showMessageDialog(null, "Idle successfully saved");
 			}
 		}
+		if (move1 && move2 && move3 && realIdle) {
+			allDone = true;
+		}
 	}
 	
 	private PImage reflect (Color [][] copy) {
@@ -187,7 +190,7 @@ public class DrawingScreen extends Screen {
 	 * @return whether all frames have been saved or not
 	 */
 	public boolean framesDone() {
-		return move1 && move2 && move3 && realIdle;
+		return allDone;
 	}
 	
 	public void setup () {
@@ -278,14 +281,49 @@ public class DrawingScreen extends Screen {
 		}
 	}
 
+	/**
+	 * Changes the selected color to a user input color.
+	 */
 	public void changeColor() {
+		int r = -1, g = -1, b = -1;
+		System.out.println("k");
+
 		String first = JOptionPane.showInputDialog(null, "Enter r value.");
-		int r = Integer.parseInt(first);
+		if (first != null && isNumeric(first)) {
+			r = Integer.parseInt(first);
+		} else {
+			JOptionPane.showMessageDialog(null, "Please enter a valid value.");
+			return;
+		}
 		String second = JOptionPane.showInputDialog(null, "Enter g value.");
-		int g = Integer.parseInt(second);
+		if (second != null && isNumeric(second)) {
+			g = Integer.parseInt(second);
+		} else {
+			JOptionPane.showMessageDialog(null, "Please enter a valid value.");
+			return;
+		}
 		String third = JOptionPane.showInputDialog(null, "Enter b value.");
-		int b = Integer.parseInt(third);
-		palette.changeColor(palette.getCurrentIndex(), r, g, b);
+		if (third != null && isNumeric(third)) {
+			b = Integer.parseInt(third);
+		} else {
+			JOptionPane.showMessageDialog(null, "Please enter a valid value.");
+			return;
+		}
+		
+		if (!(r < 0 || g < 0 || b < 0)) {
+			palette.changeColor(palette.getCurrentIndex(), r, g, b);
+
+		} 
+	}
+	
+	public boolean isNumeric(String str)
+	{
+	    for (int i = 0; i < str.length(); i++)
+	    {
+	        if (!Character.isDigit(str.charAt(i)))
+	        		return false;
+	    }
+	    return true;
 	}
 	/**
 	 * (Graphical UI)

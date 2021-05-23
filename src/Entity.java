@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 
-public class Character {
+public class Entity {
 	// Fields
 	private Animation animation;
 	private int lives;
@@ -20,7 +20,7 @@ public class Character {
 	private double imgShiftX, imgShiftY;
 	
 	// Constructor
-	public Character(Animation a, int lives, int x, int y) {
+	public Entity(Animation a, int lives, int x, int y) {
 		imgShiftX = 0;
 		imgShiftY = 0;
 		animation = a;
@@ -148,7 +148,7 @@ public class Character {
 			velX += xDir;
 	}
 	
-	public void attack(Character other) {
+	public void attack(Entity other) {
 		other.takeDamage();
 	}
 	
@@ -199,7 +199,7 @@ public class Character {
 		return onASurface;
 	}
 	
-	public boolean intersects(Character other) {
+	public boolean intersects(Entity other) {
 		if(hitBox.intersects(other.getHitBox())) {
 			return true;
 		}
