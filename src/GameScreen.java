@@ -24,9 +24,9 @@ public class GameScreen extends Screen {
 	private int numEnemies;
 	private Entity enemy;
 	private Scrollable background;
-	private int cLives;
 	private int level;
 	private int score;
+	private int t;
 	private boolean doneLoading;
 	
 	// Constructor
@@ -44,9 +44,10 @@ public class GameScreen extends Screen {
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
 
-		cLives = 3;
 		score = 0;
 		level = 1;
+		
+		t = 0;
 		
 		doneLoading = false;
 		
@@ -59,7 +60,7 @@ public class GameScreen extends Screen {
 		loadCAnims();
 		background = new Scrollable(0, bg, 0, surface);
 		
-		c = new Entity(idleR, 3, DRAWING_WIDTH/2 - 64, 100);
+		c = new Entity(idleR, 3, 64, 100);
 		c.adjustImgShift(-45, -20);
 		c.setMovesXAxis(false);
 		
@@ -135,7 +136,7 @@ public class GameScreen extends Screen {
 		
 		surface.text("Score: " + score, 700, 30);
 		surface.text("Level: " + level, 700, 50);
-		surface.text("Lives: " + cLives, 700, 70);
+		surface.text("Lives: " + c.getLives(), 700, 70);
 		surface.popStyle();
 		
 		background.setSpeed(0);
@@ -202,6 +203,8 @@ public class GameScreen extends Screen {
 		
 		updateLevel();
 		
+		countLives();
+
 		if (surface.isPressed(KeyEvent.VK_SPACE)) {
 			for (int i = 0; i<enemies.size(); i++) {
 				if (c.intersects(enemies.get(i))) {
@@ -212,7 +215,6 @@ public class GameScreen extends Screen {
 			}
 		}
 		
-		countLives();
 		
 		background.update();
 		
@@ -278,20 +280,37 @@ public class GameScreen extends Screen {
 	
 	public void countLives() {
 		for(int i=0; i<enemies.size(); i++) {
+//			if(enemies.get(i).getX() > this.DRAWING_WIDTH || enemies.get(i).getX() <0) {
+//				cLives--;
+//				enemies.remove(i);
+//				i++;
+//			}
 			if(enemies.get(i).getX() > this.DRAWING_WIDTH || enemies.get(i).getX() <0) {
-				cLives--;
 				enemies.remove(i);
-				i++;
+				i--;
 			}
+			
+			if(enemies.get(i).intersects(c)) {
+//				enemies.remove(i);
+//				t++;
+//				System.out.println(t);
+//				if (t > 60) {
+				enemies.get(i).attack(c);
+//				cLives--;
+//				i++;
+				//}
+			}
+			
+			t = 0;
 			
 			if(enemies.size() == 0) {
 				spawnEnemy();
 			}
 		}
 		
-		if(cLives==0) {
+		if(!c.getLiveState()) {
 			surface.switchScreen(3);
-			cLives = 3;
+			c.setLives(3);
 			isRight = true;
 			level = 0;
 			score = 0;

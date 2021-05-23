@@ -159,7 +159,13 @@ public class Entity {
 		}
 	}
 	
+	public int getLives() {
+		return lives;
+	}
 	
+	public void setLives(int num) {
+		lives = num;
+	}
 	
 	public void setX(double xCoord) {
 		x = xCoord;
