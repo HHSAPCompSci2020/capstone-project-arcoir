@@ -27,6 +27,7 @@ public class GameScreen extends Screen {
 	private int cLives;
 	private int level;
 	private int score;
+	private boolean doneLoading;
 	
 	// Constructor
 	public GameScreen(DrawingSurface surface) {
@@ -46,6 +47,8 @@ public class GameScreen extends Screen {
 		cLives = 3;
 		score = 0;
 		level = 1;
+		
+		doneLoading = false;
 		
 		
 	}
@@ -97,7 +100,9 @@ public class GameScreen extends Screen {
 	}
 
 	public void draw() {
-		assignFrames();
+		if (!doneLoading && surface.framesDone()) {
+			assignFrames();
+		} 
 		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
 //		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
@@ -228,23 +233,25 @@ public class GameScreen extends Screen {
 	private void assignFrames() {
 		PImage[][] frames = surface.getFrames();
 		if(surface.framesDone()) {
+			idleR = new Animation(300);
+			idleL = new Animation(300);
+			cWR = new Animation(100);
+			cWL = new Animation(100);
 			for(int i = 0; i < frames.length; i++) {
 				for(int j = 0; j < frames[i].length; j++) {
 					if(i == 0) {
-//						cWR = new Animation(100);
 						cWR.addFrame(frames[i][j]);
 					} else if(i == 1) {
-//						idleR = new Animation(300);
 						idleR.addFrame(frames[i][j]);
 					} else if(i == 2) {
-//						cWL = new Animation(100);
 						cWL.addFrame(frames[i][j]);
 					} else if(i == 3) {
-//						idleL = new Animation(300);
 						idleL.addFrame(frames[i][j]);
 					}
 				}
 			}
+			c.setAnimation(idleR);
+			doneLoading = true;
 		}
 	} 
 
@@ -284,6 +291,10 @@ public class GameScreen extends Screen {
 		
 		if(cLives==0) {
 			surface.switchScreen(3);
+			cLives = 3;
+			isRight = true;
+			level = 0;
+			score = 0;
 		}
 	}
 }

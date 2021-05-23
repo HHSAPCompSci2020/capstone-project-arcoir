@@ -67,7 +67,6 @@ public float ratioX, ratioY;
 	
 	public boolean framesDone() {
 		DrawingScreen screen = (DrawingScreen)screens.get(DRAWINGSCREEN);
-		System.out.println(screen.framesDone());
 		return screen.framesDone();
 	}
 	

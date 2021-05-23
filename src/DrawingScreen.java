@@ -286,7 +286,6 @@ public class DrawingScreen extends Screen {
 	 */
 	public void changeColor() {
 		int r = -1, g = -1, b = -1;
-		System.out.println("k");
 
 		String first = JOptionPane.showInputDialog(null, "Enter r value.");
 		if (first != null && isNumeric(first)) {
@@ -312,7 +311,6 @@ public class DrawingScreen extends Screen {
 		
 		if (!(r < 0 || g < 0 || b < 0)) {
 			palette.changeColor(palette.getCurrentIndex(), r, g, b);
-
 		} 
 	}
 	
