@@ -102,13 +102,13 @@ public class GameScreen extends Screen {
 //		System.out.println("Width: " + surface.width + ", Height: " + surface.height);
 
 		
-		background.draw(surface);
 		surface.pushStyle();
 
-	//	while (bg.width != this.surface.width || bg.height != this.surface.height)
-	//	bg.resize(this.surface.width, this.surface.height);
+//		while (bg.width != this.surface.width || bg.height != this.surface.height)
+//			bg.resize(this.surface.width, this.surface.height);
 		//surface.background(bg); // Clear the screen with a white background
-
+	//	background.setImage(bg);
+		background.draw(surface);
 		surface.stroke(0); // Set line drawing color to white
 		surface.noFill();
 		
