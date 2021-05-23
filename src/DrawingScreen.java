@@ -73,7 +73,7 @@ public class DrawingScreen extends Screen {
 					}
 				}
 				frame1R.updatePixels();
-				frame1L = reflect(frame1R);
+				frame1L = reflect(character1);
 				frame1L.updatePixels();
 				move1 = true;
 				JOptionPane.showMessageDialog(null, "Move 1 successfully saved");
@@ -91,7 +91,7 @@ public class DrawingScreen extends Screen {
 					}
 				}
 				frame2R.updatePixels();
-				frame2L = reflect(frame2R);
+				frame2L = reflect(character2);
 				frame2L.updatePixels();
 				move2 = true;
 				JOptionPane.showMessageDialog(null, "Move 2 successfully saved");
@@ -109,7 +109,7 @@ public class DrawingScreen extends Screen {
 					}
 				}
 				frame3R.updatePixels();
-				frame3L = reflect(frame3R);
+				frame3L = reflect(character3);
 				frame3L.updatePixels();
 				move3 = true;
 				JOptionPane.showMessageDialog(null, "Move 3 successfully saved");
@@ -127,7 +127,7 @@ public class DrawingScreen extends Screen {
 					}
 				}
 				idleR.updatePixels();
-				idleL = reflect(idleR);
+				idleL = reflect(idle);
 				idleL.updatePixels();
 				realIdle = true;
 				JOptionPane.showMessageDialog(null, "Idle successfully saved");
@@ -135,11 +135,26 @@ public class DrawingScreen extends Screen {
 		}
 	}
 	
-	private PImage reflect (PImage img) {
-		PImage reflected = surface.createImage(128, 128, PConstants.RGB);
-		img.loadPixels();
-		for (int i = img.pixels.length - 1; i >= 0; i--) {
-			reflected.pixels[i] = img.pixels[img.pixels.length - i - 1];
+	private PImage reflect (Color [][] copy) {
+		Color [][] reflect = new Color [128][128];
+		for (int r = 0; r < 128; r++) {
+			for (int c = 0; c < 64; c++) {
+				reflect[r][c] = copy[r][128 - c - 1];
+				reflect[r][128 - c - 1] = copy[r][c];
+			}
+		}
+		PImage reflected = surface.createImage(128, 128, PConstants.ARGB);
+
+		int i = 0;
+		for (int r = 0; r < reflect.length; r++) {
+			for (int c = 0; c < reflect.length; c++) {
+				if (reflect[r][c] != null) {
+					reflected.pixels[i] = surface.color(reflect[r][c].getRed(), reflect[r][c].getGreen(), reflect[r][c].getBlue());
+				} else {
+					reflected.pixels[i] = surface.color(0, 0, 0, 0);
+				}
+				i++;
+			}
 		}
 		return reflected;
 	}
