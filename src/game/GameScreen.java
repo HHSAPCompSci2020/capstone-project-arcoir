@@ -1,3 +1,4 @@
+package game;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.security.spec.ECField;
@@ -6,6 +7,10 @@ import java.awt.Rectangle;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+
+import dashboard.Dashboard;
+import arcoir.DrawingSurface;
+import screens.Screen;
 
 // modfied from Mr. Shelby's SecondScreen class
 /**A screen that displays all the components used to run the game. 

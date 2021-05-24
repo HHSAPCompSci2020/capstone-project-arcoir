@@ -1,4 +1,10 @@
+
+package screens;
 import processing.core.PImage;
+
+import dashboard.Dashboard;
+import arcoir.DrawingSurface;
+import arcoir.ScreenSwitcher;
 import java.awt.Point;
 import java.awt.Rectangle;
 

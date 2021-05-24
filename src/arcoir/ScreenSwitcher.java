@@ -1,3 +1,5 @@
+package arcoir;
+
 
 /**
  * The ScreenSwitcher interface initialized each of the four screens to a number between 0 and 3, 

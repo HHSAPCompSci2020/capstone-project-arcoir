@@ -1,8 +1,12 @@
+package dashboard;
 import processing.core.PApplet;
 import processing.core.PImage;
 import java.awt.Rectangle;
 
 import javax.swing.JOptionPane;
+
+import arcoir.DrawingSurface;
+import arcoir.ScreenSwitcher;
 
 /**
  * The Dashboard class displays the help button and back button on the screen.

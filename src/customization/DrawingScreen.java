@@ -1,9 +1,15 @@
+package customization;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import processing.core.PImage;
 import processing.core.PConstants;
+
+import customization.DrawingScreen;
+import screens.Screen;
+import dashboard.Dashboard;
+import arcoir.DrawingSurface;
 
 /**
  * The DrawingScreen class encompasses all of the functions the user needs to draw and customize Entities. 

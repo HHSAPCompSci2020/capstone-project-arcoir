@@ -1,6 +1,11 @@
+package game;
 import processing.core.PImage;
 import java.awt.Point;
 import java.awt.Rectangle;
+
+import arcoir.DrawingSurface;
+import dashboard.Dashboard;
+import screens.Screen;
 
 /**
  * The GameOverScreen class presents the display that appears when the character loses all three of its lives. 

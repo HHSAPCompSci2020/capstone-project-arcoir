@@ -1,7 +1,15 @@
+package arcoir;
 import processing.core.PApplet;
 import processing.core.PImage;
 import java.awt.Point;
 import java.util.ArrayList;
+
+import screens.MenuScreen;
+import screens.Screen;
+import game.GameScreen;
+import game.GameOverScreen;
+import customization.DrawingScreen;
+
 
 /**
  * The ScreenSwitcher interface initializes each of four screens and adds them to a screens 
