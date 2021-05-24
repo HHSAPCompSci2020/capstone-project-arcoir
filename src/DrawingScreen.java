@@ -14,7 +14,8 @@ public class DrawingScreen extends Screen {
 //need to fix UI, input RGB, frames show up
 	private ColorPalette palette;
 	private DrawingSurface surface;
-	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect, colorRect, addRect, resetRect, typeRect;
+	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect, 
+	colorRect, addRect, resetRect, typeRect, pencilRect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
@@ -22,10 +23,12 @@ public class DrawingScreen extends Screen {
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
 	private int index, prevIndex;
 	private Point prevToggle;
-	private PImage paintCanIcon, saveIcon, refreshIcon, addIcon, resetIcon;
+	private PImage paintCanIcon, saveIcon, refreshIcon, addIcon, resetIcon, pencilIcon;
 	private String selectedTool, currentFrame;
 	private boolean move1, move2, move3, realIdle, allDone;
 	private boolean [] check;
+	private int [] pencilWidth;
+	private int widthIndex;
 	
 	private boolean isEnemy;
 	private String type;
@@ -48,11 +51,15 @@ public class DrawingScreen extends Screen {
 		check = new boolean [4];
 		index = 3;
 		prevIndex = 0;
+		pencilWidth = new int [] {1, 2};
+		widthIndex = 0;
+		
 		paintCanRect = new Rectangle (710, 0, 40, 40);
 		saveRect = new Rectangle  (755, 0, 40, 40);
 		addRect = new Rectangle(710, 45, 40, 40);
 		refreshRect = new Rectangle (755, 45, 40, 40);
 		resetRect = new Rectangle(710, 90, 40, 40);
+		pencilRect = new Rectangle (755, 90, 40, 40);
 		
 		typeRect = new Rectangle (710, 136, 80, 30);
 		frameSelect = new Rectangle (710, 172, 80, 30);
@@ -323,6 +330,7 @@ public class DrawingScreen extends Screen {
 		refreshIcon = surface.loadImage("resources/drawingIcons/refresh.gif");
 		addIcon = surface.loadImage("resources/drawingIcons/add.gif");
 		resetIcon = surface.loadImage("resources/drawingIcons/reset.gif");
+		pencilIcon = surface.loadImage("resources/drawingIcons/pencil.gif");
 		createFrames();
 
 	}
@@ -346,6 +354,7 @@ public class DrawingScreen extends Screen {
 		surface.image(refreshIcon, refreshRect.x,  refreshRect.y, refreshRect.width, refreshRect.height);
 		surface.image(addIcon, addRect.x, addRect.y, addRect.width, addRect.height);
 		surface.image(resetIcon, resetRect.x,  resetRect.y, resetRect.width, resetRect.height);
+		surface.image(pencilIcon, pencilRect.x,  pencilRect.y, pencilRect.width, pencilRect.height);
 		
 		surface.pushStyle();
 		surface.noFill();
@@ -653,8 +662,24 @@ public class DrawingScreen extends Screen {
 	public void toggleCell(int i, int j) {
 		if (!isEnemy) {
 			characters[index][i][j] = palette.getSelectedColor();
+			if (pencilWidth[widthIndex] == 2) {
+				if (j + 1 < characters[index].length)
+					characters[index][i][j + 1] = palette.getSelectedColor();
+				if (i + 1 < characters[index].length)
+					characters[index][i + 1][j] = palette.getSelectedColor();
+				if (i + 1 < characters[index].length && j + 1 < characters[index].length)
+					characters[index][i + 1][j + 1] = palette.getSelectedColor();
+			}
 		} else {
 			enemies[enemyIndex][i][j] = palette.getSelectedColor();
+			if (pencilWidth[widthIndex] == 2) {
+				if (j + 1 < enemies[enemyIndex].length)
+					enemies[enemyIndex][i][j + 1] = palette.getSelectedColor();
+				if (i + 1 < enemies[enemyIndex].length)
+					enemies[enemyIndex][i + 1][j] = palette.getSelectedColor();
+				if (i + 1 < enemies[enemyIndex].length && j + 1 < enemies[enemyIndex].length)
+					enemies[enemyIndex][i + 1][j + 1] = palette.getSelectedColor();
+			}		
 		}
 	}
 
@@ -769,6 +794,17 @@ public class DrawingScreen extends Screen {
 			
 			if (resetRect.contains(click.x, click.y)) {
 				palette.reset();
+			}
+			
+			if (pencilRect.contains(click.x, click.y)) {
+				String widths[] = new String [] {"1", "2"};
+				String input = (String)JOptionPane.showInputDialog(null, "Choose a pencil width.", "Which width?", 
+						JOptionPane.QUESTION_MESSAGE, null, widths, "" + widths[widthIndex]);
+				if (Integer.parseInt(input) == 1) 
+					widthIndex = 0;
+				else {
+					widthIndex = 1;
+				}
 			}
 			
 			if (typeRect.contains(click.x, click.y)) {

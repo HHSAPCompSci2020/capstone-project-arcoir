@@ -3,7 +3,6 @@ import java.awt.event.KeyEvent;
 import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -224,6 +223,9 @@ public class GameScreen extends Screen {
 				background.setImage(backgrounds.get(level - 2));
 				System.out.println(level - 2);
 			}
+			if(displayCount == 10 && level < 7 && level != 0) {
+				background.setImage(backgrounds.get(level - 1));
+			}
 			
 			if(displayCount > 0) {
 				surface.image(artifacts.get(level-2), 400 - artifacts.get(level-2).width/2, 250 - artifacts.get(level-2).height/2);
@@ -250,6 +252,7 @@ public class GameScreen extends Screen {
 		
 
 		dash.draw(surface);
+		
 	}
 	
 	public void reset () {
