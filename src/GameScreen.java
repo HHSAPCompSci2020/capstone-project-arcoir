@@ -82,7 +82,7 @@ public class GameScreen extends Screen {
 
 	private void loadCAnims() {
 		bg = surface.loadImage("resources/bgs/bgGrey.jpeg");
-		obstacle = surface.loadImage("resources/obstacle/Cone.png");
+		obstacle = surface.loadImage("resources/obstacle/Mushroom.png");
 		obstacle.resize(40, 40);
 		for(int i = 0; i < g.size(); i++) {
 			if(i != 0) {

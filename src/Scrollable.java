@@ -39,7 +39,7 @@ public class Scrollable {
 		} else {
 			int lastTile = imagePos.get(imagePos.size()-1);
 		
-			if(lastTile > surface.width) {	//if out of screen adds the tile at 3 to beginning and removes tile 3
+			if(lastTile > surface.width) {	//if out of screen adds the tile at end to beginning and removes tile 3
 				imagePos.set(imagePos.size()-1, imagePos.get(0)- image.width); 
 				imagePos.add(0, imagePos.get(imagePos.size() - 1));	
 				imagePos.remove(imagePos.size() - 1);
