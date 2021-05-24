@@ -101,7 +101,7 @@ public class GameScreen extends Screen {
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft1.png"));
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft2.png"));
 		
-		
+	//	backgrounds.add(bg);
 		backgrounds.add(surface.loadImage("resources/bgs/bgRed.gif"));
 		backgrounds.add(surface.loadImage("resources/bgs/bgOrange.gif"));
 		backgrounds.add(surface.loadImage("resources/bgs/bgYellow.gif"));
@@ -218,14 +218,15 @@ public class GameScreen extends Screen {
 		updateEnemyState();
 		enemyAttack();
 		
-		if(leveledUp && level < 8) {
+		if(leveledUp && level < 8 && level > 1) {
 			
 			if(displayCount == 10 && level < 7) {
-				background.setImage(backgrounds.get(level - 1));
+				background.setImage(backgrounds.get(level - 2));
+				System.out.println(level - 2);
 			}
 			
 			if(displayCount > 0) {
-				surface.image(artifacts.get(level-1), 400 - artifacts.get(level-1).width/2, 250 - artifacts.get(level-1).height/2);
+				surface.image(artifacts.get(level-2), 400 - artifacts.get(level-2).width/2, 250 - artifacts.get(level-2).height/2);
 				displayCount--;
 			}
 		}
@@ -254,7 +255,7 @@ public class GameScreen extends Screen {
 	public void reset () {
 		c.setLives(3);
 		isRight = true;
-		level = 0;
+		level = 1;
 		score = 0;
 		leveledUp = false;
 		displayCount = 0;
