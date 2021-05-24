@@ -14,20 +14,31 @@ public class DrawingScreen extends Screen {
 //need to fix UI, input RGB, frames show up
 	private ColorPalette palette;
 	private DrawingSurface surface;
-	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect, colorRect, addRect, resetRect;
+	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect, colorRect, addRect, resetRect, typeRect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
+	private Color[][] enemy1, enemy2;
 	private PImage frame1R, frame2R, frame3R, frame4R, idleR, frame1L, frame2L, frame3L, frame4L, idleL;
 	private int index, prevIndex;
 	private Point prevToggle;
 	private PImage paintCanIcon, saveIcon, refreshIcon, addIcon, resetIcon;
 	private String selectedTool, currentFrame;
 	private boolean move1, move2, move3, realIdle, allDone;
-	boolean [] check;
+	private boolean [] check;
+	
+	private boolean isEnemy;
+	private String type;
+	private Color [][][] enemies;
+	private PImage e1R, e2R, e1L, e2L;
+	private boolean emove1, emove2, eallDone;
+	private String currentEnemyFrame;
+	private int enemyIndex, prevEnemyIndex;
+	private boolean [] enemyCheck;
 
 	public DrawingScreen(DrawingSurface surface) {
 		this.surface = surface;
+		isEnemy = false;
 		palette = new ColorPalette();
 		paletteRect = new Rectangle (660, 0, 40, 240);
 		character1 = new Color [128][128];
@@ -39,11 +50,14 @@ public class DrawingScreen extends Screen {
 		prevIndex = 0;
 		paintCanRect = new Rectangle (710, 0, 40, 40);
 		saveRect = new Rectangle  (755, 0, 40, 40);
-		refreshRect = new Rectangle (755, 45, 40, 40);
-		frameSelect = new Rectangle (710, 210, 80, 30);
-		colorRect = new Rectangle (710, 135, 40, 38);
 		addRect = new Rectangle(710, 45, 40, 40);
+		refreshRect = new Rectangle (755, 45, 40, 40);
 		resetRect = new Rectangle(710, 90, 40, 40);
+		
+		typeRect = new Rectangle (710, 136, 80, 30);
+		frameSelect = new Rectangle (710, 172, 80, 30);
+		colorRect = new Rectangle (710, 209, 80, 30);
+		
 		move1 = false;
 		move2 = false;
 		move3 = false;
@@ -51,90 +65,153 @@ public class DrawingScreen extends Screen {
 		selectedTool = "";
 		currentFrame = "Idle";
 		characters = new Color [][][] {character1, character2, character3, idle};
+		
+		type = "Hero";
+		
+		enemy1 = new Color [64][64];
+		enemy2 = new Color [64][64];
+		
+		enemies = new Color [][][] {enemy1, enemy2};
+		
+		emove1 = false;
+		emove2 = false;
+		eallDone = false;
+		
+		enemyIndex = 0;
+		prevEnemyIndex = 0;
+		currentEnemyFrame = "Move 1";
+		enemyCheck = new boolean [2];
 	}
 
 	/**
 	 * Saves the frame from the drawing interface as an actual frame to be used in an animation.
 	 */
 	public void saveImage() {
-		if (characters[index] != null && check[index] != false) {
-			if (index == 0) {
-				frame1R.loadPixels();
-				int i = 0;
-				for (int r = 0; r < character1.length; r++) {
-					for (int c = 0; c < character1.length; c++) {
-						if (character1[r][c] != null)
-							frame1R.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
-						else {
-							frame1R.pixels[i] = surface.color(0, 0, 0, 0); //transparent
+		if (!isEnemy) {
+			if (characters[index] != null && check[index] != false) {
+				if (index == 0) {
+					frame1R.loadPixels();
+					int i = 0;
+					for (int r = 0; r < character1.length; r++) {
+						for (int c = 0; c < character1.length; c++) {
+							if (character1[r][c] != null)
+								frame1R.pixels[i] = surface.color(character1[r][c].getRed(), character1[r][c].getGreen(), character1[r][c].getBlue());
+							else {
+								frame1R.pixels[i] = surface.color(0, 0, 0, 0); //transparent
+							}
+
+							i++;
 						}
-							
-						i++;
 					}
-				}
-				frame1R.updatePixels();
-				frame1L = reflect(character1);
-				frame1L.updatePixels();
-				move1 = true;
-				JOptionPane.showMessageDialog(null, "Move 1 successfully saved");
-			} else if (index == 1) {
-				frame2R.loadPixels();
-				int i = 0;
-				for (int r = 0; r < character2.length; r++) {
-					for (int c = 0; c < character2.length; c++) {
-						if (character2[r][c] != null)
-							frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
-						else {
-							frame2R.pixels[i] = surface.color(0, 0, 0, 0);
+					frame1R.updatePixels();
+					frame1L = reflect(character1);
+					frame1L.updatePixels();
+					move1 = true;
+					JOptionPane.showMessageDialog(null, "Move 1 successfully saved");
+				} else if (index == 1) {
+					frame2R.loadPixels();
+					int i = 0;
+					for (int r = 0; r < character2.length; r++) {
+						for (int c = 0; c < character2.length; c++) {
+							if (character2[r][c] != null)
+								frame2R.pixels[i] = surface.color(character2[r][c].getRed(), character2[r][c].getGreen(), character2[r][c].getBlue());
+							else {
+								frame2R.pixels[i] = surface.color(0, 0, 0, 0);
+							}
+							i++;
 						}
-						i++;
 					}
-				}
-				frame2R.updatePixels();
-				frame2L = reflect(character2);
-				frame2L.updatePixels();
-				move2 = true;
-				JOptionPane.showMessageDialog(null, "Move 2 successfully saved");
-			} else if (index == 2){
-				frame3R.loadPixels();
-				int i = 0;
-				for (int r = 0; r < character3.length; r++) {
-					for (int c = 0; c < character3.length; c++) {
-						if (character3[r][c] != null)
-							frame3R.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
-						else {
-							frame3R.pixels[i] = surface.color(0, 0, 0, 0);
+					frame2R.updatePixels();
+					frame2L = reflect(character2);
+					frame2L.updatePixels();
+					move2 = true;
+					JOptionPane.showMessageDialog(null, "Move 2 successfully saved");
+				} else if (index == 2){
+					frame3R.loadPixels();
+					int i = 0;
+					for (int r = 0; r < character3.length; r++) {
+						for (int c = 0; c < character3.length; c++) {
+							if (character3[r][c] != null)
+								frame3R.pixels[i] = surface.color(character3[r][c].getRed(), character3[r][c].getGreen(), character3[r][c].getBlue());
+							else {
+								frame3R.pixels[i] = surface.color(0, 0, 0, 0);
+							}
+							i++;
 						}
-						i++;
 					}
-				}
-				frame3R.updatePixels();
-				frame3L = reflect(character3);
-				frame3L.updatePixels();
-				move3 = true;
-				JOptionPane.showMessageDialog(null, "Move 3 successfully saved");
-			} else {
-				idleR.loadPixels();
-				int i = 0;
-				for (int r = 0; r < idle.length; r++) {
-					for (int c = 0; c < idle.length; c++) {
-						if (idle[r][c] != null) {
-							idleR.pixels[i] = surface.color(idle[r][c].getRed(), idle[r][c].getGreen(), idle[r][c].getBlue());
-						} else {
-							idleR.pixels[i] = surface.color(0, 0, 0, 0);
+					frame3R.updatePixels();
+					frame3L = reflect(character3);
+					frame3L.updatePixels();
+					move3 = true;
+					JOptionPane.showMessageDialog(null, "Move 3 successfully saved");
+				} else {
+					idleR.loadPixels();
+					int i = 0;
+					for (int r = 0; r < idle.length; r++) {
+						for (int c = 0; c < idle.length; c++) {
+							if (idle[r][c] != null) {
+								idleR.pixels[i] = surface.color(idle[r][c].getRed(), idle[r][c].getGreen(), idle[r][c].getBlue());
+							} else {
+								idleR.pixels[i] = surface.color(0, 0, 0, 0);
+							}
+							i++;
 						}
-						i++;
 					}
+					idleR.updatePixels();
+					idleL = reflect(idle);
+					idleL.updatePixels();
+					realIdle = true;
+					JOptionPane.showMessageDialog(null, "Idle successfully saved");
 				}
-				idleR.updatePixels();
-				idleL = reflect(idle);
-				idleL.updatePixels();
-				realIdle = true;
-				JOptionPane.showMessageDialog(null, "Idle successfully saved");
 			}
-		}
-		if (move1 && move2 && move3 && realIdle) {
-			allDone = true;
+			if (move1 && move2 && move3 && realIdle) {
+				allDone = true;
+			}
+		} else {
+			if (enemies[enemyIndex] != null && enemyCheck[enemyIndex] != false) {
+				if (enemyIndex == 0) {
+					e1R.loadPixels();
+					int i = 0;
+					for (int r = 0; r < enemy1.length; r++) {
+						for (int c = 0; c < enemy1.length; c++) {
+							if (enemy1[r][c] != null)
+								e1R.pixels[i] = surface.color(enemy1[r][c].getRed(), enemy1[r][c].getGreen(), enemy1[r][c].getBlue());
+							else {
+								e1R.pixels[i] = surface.color(0, 0, 0, 0); //transparent
+							}
+
+							i++;
+						}
+					}
+					e1R.updatePixels();
+					e1L = reflect(enemy1);
+					e1L.updatePixels();
+					emove1 = true;
+					JOptionPane.showMessageDialog(null, "Move 1 successfully saved");
+					System.out.println("k");
+				} else if (enemyIndex == 1) {
+					frame2R.loadPixels();
+					int i = 0;
+					for (int r = 0; r < enemy2.length; r++) {
+						for (int c = 0; c < enemy2.length; c++) {
+							if (enemy2[r][c] != null)
+								e2R.pixels[i] = surface.color(enemy2[r][c].getRed(), enemy2[r][c].getGreen(), enemy2[r][c].getBlue());
+							else {
+								e2R.pixels[i] = surface.color(0, 0, 0, 0);
+							}
+							i++;
+						}
+					}
+					e2R.updatePixels();
+					e2L = reflect(enemy2);
+					e2L.updatePixels();
+					emove2 = true;
+					JOptionPane.showMessageDialog(null, "Move 2 successfully saved");
+				}
+				if (emove1 && emove2) {
+					eallDone = true;
+				}
+			}	
 		}
 	}
 	
@@ -174,15 +251,25 @@ public class DrawingScreen extends Screen {
 		frame3L = surface.createImage(128,  128,  PConstants.ARGB);
 		frame4L = surface.createImage(128,  128,  PConstants.ARGB);
 		idleL = surface.createImage(128,  128,  PConstants.ARGB);
+		
+		e1R = surface.createImage(64, 64, PConstants.ARGB);
+		e2R = surface.createImage(64, 64, PConstants.ARGB);
+		e1L = surface.createImage(64, 64, PConstants.ARGB);
+		e2L = surface.createImage(64, 64, PConstants.ARGB);
 	}
 	/**
 	 * 
 	 * @return the animation frames.
 	 */
 	public PImage[][] getFrames() {
-		PImage [][] frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, 
-			{frame1L, frame2L, frame3L, frame4L}, {idleL}};
-		return frames;
+		if (!isEnemy) {
+			PImage [][] frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, 
+				{frame1L, frame2L, frame3L, frame4L}, {idleL}};
+				return frames;
+		} else {
+			PImage [][] frames = new PImage [][] {{e1R, e2R}, {e1L, e2L}};
+			return frames;
+		}
 	}
 	
 	/**
@@ -190,7 +277,11 @@ public class DrawingScreen extends Screen {
 	 * @return whether all frames have been saved or not
 	 */
 	public boolean framesDone() {
-		return allDone;
+		if (!isEnemy) {
+			return allDone;
+		} else {
+			return eallDone;
+		}
 	}
 	
 	public void setup () {
@@ -230,6 +321,7 @@ public class DrawingScreen extends Screen {
 		surface.stroke(91, 15, 0);
 		surface.strokeWeight(2);
 		surface.rect(frameSelect.x, frameSelect.y, frameSelect.width, frameSelect.height);
+		surface.rect(typeRect.x,  typeRect.y,  typeRect.width,  typeRect.height);
 		surface.popStyle();
 		
 		surface.pushStyle();
@@ -237,7 +329,12 @@ public class DrawingScreen extends Screen {
 		surface.textSize(10);
 		surface.textLeading(13);
 		surface.textAlign(PConstants.CENTER, PConstants.CENTER);
-		surface.text("Current Frame: \n" + currentFrame, frameSelect.x + 42, frameSelect.y + 12);
+		if (!isEnemy)
+			surface.text("Current Frame: \n" + currentFrame, frameSelect.x + 42, frameSelect.y + 12);
+		else {
+			surface.text("Current Frame: \n" + currentEnemyFrame, frameSelect.x + 42, frameSelect.y + 12);
+		}
+		surface.text(type, typeRect.x + 40, typeRect.y + 13);
 		surface.popStyle();
 		
 		surface.pushStyle();
@@ -251,33 +348,56 @@ public class DrawingScreen extends Screen {
 	}
 	
 	private void showFrameSelect() {
-		String [] realFrames = new String [] {"Idle", "Move 1", "Move 2", "Move 3"};
-		String input = (String)JOptionPane.showInputDialog(null, "Choose a frame to draw", "Which frame?", 
-				JOptionPane.QUESTION_MESSAGE, null, realFrames, realFrames[prevIndex]);
-		
-		if (input == null)
-			return;
-		
-		selectFrame(input);
+		if (!isEnemy) {
+			String [] realFrames = new String [] {"Idle", "Move 1", "Move 2", "Move 3"};
+			String input = (String)JOptionPane.showInputDialog(null, "Choose a frame to draw", "Which frame?", 
+					JOptionPane.QUESTION_MESSAGE, null, realFrames, realFrames[prevIndex]);
+
+			if (input == null)
+				return;
+
+			selectFrame(input);
+		} else {
+			String [] realFrames = new String [] {"Move 1", "Move 2"};
+			String input = (String)JOptionPane.showInputDialog(null, "Choose a frame to draw", "Which frame?", 
+					JOptionPane.QUESTION_MESSAGE, null, realFrames, realFrames[prevEnemyIndex]);
+
+			if (input == null)
+				return;
+
+			selectFrame(input);
+		}
 	}
 	
 	private void selectFrame(String input) {
-		if (input.equals("Idle")) {
-			index = 3;
-			currentFrame = "Idle";
-			prevIndex = 0;
-		} else if (input.equals("Move 1")) {
-			index = 0;
-			currentFrame = "Move 1";
-			prevIndex = 1;
-		} else if (input.equals("Move 2")) {
-			index = 1;
-			currentFrame = "Move 2";
-			prevIndex = 2;
+		if (!isEnemy) {
+			if (input.equals("Idle")) {
+				index = 3;
+				currentFrame = "Idle";
+				prevIndex = 0;
+			} else if (input.equals("Move 1")) {
+				index = 0;
+				currentFrame = "Move 1";
+				prevIndex = 1;
+			} else if (input.equals("Move 2")) {
+				index = 1;
+				currentFrame = "Move 2";
+				prevIndex = 2;
+			} else {
+				index = 2;
+				currentFrame = "Move 3";
+				prevIndex = 3;
+			}
 		} else {
-			index = 2;
-			currentFrame = "Move 3";
-			prevIndex = 3;
+			if (input.equals("Move 1")) {
+				enemyIndex = 0;
+				prevEnemyIndex = 0;
+				currentEnemyFrame = "Move 1";
+			} else {
+				enemyIndex = 1;
+				prevEnemyIndex = 1;
+				currentEnemyFrame = "Move 2";
+			}
 		}
 	}
 
@@ -334,22 +454,44 @@ public class DrawingScreen extends Screen {
 	 * @param height The pixel height of the grid drawing.
 	 */
 	public void drawGrid(float x, float y, float side) {
-		float sideLength = side/characters[index].length;
+		if (!isEnemy) {
+			float sideLength = side/characters[index].length;
 
-		for (int i = 0; i < characters[index].length; i++) {
-			for (int j = 0; j < characters[index][0].length; j++) {
-				float rectX = x + j * sideLength;
-				float rectY = y + i * sideLength;
+			for (int i = 0; i < characters[index].length; i++) {
+				for (int j = 0; j < characters[index][0].length; j++) {
+					float rectX = x + j * sideLength;
+					float rectY = y + i * sideLength;
 
-				if(characters[index][i][j] != null) {
-					Color current = characters[index][i][j];
+					if(characters[index][i][j] != null) {
+						Color current = characters[index][i][j];
 
-					//draw grid here (not transparent background, but what is in the character array
-					surface.pushStyle();
-					surface.noStroke();
-					surface.fill(current.getRGB());
-					surface.rect(rectX, rectY, sideLength, sideLength);
-					surface.popStyle();
+						//draw grid here (not transparent background, but what is in the character array
+						surface.pushStyle();
+						surface.noStroke();
+						surface.fill(current.getRGB());
+						surface.rect(rectX, rectY, sideLength, sideLength);
+						surface.popStyle();
+					}
+				}
+			}
+		} else {
+			float sideLength = side/enemies[enemyIndex].length;
+
+			for (int i = 0; i < enemies[enemyIndex].length; i++) {
+				for (int j = 0; j < enemies[enemyIndex][0].length; j++) {
+					float rectX = x + j * sideLength;
+					float rectY = y + i * sideLength;
+
+					if(enemies[enemyIndex][i][j] != null) {
+						Color current = enemies[enemyIndex][i][j];
+
+						//draw grid here (not transparent background, but what is in the character array
+						surface.pushStyle();
+						surface.noStroke();
+						surface.fill(current.getRGB());
+						surface.rect(rectX, rectY, sideLength, sideLength);
+						surface.popStyle();
+					}
 				}
 			}
 		}
@@ -365,32 +507,62 @@ public class DrawingScreen extends Screen {
 	 * @param height The pixel height of the grid drawing.
 	 */
 	public void drawBackground(float x, float y, float side) {
-		float sideLength = side/characters[index][0].length;
-		int gridCount = 0;
+		if (!isEnemy) {
+			float sideLength = side/characters[index][0].length;
+			int gridCount = 0;
 
-		for (int i = 0; i < characters[index].length; i++) {
-			for (int j = 0; j < characters[index][0].length; j++) {
-				float rectX = x + j * sideLength;
-				float rectY = y + i * sideLength;
+			for (int i = 0; i < characters[index].length; i++) {
+				for (int j = 0; j < characters[index][0].length; j++) {
+					float rectX = x + j * sideLength;
+					float rectY = y + i * sideLength;
 
-				Color current;
+					Color current;
 
-				if (gridCount % 2 == 0) {
-					current = Color.WHITE;
-				} else {
-					current = Color.LIGHT_GRAY;
+					if (gridCount % 2 == 0) {
+						current = Color.WHITE;
+					} else {
+						current = Color.LIGHT_GRAY;
+					}
+
+					//draw grid here (not transparent background, but what is in the character array
+					surface.pushStyle();
+					surface.noStroke();
+					surface.fill(current.getRGB());
+					surface.rect(rectX, rectY, sideLength, sideLength);
+					surface.popStyle();
+
+					gridCount++;
 				}
-
-				//draw grid here (not transparent background, but what is in the character array
-				surface.pushStyle();
-				surface.noStroke();
-				surface.fill(current.getRGB());
-				surface.rect(rectX, rectY, sideLength, sideLength);
-				surface.popStyle();
-
 				gridCount++;
 			}
-			gridCount++;
+		} else {
+			float sideLength = side/enemies[enemyIndex][0].length;
+			int gridCount = 0;
+
+			for (int i = 0; i < enemies[enemyIndex].length; i++) {
+				for (int j = 0; j < enemies[enemyIndex][0].length; j++) {
+					float rectX = x + j * sideLength;
+					float rectY = y + i * sideLength;
+
+					Color current;
+
+					if (gridCount % 2 == 0) {
+						current = Color.WHITE;
+					} else {
+						current = Color.LIGHT_GRAY;
+					}
+
+					//draw grid here (not transparent background, but what is in the character array
+					surface.pushStyle();
+					surface.noStroke();
+					surface.fill(current.getRGB());
+					surface.rect(rectX, rectY, sideLength, sideLength);
+					surface.popStyle();
+
+					gridCount++;
+				}
+				gridCount++;
+			}
 		}
 	}
 
@@ -407,16 +579,29 @@ public class DrawingScreen extends Screen {
 	 * @return A Point object representing a coordinate within the game of life grid.
 	 */
 	public Point clickToIndex(Point p, float x, float y, float width, float height) {
-		float rectWidth = width/characters[index][0].length;
-		float rectHeight = height/characters[index].length;
 		int a = -1; //def not on the grid
 		int b = -1; //def not on the grid
-		float x1 = p.x - x;
-		float y1 = p.y - y;
 
-		if ((x <= p.x && p.x < x + width) && (y <= p.y && p.y < y + height)) {
-			a = (int)(y1/rectHeight);
-			b = (int)(x1/rectWidth);
+		if (!isEnemy) {
+			float rectWidth = width/characters[index][0].length;
+			float rectHeight = height/characters[index].length;
+			float x1 = p.x - x;
+			float y1 = p.y - y;
+
+			if ((x <= p.x && p.x < x + width) && (y <= p.y && p.y < y + height)) {
+				a = (int)(y1/rectHeight);
+				b = (int)(x1/rectWidth);
+			}
+		} else {
+			float rectWidth = width/enemies[enemyIndex][0].length;
+			float rectHeight = height/enemies[enemyIndex].length;
+			float x1 = p.x - x;
+			float y1 = p.y - y;
+
+			if ((x <= p.x && p.x < x + width) && (y <= p.y && p.y < y + height)) {
+				a = (int)(y1/rectHeight);
+				b = (int)(x1/rectWidth);
+			}
 		}
 
 		Point coordinate = new Point (a, b);
@@ -435,7 +620,11 @@ public class DrawingScreen extends Screen {
 	 * @param j The y coordinate of the cell in the grid.
 	 */
 	public void toggleCell(int i, int j) {
-		characters[index][i][j] = palette.getSelectedColor();
+		if (!isEnemy) {
+			characters[index][i][j] = palette.getSelectedColor();
+		} else {
+			enemies[enemyIndex][i][j] = palette.getSelectedColor();
+		}
 	}
 
 	/**
@@ -466,21 +655,40 @@ public class DrawingScreen extends Screen {
 	 * Resets the frame to its default state.
 	 */
 	public void reset() {
+		if (!isEnemy) {
 		characters[index] = new Color [128][128];
+		} else {
+			enemies[enemyIndex] = new Color [64][64];
+		}
 	}
 	
 	private void fill (int x, int y) {
-		if (x < 0 || x >= 128 || y < 0 || y >= 128) {
-			//do nothing
-		} else if (characters[index][x][y] != null && characters[index][x][y].equals(palette.getSelectedColor())) {
-			//do nothing
-		} else {
-			characters[index][x][y] = palette.getSelectedColor();
+		if (!isEnemy) {
+			if (x < 0 || x >= 128 || y < 0 || y >= 128) {
+				//do nothing
+			} else if (characters[index][x][y] != null && characters[index][x][y].equals(palette.getSelectedColor())) {
+				//do nothing
+			} else {
+				characters[index][x][y] = palette.getSelectedColor();
 
-			fill(x + 1, y);
-			fill(x - 1, y);
-			fill(x, y + 1);
-			fill(x, y - 1);
+				fill(x + 1, y);
+				fill(x - 1, y);
+				fill(x, y + 1);
+				fill(x, y - 1);
+			}
+		} else {
+			if (x < 0 || x >= 64 || y < 0 || y >= 64) {
+				//do nothing
+			} else if (enemies[enemyIndex][x][y] != null && enemies[enemyIndex][x][y].equals(palette.getSelectedColor())) {
+				//do nothing
+			} else {
+				enemies[enemyIndex][x][y] = palette.getSelectedColor();
+
+				fill(x + 1, y);
+				fill(x - 1, y);
+				fill(x, y + 1);
+				fill(x, y - 1);
+			}
 		}
 	}
 
@@ -528,6 +736,15 @@ public class DrawingScreen extends Screen {
 				palette.reset();
 			}
 			
+			if (typeRect.contains(click.x, click.y)) {
+				isEnemy = !isEnemy;
+				if (isEnemy) {
+					type = "Enemy";
+				} else {
+					type = "Hero";
+				}
+			}
+			
 			board.mousePressed(click.x, click.y, surface, 1, framesDone());
 		} 
 	}
@@ -544,7 +761,6 @@ public class DrawingScreen extends Screen {
 
 		} 
 	}
-
 
 }
 
