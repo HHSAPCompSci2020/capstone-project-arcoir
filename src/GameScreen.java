@@ -53,8 +53,8 @@ public class GameScreen extends Screen {
 		displayCount = 0;
 		
 		g = new ArrayList<Ground>();
-		g.add(new Ground(new Rectangle(-1000, 450, 7000, 20)));
-		for(int i = 0; i < 16; i++) {
+		g.add(new Ground(new Rectangle(-1000, 450, 15000, 20)));
+		for(int i = 0; i < 26; i++) {
 			g.add(new Ground(new Rectangle(i*500-1000, 410, 40, 40)));
 		}
 		score = 0;
@@ -143,7 +143,9 @@ public class GameScreen extends Screen {
 		artifacts.add(surface.loadImage("resources/artifacts/artifactRainbow.gif"));
 
 	}
-	
+	/**Draws components of the game to the screen
+	 * 
+	 */
 	public void draw() {
 		if (!doneLoading && surface.framesDone()) {
 			assignFrames();
@@ -288,6 +290,9 @@ public class GameScreen extends Screen {
 		
 	}
 	
+	/**resets the game if all the character's lives are lost
+	 * 
+	 */
 	public void reset () {
 		c.setLives(3);
 		isRight = true;
@@ -307,6 +312,9 @@ public class GameScreen extends Screen {
 		spawnEnemy();
 	}
 	
+	/**Assigns the customized images to the frames of the main character
+	 * 
+	 */
 	private void assignFrames() {
 		PImage[][] frames = surface.getFrames();
 		if(surface.framesDone()) {
@@ -331,7 +339,9 @@ public class GameScreen extends Screen {
 			doneLoading = true;
 		}
 	} 
-	
+	/**Assigns the customized images to the frames of the enemies
+	 * 
+	 */
 	private void assignEnemyFrames() {
 		PImage[][] frames = surface.getEnemyFrames();
 		if (surface.eFramesDone()) {
@@ -350,13 +360,18 @@ public class GameScreen extends Screen {
 			edoneLoading = true;
 		}
 	}
-
+	/**if the left mouse button if pressed, the dashboard's mousePressed button is called
+	 * 
+	 */
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
 			dash.mousePressed(p.x, p.y, surface, 2, false, false);
 		}
 	}
 	
+	/**Increments the level by one if the score has exceeded the current level
+	 * 
+	 */
 	public void updateLevel() {
 		if (score >= level) {
 			level++;
@@ -366,6 +381,9 @@ public class GameScreen extends Screen {
 		}
 	}
 	
+	/**Spawns an enemy at a random place to the right of the character
+	 * 
+	 */
 	public void spawnEnemy() {
 		Entity spawnedEnemy = new Entity(eL, "ENEMY", 1, (int)(Math.random()*400+400), 100);
 		spawnedEnemy.adjustImgShift(-8, -10);
@@ -373,6 +391,9 @@ public class GameScreen extends Screen {
 		enemies.add(spawnedEnemy);
 	}
 	
+	/**removes enemies as they  go off the screen
+	 * 
+	 */
 	public void updateEnemyState() {
 		for(int i=0; i<enemies.size(); i++) {
 			if(enemies.get(i).getX() > this.DRAWING_WIDTH || enemies.get(i).getX() <0) {
@@ -381,7 +402,9 @@ public class GameScreen extends Screen {
 			}
 		}
 	}
-	
+	/** checks if enemies are intersecting the character, if so, they attack the character
+	 * 
+	 */
 	public void enemyAttack() {
 		for(int i=0; i<enemies.size(); i++) {
 			if(enemies.get(i).intersects(c)) {
