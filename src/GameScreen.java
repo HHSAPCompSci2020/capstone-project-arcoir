@@ -12,7 +12,6 @@ import processing.core.PImage;
 public class GameScreen extends Screen {
 
 	// Fields
-	private ArrayList<Animation> enemyALeft, enemyARight;
 	private Entity c;
 	private ArrayList<Ground> g;
 	private Dashboard dash;
@@ -41,8 +40,6 @@ public class GameScreen extends Screen {
 		eR = new Animation(300);
 		eL = new Animation(300);
 		
-		enemyALeft = new ArrayList<Animation>();
-		enemyARight = new ArrayList<Animation>();
 		artifacts =  new ArrayList<PImage>();
 		backgrounds = new ArrayList<PImage>();
 		leveledUp = false;
@@ -104,7 +101,6 @@ public class GameScreen extends Screen {
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft1.png"));
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft2.png"));
 		
-		loadEnemyAnims();
 		
 		backgrounds.add(surface.loadImage("resources/bgs/bgRed.gif"));
 		backgrounds.add(surface.loadImage("resources/bgs/bgOrange.gif"));
@@ -120,88 +116,6 @@ public class GameScreen extends Screen {
 		artifacts.add(surface.loadImage("resources/artifacts/artifactBlue.gif"));
 		artifacts.add(surface.loadImage("resources/artifacts/artifactPurple.gif"));
 		artifacts.add(surface.loadImage("resources/artifacts/artifactRainbow.gif"));
-
-	}
-
-	public void loadEnemyAnims() {
-		Animation eGreyR = new Animation(300);
-		Animation eRedR = new Animation(300);
-		Animation eOrangeR = new Animation(300);
-		Animation eYellowR = new Animation(300);
-		Animation eGreenR = new Animation(300);
-		Animation eBlueR = new Animation(300);
-		Animation ePurpleR = new Animation(300);
-		
-		Animation eGreyL = new Animation(300);
-		Animation eRedL = new Animation(300);
-		Animation eOrangeL = new Animation(300);
-		Animation eYellowL = new Animation(300);
-		Animation eGreenL = new Animation(300);
-		Animation eBlueL = new Animation(300);
-		Animation ePurpleL = new Animation(300);
-		
-		//load right
-		
-		eGreyR.addFrame(surface.loadImage("resources/enemy/colors/grey/EnemyGreyRunRight1.png"));
-		eGreyR.addFrame(surface.loadImage("resources/enemy/colors/grey/EnemyGreyRunRight2.png"));
-		
-		eRedR.addFrame(surface.loadImage("resources/enemy/colors/red/EnemyRedRunRight1.png"));
-		eRedR.addFrame(surface.loadImage("resources/enemy/colors/red/EnemyRedRunRight2.png"));
-		
-		eOrangeR.addFrame(surface.loadImage("resources/enemy/colors/orange/EnemyOrangeRunRight1.png"));
-		eOrangeR.addFrame(surface.loadImage("resources/enemy/colors/orange/EnemyOrangeRunRight1.png"));
-		
-		eYellowR.addFrame(surface.loadImage("resources/enemy/colors/yellow/EnemyYellowRunRight1.png"));
-		eYellowR.addFrame(surface.loadImage("resources/enemy/colors/yellow/EnemyYellowRunRight2.png"));
-		
-		eGreenR.addFrame(surface.loadImage("resources/enemy/colors/green/EnemyGreenRunRight1.png"));
-		eGreenR.addFrame(surface.loadImage("resources/enemy/colors/green/EnemyGreenRunRight2.png"));
-		
-		eBlueR.addFrame(surface.loadImage("resources/enemy/colors/blue/EnemyBlueRunRight1.png"));
-		eBlueR.addFrame(surface.loadImage("resources/enemy/colors/blue/EnemyBlueRunRight2.png"));
-		
-		ePurpleR.addFrame(surface.loadImage("resources/enemy/colors/purple/EnemyPurpleRunRight1.png"));
-		ePurpleR.addFrame(surface.loadImage("resources/enemy/colors/purple/EnemyPurpleRunRight2.png"));
-		
-		//load left
-		
-		eGreyL.addFrame(surface.loadImage("resources/enemy/colors/grey/EnemyGreyRunLeft1.png"));
-		eGreyL.addFrame(surface.loadImage("resources/enemy/colors/grey/EnemyGreyRunLeft2.png"));
-
-		eRedL.addFrame(surface.loadImage("resources/enemy/colors/red/EnemyRedRunLeft1.png"));
-		eRedL.addFrame(surface.loadImage("resources/enemy/colors/red/EnemyRedRunLeft2.png"));
-
-		eOrangeL.addFrame(surface.loadImage("resources/enemy/colors/orange/EnemyOrangeRunLeft1.png"));
-		eOrangeL.addFrame(surface.loadImage("resources/enemy/colors/orange/EnemyOrangeRunLeft1.png"));
-
-		eYellowL.addFrame(surface.loadImage("resources/enemy/colors/yellow/EnemyYellowRunLeft1.png"));
-		eYellowL.addFrame(surface.loadImage("resources/enemy/colors/yellow/EnemyYellowRunLeft2.png"));
-
-		eGreenL.addFrame(surface.loadImage("resources/enemy/colors/green/EnemyGreenRunLeft1.png"));
-		eGreenL.addFrame(surface.loadImage("resources/enemy/colors/green/EnemyGreenRunLeft2.png"));
-
-		eBlueL.addFrame(surface.loadImage("resources/enemy/colors/blue/EnemyBlueRunLeft1.png"));
-		eBlueL.addFrame(surface.loadImage("resources/enemy/colors/blue/EnemyBlueRunLeft2.png"));
-
-		ePurpleL.addFrame(surface.loadImage("resources/enemy/colors/purple/EnemyPurpleRunLeft1.png"));
-		ePurpleL.addFrame(surface.loadImage("resources/enemy/colors/purple/EnemyPurpleRunLeft2.png"));
-
-		//add to arraylist
-		enemyALeft.add(eGreyL);
-		enemyALeft.add(eRedL);
-		enemyALeft.add(eOrangeL);
-		enemyALeft.add(eYellowL);
-		enemyALeft.add(eGreenL);
-		enemyALeft.add(eBlueL);
-		enemyALeft.add(ePurpleL);
-		
-		enemyARight.add(eGreyR);
-		enemyARight.add(eRedR);
-		enemyARight.add(eOrangeR);
-		enemyARight.add(eYellowR);
-		enemyARight.add(eGreenR);
-		enemyARight.add(eBlueR);
-		enemyARight.add(ePurpleR);
 
 	}
 	
