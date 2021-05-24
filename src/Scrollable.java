@@ -15,7 +15,7 @@ public class Scrollable {
 		this.surface = surface;
 		image = img;
 		imagePos = new ArrayList<Integer>();
-		int numOfGround = surface.width/img.width + 2;
+		int numOfGround = surface.width/img.width + 3;
 		this.posY = posY;
 		for(int i = 0; i < numOfGround; i++) {		
 			int posX = (int)(i * image.width - img.width);

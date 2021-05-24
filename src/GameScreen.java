@@ -234,9 +234,9 @@ public class GameScreen extends Screen {
 		updateEnemyState();
 		enemyAttack();
 		
-		if(leveledUp && level < 8 && level > 1) {
+		if(leveledUp && level < 9 && level > 1) {
 			
-			if(displayCount == 10 && level < 7) {
+			if(displayCount == 10 && level < 8) {
 				background.setImage(backgrounds.get(level - 2));
 				System.out.println(level - 2);
 			}
