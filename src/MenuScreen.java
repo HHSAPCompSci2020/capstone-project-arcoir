@@ -33,8 +33,8 @@ public class MenuScreen extends Screen {
 		six = surface.loadImage("resources/intro/6.png");
 		seven = surface.loadImage("resources/intro/7.png");
 		
-		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				false, true, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+		dash = new Dashboard(false, true, surface.loadImage("resources/dash/help/helpIcon.gif"), 
+				surface.loadImage("resources/dash/back.gif"));
 
 	}
 	
