@@ -16,7 +16,7 @@ public class GameScreen extends Screen {
 	private Dashboard dash;
 	private DrawingSurface surface;
 	private Animation idleR, idleL, cWR, cWL, eR, eL;
-	private PImage bg;
+	private PImage bg, obstacle;
 	private boolean isRight;
 	private ArrayList <Entity> enemies;
 	private Entity enemy;
@@ -45,8 +45,10 @@ public class GameScreen extends Screen {
 		displayCount = 0;
 		
 		g = new ArrayList<Ground>();
-		g.add(new Ground(new Rectangle(0, 450, 1000, 20)));
-
+		g.add(new Ground(new Rectangle(-1000, 450, 7000, 20)));
+		for(int i = 0; i < 6; i++) {
+			g.add(new Ground(new Rectangle(i*300+20, 410, 40, 40)));
+		}
 		score = 0;
 		level = 1;
 				
@@ -80,6 +82,14 @@ public class GameScreen extends Screen {
 
 	private void loadCAnims() {
 		bg = surface.loadImage("resources/bgs/bgGrey.jpeg");
+		obstacle = surface.loadImage("resources/obstacle/Cone.png");
+		obstacle.resize(40, 40);
+		for(int i = 0; i < g.size(); i++) {
+			if(i != 0) {
+				g.get(i).setImage(obstacle);
+			}
+		}
+		
 		idleR.addFrame(surface.loadImage("resources/maincharacter/idleR.png"));
 		
 		idleL.addFrame(surface.loadImage("resources/maincharacter/idleL.png"));
@@ -99,6 +109,7 @@ public class GameScreen extends Screen {
 		
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft1.png"));
 		eL.addFrame(surface.loadImage("resources/enemy/EnemyRunLeft2.png"));
+		
 		
 	//	backgrounds.add(bg);
 		backgrounds.add(surface.loadImage("resources/bgs/bgRed.gif"));
@@ -128,11 +139,6 @@ public class GameScreen extends Screen {
 		} 
 		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
-		if(!c.getLiveState()) {
-			surface.switchScreen(3);
-			reset();
-		}
-		
 		surface.pushStyle();
 		
 		background.draw(surface);
@@ -140,6 +146,10 @@ public class GameScreen extends Screen {
 		surface.noFill();
 		
 	
+		for(Ground ground: g) {
+			ground.drawGround(surface);
+		}
+		
 		c.draw(surface);
 		for (Entity e : enemies) {
 			e.draw(surface);
@@ -160,12 +170,18 @@ public class GameScreen extends Screen {
 			for(Entity enm : enemies) {
 				enm.translate(0.8);
 			}
+			for(Ground ground: g) {
+				ground.translate(3);
+			}
 			c.translate(-1);
 			background.setSpeed(-3);
 		}
 		if (surface.isPressed(KeyEvent.VK_RIGHT)) {
 			for(Entity enm : enemies) {
 				enm.translate(-0.8);
+			}
+			for(Ground ground: g) {
+				ground.translate(-3);
 			}
 			c.translate(1);
 			background.setSpeed(3);
@@ -217,9 +233,9 @@ public class GameScreen extends Screen {
 		updateEnemyState();
 		enemyAttack();
 		
-		if(leveledUp && level < 8 && level > 1) {
+		if(leveledUp && level < 9 && level > 1) {
 			
-			if(displayCount == 10 && level < 7) {
+			if(displayCount == 10 && level < 8) {
 				background.setImage(backgrounds.get(level - 2));
 				System.out.println(level - 2);
 			}
@@ -242,11 +258,10 @@ public class GameScreen extends Screen {
 			}
 		}
 		
-		if((int)c.getLives() == 0) {
+		if(!c.getLiveState()) {
 			surface.switchScreen(3);
 			reset();
 		}
-		
 		
 		background.update();
 		
