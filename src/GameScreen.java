@@ -349,7 +349,7 @@ public class GameScreen extends Screen {
 	}
 	
 	public void spawnEnemy() {
-		Entity spawnedEnemy = new Entity(eL, "ENEMY", 1, (int)(Math.random()*500+100), 100);
+		Entity spawnedEnemy = new Entity(eL, "ENEMY", 1, (int)(Math.random()*400+400), 100);
 		spawnedEnemy.adjustImgShift(-8, -10);
 		spawnedEnemy.setHeight(40);
 		enemies.add(spawnedEnemy);
