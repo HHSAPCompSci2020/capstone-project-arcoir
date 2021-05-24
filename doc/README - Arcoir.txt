@@ -1,113 +1,82 @@
 ﻿AP Computer Science Final Project - README Template
 
 
-Instructions:
-The first step in creating an excellent APCS final project is to write up a README. At this stage, this README file acts as your project proposal. Once you’ve filled in all components, Shelby will read through it and suggest edits. Ultimately, you need a document that adequately describes your project idea and we must agree on this plan.
-
-
-Have one member of your group make a copy of this Google Doc. Then, they should share it with all other members and with Mr. Shelby so that every group member has edit permissions, and Shelby can add comments on your ideas.
-
-
-There’s a lot of parts of this document that you might not have full answers for yet. Because you haven’t written the program yet, it’s difficult to think about the instructions or which group members will do which parts. Even though this is hard to think about, you must have something in these sections that acts as your current plan. However, during the course of the project, you’ll continuously update this document. This means that you will not be held to exactly what you put here - components of this document can change (and it’s pretty common!).
-
-
-There is one exception: the Features List section. Once Shelby OKs your README, the Features List section cannot be modified. For this reason, it is most important that you get a solid idea of what you want to make and the primary features it will have now.
-
-
-Talk with your group. Consider drawing some pictures of what you think your project might look like. Be precise. When you’re ready, fill this out together. Each component in brackets below ( [these things] ) should be replaced with your ideas. Note that there are several sample READMEs posted on this assignment for you to use as guidance.
-
-
--------------------When README is finalized, remove everything above this line--------------------
-
-
 Arcoir
 Authors: Nicole Spaulding, Emily Zhang, Lindsay Qin
-Revision: 5/14/21
+Revision: 5/23/21
 
 
 Introduction: 
-[In a few paragraphs totaling about ½ page, introduce the high-level concept of your program. What this looks like depends a lot on what type of thing you are making. An introduction for an application will look different than one for a game. In general, your introduction should address questions like these:
 
 
+Long ago, in the Kingdom of Arcoir, a decree was issued: Only the family of Arc-en, the rulers of the land, were allowed to use colors. The royal family stole the colors and scattered them across the country, locked away from the people of Arcoir. Since then, the kingdom has lived in a gray and colorless world. You, a rising star in the world of artists, are determined to get them back. Do YOU have what it takes to bring color back to Arcoir?
 
 
-What does your program do?
-What problem does it solve? Why did you write it?
-What is the story?
-What are the rules? What is the goal?
-Who would want to use your program?
-What are the primary features of your program?]
+In this unique level-based game, players can create and design their own characters (if they want, standard characters will be provided), collect artifacts, and restore colors! Users have the ability to custom their own character with a graphics editor app. This digital painting graphic provides twenty four different colors with more that can be used by entering the rgb numbers into a color palette generator. Uses can also use the pen tool to draw their design and easily reset both the color palette and their drawing to their defaults. Players have the ability to animate their design by drawing their character in four different modes: idle and in three other movements. Not only can they customize their own character (the hero), they can also design the enemies. 
 
 
------
+After customizing their characters, users can save their design and use them in an interactive game. The character attempts to kill off dragon enemies as it begins its travel along the Kingdom of Arcoir. However, if the dragons come into contact with the player for too long, the character will lose a life. Once the user loses all three lives, the game will be over. When the character kills off the same number of enemies as the level it is on, the game will level up. At the end of each level, the character can collect a color artifact in order to return all the colors back into the Kingdom of Arcoir. However, during this journey, the player may encounter mushrooms along the way, which it would need to jump over.  
 
 
-Long ago, in the kingdom of Arcoir, a decree was issued: Only the family of Arc-en, the rulers of the land, were allowed to use colors. They scattered the colors in strongholds across the country, locked away from the people or Arcoir. Since then, the kingdom has lived in a gray and colorless world. You, a rising star in the world of artists, are determined to get them back. Do YOU have what it takes to bring color back to Arcoir?
-
-
-In this unique level-based game, players can create and design their own characters (if they want, standard characters will be provided), collect artifacts, and restore colors!
+Gamers and artists who would like a combination of both types of programs would want to use this program. They have no limit to test their creativity with their drawing skills, and they also have the ability to showcase their artwork as their own character in a game.  
 
 
 Instructions:
-[Explain how to use the program. This needs to be specific: 
-Which keyboard keys will do what? 
-Where will you need to click? 
-Will you have menus that need to be navigated? What will they look like? 
-Do actions need to be taken in a certain order?]
+Left click START to begin.
 
 
-Starting Screen
-Right click START to begin the game.
+Left click through the storyline to get to the Main menu!
 
 
-Main Menu
-Right click CUSTOMIZE to customize characters and enemies.
-Right click PLAY to begin playing the game.
+Main Menu:
+Left click CUSTOMIZE to customize characters and enemies.
+Left click PLAY to begin playing the game.
 
 
-Help
-Right click the question mark at the bottom of the screen to get help.
+Help:
+Left click the question mark at the bottom right of the screen to get help.
 
 
-Drawing Screen
-Right click the colors to select a color. Click the grid to customize your character. 
-Right click CHARACTER to customize the character you will be playing as. 
-Right click ENEMY to customize enemies. These can only be customized at the beginning of the game.
-Right click DOWNLOAD to download your customized character as a jpg or png.
-Right click SAVE to save your customized character.
+Back:
+Left click the arrow at the bottom left of the screen to go back to the previous screen.
 
 
-Gameplay -
-Description: A platformer similar to Mario in which the player remains in the center of the screen and the camera pans to keep it that way.
+Drawing Screen:
+Left click the colors to select a color. Click the grid to customize your character. 
+Left click the paint bucket icon to fill in a larger area with a single click.
+Left click the save icon to save your customized character.
+Left click the palette with the plus icon to enter a rgb value to choose a specific color. 
+Left click the refresh arrow icon to clear the drawing page. 
+Left click the palette with the refresh icon to reset the color back to default. 
+Left click the pencil to change the stroke width.
+Left click HERO to switch to customizing enemies. Left click ENEMY to switch to customizing the character you will be playing as. 
+Left click DOWNLOAD IMAGE to download your customized character as a jpg or png. This can only be done if the current frame is saved first.
+
+
+Gameplay: 
+Description: A game similar to Mario in which the player remains in the center of the screen and the camera pans to keep it that way. Unlike Mario though, leveling up happens by defeating enemies, but if enemies get too close, the character will lose a life! Everytime a level is reached, a new color will be collected. 
 
 
 Controls:
-Press the spacebar to jump.
+Press the spacebar to attack.
+Press the up arrow to jump.
 Press the right arrow to move right.
 Press the left arrow to move left.
-Go through coins to collect coins. 
-To avoid monsters, simply jump over them. To kill monsters, right-click anywhere on the screen once the monster comes into range. 
-Right click the treasure chest to collect the artifact and gain loot. 
+To avoid monsters, simply jump over them. To kill monsters, press space once the monster comes into range. 
 
 
-Shop
-Right click POWERUPS to browse available powerups and lives. 
-Right click CUSTOMIZE to customize your character.
-Right click WEAPONS to browse available weapons.
-Right click BUY to buy the selected product. 
+Left click RETURN TO MENU to return to the menu.
 
 
-Available lives, powerups, and the help button are always available to be accessed/viewed at the bottom of the screen.
-
-
-This is a side-view platformer game. The game will scroll as the player moves. 
+This is a side-view game. The game scrolls as the player moves. 
 
 
 Features List (THE ONLY SECTION THAT CANNOT CHANGE LATER):
+
+
 Must-have Features:
-[These are features that we agree you will definitely have by the project due date. A good final project would have all of these completed. At least 5 are required. Each feature should be fully described (at least a few full sentences for each)]
 *  Drawing interface
-   * The drawing interface allows players to create their own custom characters before playing the game. The characters are drawn using pixel art and have two different motions: one where the left foot is forward, and one where the right foot is forward. If the player does not wish to customize their character, they do not have to and can use a default character instead.
+   * The drawing interface allows players to create their own custom characters before playing the game. The characters are drawn using pixel art and have three different motions. If the player does not wish to customize their character, they do not have to and can use a default character instead.
 *  Game becomes more colorful as player progresses
    * The game levels start off in black and white. As the player collects color artifacts, that color is gradually returned to the in-game world.
 * defeatable enemies and player has lives
@@ -121,7 +90,8 @@ Must-have Features:
 
 
 Want-to-have Features:
-[These are features that you would like to have by the project due date, but you’re unsure whether you’ll hit all of them. A good final project would have perhaps half of these completed. At least 5 are required. Again, fully describe each.]
+
+
 * Shops at end of levels (towns, outposts, etc)
    * After completing each level, the player can enter towns/outposts to buy power ups and lives that assist the player with completing levels. The player can also buy weapons to better attack enemies with. 
 * Collect coins on levels
@@ -135,7 +105,8 @@ Want-to-have Features:
 
 
 Stretch Features:
-[These are features that we agree a fully complete version of this program would have, but that you probably will not have time to implement. A good final project does not necessarily need to have any of these completed at all. At least 3 are required. Again, fully describe each.]
+
+
 *  Chests that contain the artifact as well as loot (powerups/money) at end of levels
    * At the ends of each level, chests can be opened giving a color artifact and a possibility of power-ups
 *  Saved highscores and drawings even after closing the eclipse window 
@@ -145,135 +116,48 @@ Stretch Features:
 
 
 Class List:
-[This section lists the Java classes that make up the program and very briefly describes what each represents. It’s totally fine to put this section in list format and not to use full sentences.]
-
-
-UML Link
-
-
-* Main
-   * Fields
-      * Menu
-   * Methods
-      * main 
-* Menu
-   * Fields
-      * GameRunner
-      * DrawingSurface
-      * dashboard
-   * Methods
-      * runGame
-
-
-* DrawingSurface
-   * Fields
-      * ColorPalette
-      * Character
-      * dashboard
-   * Methods
-      * clickToFill
-      * saveImage
-
-
+* Animation 
+   * The Animation class contains an array of images. It changes and updates the frame for the given amount of milliseconds passed in the parameter. 
 * ColorPalette
-   * Fields
-      * Array of currently created colors
-   * Methods
-      * selectColor
-      * changeColor
-
-
-* GameRunner
-   * Fields
-      * MainCharacter
-      * Enemies
-      * Ground
-      * Dashboard
-   * Methods
-      * runGame
-
-
+   * The ColorPalette class creates twenty-four default colors. It displays each color in a rectangle, so that users can pick and choose the one that they want to use when designing. 
 * Dashboard
-   * Fields
-      * Buttons
-      * Help
-      * Map
-      * Pause
-   * Methods
-      * select
-
-
-* Map
-   * Fields
-      * progress
-   * Methods
-      * increaseProgress
-
-
-* Enemies
-   * Fields
-      * Animation
-      * Int damage
-   * Methods
-      * attack
-
-
-* MainCharacter
-   * Fields
-      * Animation: DefaultCharacter
-      * Lives
-   * Methods
-      * act
-      * attack
-      * jump
-      * moveRight
-      * moveLeft
-      * duck
+   * The Dashboard class displays the help button and back button on the screen.
+* DrawingScreen
+   * The DrawingScreen class encompasses all of the functions the user needs to draw and customize Entities. 
+* DrawingSurface
+   * The DrawingSurface class is a PApplet that displays the program and the four different screens (DrawingScreen, MenuScreen, GameScreen, and GameOverScreen) used within the game. 
+* Entity
+   * The Entity class contains the descriptions and functions that make up each character in the game, which includes both the hero and the enemies. It measures the velocity and position of these characters. 
+* GameOverScreen
+   * The GameOverScreen class presents the display that appears when the character loses all three of its lives. It prompts the user to exit back to the main menu in order to customize or play again.   
+* GameScreen
+   * The GameScreen class displays the user-active interface that allows the player to control the character. It keeps track of the number of levels, character lives, and number of defeated enemies. This class is also in charge of spawning more enemies once they have all been killed. 
 * Ground
-   * Fields
-      * Image
-      * collider/hitbox
-   * Methods
-      * Boolean hasCollided(Rectangle r)
-
-
-* Animation
-   * Fields
-      * ArrayList<PImage> frames
-      *    * Methods
-      * Act()
-      * addFrame(PImage image)
-      * getFrame()
-* Character
-   * Fields
-      * health
-   * Methods
-      * attack
-      * takeDamage
-      * move
+   * The Ground class enables the characters to remain along the same x-axis with a rectangle shape.
+* Help 
+   * The Help class creates a help window that instructs the user on how to use the program.
+* Main
+   * The Main class runs and executes the program.
+* MenuScreen        
+   * The MenuScreen class displays the initial screen when the user first runs the program. It prompts the player to start the game and either begin the customization of their character or the game. 
+* Screen
+   * The Screen class initializes the window size to 800 by 500, and any changes to the window after will follow the same scale. 
+* ScreenSwitcher
+   * The ScreenSwitcher interface initialized each of the four screens to a number between 0 and 3, so that other classes can easily call the switchScreen() method in order to change the display. 
+* Scrollable
+   * The Scrollable class shifts the background image either left or right, depending on which direction the character moves in the game. 
 
 
 Credits:
-[Gives credit for project components. This includes both internal credit (your group members) and external credit (other people, websites, libraries). To do this:
-* List the group members and describe how each member contributed to the completion of the final program. This could be classes written, art assets created, leadership/organizational skills exercises, or other tasks. Initially, this is how you plan on splitting the work.
-* Give credit to all outside resources used. This includes downloaded images or sounds, external java libraries, parent/tutor/student coding help, etc.]
 
 
-Lindsay: Gameplay Elements, Enemies, Scenes 
-        ColorPalette, Map, Dashboard, DrawingSurface
-Nicole: Gameplay Elements, Character Control, Scenes
-        Animation, Character
-Emily: Gameplay Elements, GUI, Music
-Ground
+Lindsay: ColorPalette, Map, Dashboard, DrawingScreen, Help, MenuScreen, Entity, GameScreen, icons in DrawingScreen, starting screen drawings, starting screen story images
+Nicole: Animation, Character, GameScreen, DrawingScreen, default hero/enemy animations, backgrounds, artifacts, mushroom drawing, artifact drawing, default character drawing
+Emily: Ground, Levels, GameScreen, GameOverScreen, Entity
 
 
 External Library: Processing
 Code from:
         GameOfLife lab (Main, Grid methods, filereader)
-        Processing ScreenSwitcher demo
-        
-
-
-Fun things to do if we feel like it:
-Nicole voice every time you open the program: “Arcoir: Legendary Adventure” nicole says noooooooooooo :(
-Intro animation that gives you the story
+        Processing ScreenSwitcher demo, popup demo
+        Processing Animation demo
