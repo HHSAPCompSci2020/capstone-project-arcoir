@@ -18,7 +18,8 @@ Left click the colors to select a color. Click the grid to customize your charac
 Left click the paint can to use the paint can tool. Right click again to turn it off. 
 Left click the save icon to save your edits.
 Left click the refresh icon to reset the frame.
-Left click the "Current Frame" button to move between frames. 
+Left click the "Current Frame" button to move between frames.
+Left click the save icon, and then the "Download Frames" button to download the current frame as a png.  
 
 Gameplay Controls
 Press the space bar to kill enemies.
