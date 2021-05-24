@@ -41,7 +41,7 @@ public class GameOverScreen extends Screen {
 		if (surface.mouseButton == surface.LEFT) {
 			if (menu.contains(click.x, click.y))
 				surface.switchScreen(0);
-			dash.mousePressed(click.x, click.y, surface, 0, false);
+			dash.mousePressed(click.x, click.y, surface, 0, false, false);
 		}
 	}
 }

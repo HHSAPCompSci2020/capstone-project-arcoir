@@ -168,6 +168,8 @@ public class DrawingScreen extends Screen {
 				allDone = true;
 			}
 		} else {
+			System.out.println("k");
+
 			if (enemies[enemyIndex] != null && enemyCheck[enemyIndex] != false) {
 				if (enemyIndex == 0) {
 					e1R.loadPixels();
@@ -188,7 +190,6 @@ public class DrawingScreen extends Screen {
 					e1L.updatePixels();
 					emove1 = true;
 					JOptionPane.showMessageDialog(null, "Move 1 successfully saved");
-					System.out.println("k");
 				} else if (enemyIndex == 1) {
 					frame2R.loadPixels();
 					int i = 0;
@@ -216,24 +217,46 @@ public class DrawingScreen extends Screen {
 	}
 	
 	private PImage reflect (Color [][] copy) {
-		Color [][] reflect = new Color [128][128];
-		for (int r = 0; r < 128; r++) {
-			for (int c = 0; c < 64; c++) {
-				reflect[r][c] = copy[r][128 - c - 1];
-				reflect[r][128 - c - 1] = copy[r][c];
-			}
-		}
-		PImage reflected = surface.createImage(128, 128, PConstants.ARGB);
-
-		int i = 0;
-		for (int r = 0; r < reflect.length; r++) {
-			for (int c = 0; c < reflect.length; c++) {
-				if (reflect[r][c] != null) {
-					reflected.pixels[i] = surface.color(reflect[r][c].getRed(), reflect[r][c].getGreen(), reflect[r][c].getBlue());
-				} else {
-					reflected.pixels[i] = surface.color(0, 0, 0, 0);
+		PImage reflected;
+		if (!isEnemy) {
+			Color [][] reflect = new Color [128][128];
+			for (int r = 0; r < 128; r++) {
+				for (int c = 0; c < 128; c++) {
+					reflect[r][c] = copy[r][128 - c - 1];
+					reflect[r][128 - c - 1] = copy[r][c];
 				}
-				i++;
+			}
+			reflected = surface.createImage(128, 128, PConstants.ARGB);
+			int i = 0;
+			for (int r = 0; r < reflect.length; r++) {
+				for (int c = 0; c < reflect.length; c++) {
+					if (reflect[r][c] != null) {
+						reflected.pixels[i] = surface.color(reflect[r][c].getRed(), reflect[r][c].getGreen(), reflect[r][c].getBlue());
+					} else {
+						reflected.pixels[i] = surface.color(0, 0, 0, 0);
+					}
+					i++;
+				}
+			}
+		}else {
+			Color [][] reflect = new Color [64][64];
+			for (int r = 0; r < 64; r++) {
+				for (int c = 0; c < 64; c++) {
+					reflect[r][c] = copy[r][64 - c - 1];
+					reflect[r][64 - c - 1] = copy[r][c];
+				}
+			}
+			reflected = surface.createImage(64, 64, PConstants.ARGB);
+			int i = 0;
+			for (int r = 0; r < reflect.length; r++) {
+				for (int c = 0; c < reflect.length; c++) {
+					if (reflect[r][c] != null) {
+						reflected.pixels[i] = surface.color(reflect[r][c].getRed(), reflect[r][c].getGreen(), reflect[r][c].getBlue());
+					} else {
+						reflected.pixels[i] = surface.color(0, 0, 0, 0);
+					}
+					i++;
+				}
 			}
 		}
 		return reflected;
@@ -262,14 +285,14 @@ public class DrawingScreen extends Screen {
 	 * @return the animation frames.
 	 */
 	public PImage[][] getFrames() {
-		if (!isEnemy) {
-			PImage [][] frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, 
-				{frame1L, frame2L, frame3L, frame4L}, {idleL}};
-				return frames;
-		} else {
-			PImage [][] frames = new PImage [][] {{e1R, e2R}, {e1L, e2L}};
-			return frames;
-		}
+		PImage [][] frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, 
+			{frame1L, frame2L, frame3L, frame4L}, {idleL}};
+		return frames;
+	}
+	
+	public PImage [][] getEnemyFrames() {
+		PImage [][] frames = new PImage [][] {{e1R, e2R}, {e1L, e2L}};
+		return frames;
 	}
 	
 	/**
@@ -277,11 +300,11 @@ public class DrawingScreen extends Screen {
 	 * @return whether all frames have been saved or not
 	 */
 	public boolean framesDone() {
-		if (!isEnemy) {
-			return allDone;
-		} else {
-			return eallDone;
-		}
+		return allDone;
+	}
+	
+	public boolean eframesDone() {
+		return eallDone;
 	}
 	
 	public void setup () {
@@ -700,7 +723,11 @@ public class DrawingScreen extends Screen {
 					paintCanFill(coord.x, coord.y);
 				} else {
 					toggleCell(coord.x, coord.y);
+					if (!isEnemy) {
 					check[index] = true;
+					} else {
+						enemyCheck[enemyIndex] = true;
+					}
 				}
 				prevToggle = coord;
 			}
@@ -745,7 +772,7 @@ public class DrawingScreen extends Screen {
 				}
 			}
 			
-			board.mousePressed(click.x, click.y, surface, 1, framesDone());
+			board.mousePressed(click.x, click.y, surface, 1, framesDone(), eframesDone());
 		} 
 	}
 

@@ -70,6 +70,16 @@ public float ratioX, ratioY;
 		return screen.framesDone();
 	}
 	
+	public PImage[][] getEnemyFrames() {
+		PImage[][] frames = ((DrawingScreen)(screens.get(1))).getEnemyFrames();
+		return frames;
+	}
+	
+	public boolean eFramesDone() {
+		DrawingScreen screen = (DrawingScreen)screens.get(DRAWINGSCREEN);
+		return screen.eframesDone();
+	}
+	
 	public void keyPressed() {
 		keys.add(keyCode);
 	}

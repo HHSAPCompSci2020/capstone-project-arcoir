@@ -26,7 +26,7 @@ public class GameScreen extends Screen {
 	private int level;
 	private int score;
 	private int t;
-	private boolean doneLoading;
+	private boolean doneLoading, edoneLoading;
 	private boolean leveledUp;
 	private int displayCount;
 	private ArrayList<PImage> artifacts, backgrounds;
@@ -56,6 +56,7 @@ public class GameScreen extends Screen {
 		t = 0;
 		
 		doneLoading = false;
+		edoneLoading = false;
 		
 		
 	}
@@ -125,6 +126,10 @@ public class GameScreen extends Screen {
 	public void draw() {
 		if (!doneLoading && surface.framesDone()) {
 			assignFrames();
+		} 
+		
+		if (!edoneLoading && surface.eFramesDone()) {
+			assignEnemyFrames();
 		} 
 		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
@@ -287,10 +292,29 @@ public class GameScreen extends Screen {
 			doneLoading = true;
 		}
 	} 
+	
+	private void assignEnemyFrames() {
+		PImage[][] frames = surface.getEnemyFrames();
+		if (surface.eFramesDone()) {
+			eR = new Animation (300);
+			eL = new Animation (300);
+			for(int i = 0; i < frames.length; i++) {
+				for(int j = 0; j < frames[i].length; j++) {
+					if(i == 0) {
+						eR.addFrame(frames[i][j]);
+					} else if(i == 1) {
+						eL.addFrame(frames[i][j]);
+					}
+				}
+			}
+			c.setAnimation(eL);
+			edoneLoading = true;
+		}
+	}
 
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {
-			dash.mousePressed(p.x, p.y, surface, 2, false);
+			dash.mousePressed(p.x, p.y, surface, 2, false, false);
 		}
 	}
 	

@@ -38,14 +38,23 @@ public class Dashboard {
 		marker.image(backIcon, back.x, back.y, back.width, back.height);
 	}
 	
-	public void mousePressed(double x, double y, DrawingSurface surface, int i, boolean framesDone) {
+	public void mousePressed(double x, double y, DrawingSurface surface, int i, boolean framesDone, boolean eframesDone) {
 		if (help.contains(x, y)) {
 			helpWindow.show();
 		}
 		if (back.contains(x, y)) {
-			if (i == 1 && !framesDone) {
-				int select = JOptionPane.showConfirmDialog(null, 
-						"Are you sure? You haven't saved all of your frames. The default character will be used.", "NOTICE", JOptionPane.YES_NO_OPTION);
+			if (i == 1 && (!framesDone || !eframesDone)) {
+				int select = -1;
+				if (!framesDone) {
+					select = JOptionPane.showConfirmDialog(null, 
+							"Are you sure? You haven't saved all of your hero frames. The default hero will be used.", "NOTICE", 
+							JOptionPane.YES_NO_OPTION);
+				} 
+				if (!eframesDone) {
+					select = JOptionPane.showConfirmDialog(null, 
+							"Are you sure? You haven't saved all of your enemy frames. The default enemy will be used.", "NOTICE", 
+							JOptionPane.YES_NO_OPTION);
+				}
 				if (select == JOptionPane.YES_OPTION) {
 					surface.switchScreen(ScreenSwitcher.MENUSCREEN);
 				}
