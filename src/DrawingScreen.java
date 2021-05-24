@@ -731,7 +731,7 @@ public class DrawingScreen extends Screen {
 			if (enemyIndex == 0)
 				frames[0][0].save("EnemyMove1.png");
 			else {
-				frames[1][0].save("EnemyMove1.png");
+				frames[1][0].save("EnemyMove2.png");
 			}	
 			JOptionPane.showMessageDialog(null, "Frame successfully downloaded.");
 		}
@@ -750,7 +750,6 @@ public class DrawingScreen extends Screen {
 	
 	private void fill (int x, int y) {
 		recursionCount++;
-		//System.out.println(recursionCount);
 		if(recursionCount >= 5000) {
 			
 			return;
