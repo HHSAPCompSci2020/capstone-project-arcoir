@@ -175,8 +175,6 @@ public class DrawingScreen extends Screen {
 				allDone = true;
 			}
 		} else {
-			System.out.println("k");
-
 			if (enemies[enemyIndex] != null && enemyCheck[enemyIndex] != false) {
 				if (enemyIndex == 0) {
 					e1R.loadPixels();

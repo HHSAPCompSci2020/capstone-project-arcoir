@@ -55,6 +55,7 @@ public class MenuScreen extends Screen {
 		} else if (clicked1 && !clicked2){
 			if (clickCount == 0) {
 				surface.image(one, 0, 0);
+				surface.text("Left click anywhere to continue.", 260, 450);
 			} else if (clickCount == 1) {
 				surface.image(two, 0, 0);
 			} else if (clickCount == 2) {
