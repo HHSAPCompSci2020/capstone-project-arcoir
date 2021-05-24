@@ -751,7 +751,6 @@ public class DrawingScreen extends Screen {
 	private void fill (int x, int y) {
 		recursionCount++;
 		if(recursionCount >= 5000) {
-			
 			return;
 		}
 		if (!isEnemy) {
