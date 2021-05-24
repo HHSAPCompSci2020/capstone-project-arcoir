@@ -21,21 +21,26 @@ public class Dashboard {
 	/**
 	 * Constructs a Dashboard object.
 	 * 
-	 * @param gameOver
-	 * @param squares
-	 * @param image1
-	 * @param image2
+	 * @param gameOver Whether the game is over or not.
+	 * @param squares Whether white squares should be displayed behind the back and help icons.
+	 * @param help1 The help icon.
+	 * @param back1 The back icon.
 	 */
-	public Dashboard (boolean gameOver, boolean squares, PImage image1, PImage image2) {
+	public Dashboard (boolean gameOver, boolean squares, PImage help1, PImage back1) {
 		help = new Rectangle(760, 460, 30, 30);
 		back = new Rectangle (10, 460, 30, 30);
-		helpIcon = image1;
+		helpIcon = help1;
 		helpWindow = new Help();
-		backIcon = image2;
+		backIcon = back1;
 		over = gameOver;
 		whiteSquares = squares;
 	}	
 	
+	/**
+	 * Draws the dashboard to the screen.
+	 * 
+	 * @param marker The PApplet to draw the dashboard with.
+	 */
 	public void draw(PApplet marker) {
 		if (whiteSquares) {
 			marker.pushStyle();
@@ -52,6 +57,16 @@ public class Dashboard {
 			marker.image(backIcon, back.x, back.y, back.width, back.height);
 	}
 	
+	/**
+	 * Carries out mouse methods when the mouse is left clicked.
+	 * 
+	 * @param x coordinate of the mouse click
+	 * @param y coordinate of the mouse click
+	 * @param surface PApplet to draw with.
+	 * @param i index of the current screen.
+	 * @param framesDone whether the hero frames were done or not
+	 * @param eframesDone whether the enemy frames were done or not
+	 */
 	public void mousePressed(double x, double y, DrawingSurface surface, int i, boolean framesDone, boolean eframesDone) {
 		if (help.contains(x, y)) {
 			helpWindow.show();

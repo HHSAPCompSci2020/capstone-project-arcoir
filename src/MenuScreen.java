@@ -2,6 +2,12 @@ import processing.core.PImage;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+/**
+ * The MenuScreen class displays the initial screen when the user first runs the program. 
+ * It prompts the player to start the game and either begin the customization of their character or the game. 
+ * 
+ * @author Lindsay Qin
+ */
 public class MenuScreen extends Screen {
 	
 	private DrawingSurface surface;
@@ -12,6 +18,11 @@ public class MenuScreen extends Screen {
 	private int clickCount;
 	private Dashboard dash;
 	
+	/**
+	 * Constructs a DrawingScreen object.
+	 * 
+	 * @param surface PApplet surface that uses Processing methods.
+	 */
 	public MenuScreen (DrawingSurface surface) {
 		this.surface = surface;
 		clicked1 = false;
@@ -22,6 +33,9 @@ public class MenuScreen extends Screen {
 		play = new Rectangle (320, 330, 160, 40);
 	}
 	
+	/**
+	 * A method that runs as soon as the program starts
+	 */
 	public void setup() {
 		initial = surface.loadImage("resources/arcoir/arcoir.gif");
 		credits = surface.loadImage("resources/arcoir/arcoirCredits.gif");
@@ -33,11 +47,14 @@ public class MenuScreen extends Screen {
 		six = surface.loadImage("resources/intro/6.png");
 		seven = surface.loadImage("resources/intro/7.png");
 		
-		dash = new Dashboard(false, true, surface.loadImage("resources/dash/help/helpIcon.gif"), 
+		dash = new Dashboard(false, false, surface.loadImage("resources/dash/help/helpIcon.gif"), 
 				surface.loadImage("resources/dash/back.gif"));
 
 	}
 	
+	/**
+	 * Draws components of the menu to the screen.
+	 */
 	public void draw () {
 		if (!clicked1) {
 			surface.image(initial, 0, 0);
@@ -69,6 +86,7 @@ public class MenuScreen extends Screen {
 			} else if (clickCount == 6) {
 				surface.image(seven, 0, 0);
 			}
+			dash.draw(surface);
 		} else {
 			surface.image(credits, 0, 0);
 			
@@ -85,12 +103,28 @@ public class MenuScreen extends Screen {
 			surface.text("PLAY", play.x + 55, play.y + 27);
 			surface.popStyle();
 			
+			surface.pushStyle();
+			surface.fill(255);
+			surface.rect(760, 460, 30, 30);
+			surface.rect(10, 460, 30, 30);
+			surface.popStyle();
+			
 			dash.draw(surface);
 		}
 	}
 	
+	/**
+	 * if the left mouse button if pressed, the dashboard's mousePressed button is called
+	 * @param p The point with coordinates x and y on the screen that is clicked by the mouse 
+	 */
 	public void mousePressed(Point click) {
 		if (surface.mouseButton == surface.LEFT) {
+			dash.mousePressed(click.x, click.y, surface, 0, false, false);
+			if (new Rectangle(760, 460, 30, 30).contains(click.x, click.y)) {
+				clickCount--;
+			} else if (new Rectangle(10, 460, 30, 30).contains(click.x, click.y)) {
+				clickCount = -1;
+			}
 			if (clicked1 != true && start.contains(click.x, click.y)) {
 				clicked1 = true;
 			} else if (clicked1 && !clicked2){
@@ -98,7 +132,7 @@ public class MenuScreen extends Screen {
 				if (clickCount == 7) {
 					clicked2 = true;
 				}
-			}else {
+			} else {
 				if (customize.contains(click.x, click.y)) {
 					surface.switchScreen(ScreenSwitcher.DRAWINGSCREEN);
 				} else if (play.contains(click.x, click.y)) {
@@ -106,7 +140,6 @@ public class MenuScreen extends Screen {
 					surface.reset();
 				}
 			}
-			dash.mousePressed(click.x, click.y, surface, 0, false, false);
 			if (new Rectangle(10, 460, 30, 30).contains(click.x, click.y))
 				clicked1 = false;
 		}
