@@ -15,7 +15,7 @@ public class DrawingScreen extends Screen {
 	private ColorPalette palette;
 	private DrawingSurface surface;
 	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect, 
-	colorRect, addRect, resetRect, typeRect, pencilRect;
+	colorRect, addRect, resetRect, typeRect, pencilRect, downloadRect;
 	private Dashboard board;
 	private Color [][][] characters;
 	private Color[][] character1, character2, character3, idle;
@@ -39,6 +39,11 @@ public class DrawingScreen extends Screen {
 	private int enemyIndex, prevEnemyIndex;
 	private boolean [] enemyCheck;
 
+	/**
+	 * Constructs a DrawingScreen object.
+	 * 
+	 * @param surface PApplet surface that uses Processing methods.
+	 */
 	public DrawingScreen(DrawingSurface surface) {
 		this.surface = surface;
 		isEnemy = false;
@@ -61,9 +66,10 @@ public class DrawingScreen extends Screen {
 		resetRect = new Rectangle(710, 90, 40, 40);
 		pencilRect = new Rectangle (755, 90, 40, 40);
 		
-		typeRect = new Rectangle (710, 136, 80, 30);
-		frameSelect = new Rectangle (710, 172, 80, 30);
-		colorRect = new Rectangle (710, 209, 80, 30);
+		typeRect = new Rectangle (710, 136, 85, 30);
+		frameSelect = new Rectangle (710, 172, 85, 30);
+		colorRect = new Rectangle (710, 209, 85, 30);
+		downloadRect = new Rectangle (660, 247, 134, 41);
 		
 		move1 = false;
 		move2 = false;
@@ -360,6 +366,7 @@ public class DrawingScreen extends Screen {
 		surface.strokeWeight(2);
 		surface.rect(frameSelect.x, frameSelect.y, frameSelect.width, frameSelect.height);
 		surface.rect(typeRect.x,  typeRect.y,  typeRect.width,  typeRect.height);
+		surface.rect(downloadRect.x, downloadRect.y, downloadRect.width, downloadRect.height);
 		surface.popStyle();
 		
 		surface.pushStyle();
@@ -368,11 +375,13 @@ public class DrawingScreen extends Screen {
 		surface.textLeading(13);
 		surface.textAlign(PConstants.CENTER, PConstants.CENTER);
 		if (!isEnemy)
-			surface.text("Current Frame: \n" + currentFrame, frameSelect.x + 42, frameSelect.y + 12);
+			surface.text("Current Frame: \n" + currentFrame, frameSelect.x + 45, frameSelect.y + 12);
 		else {
-			surface.text("Current Frame: \n" + currentEnemyFrame, frameSelect.x + 42, frameSelect.y + 12);
+			surface.text("Current Frame: \n" + currentEnemyFrame, frameSelect.x + 45, frameSelect.y + 12);
 		}
-		surface.text(type, typeRect.x + 40, typeRect.y + 13);
+		surface.text(type, typeRect.x + 44, typeRect.y + 13);
+		surface.textSize(15);
+		surface.text("Download Image", downloadRect.x + 68, downloadRect.y + 15);
 		surface.popStyle();
 		
 		surface.pushStyle();
@@ -705,6 +714,26 @@ public class DrawingScreen extends Screen {
 		}
 	}
 	
+	public void downloadImage() {
+		if (!isEnemy) {
+			PImage [][] frames = getFrames();
+			if (index == 3) {
+				frames[1][0].save("HeroIdle.png");
+			} else {
+				frames[0][index].save("HeroMove" + index + ".png");
+			}
+			JOptionPane.showMessageDialog(null, "Frame successfully downloaded.");
+		} else {
+			PImage [][] frames = getEnemyFrames();
+			if (enemyIndex == 0)
+				frames[0][0].save("EnemyMove1.png");
+			else {
+				frames[1][0].save("EnemyMove1.png");
+			}	
+			JOptionPane.showMessageDialog(null, "Frame successfully downloaded.");
+		}
+	}
+	
 	/**
 	 * Resets the frame to its default state.
 	 */
@@ -812,6 +841,10 @@ public class DrawingScreen extends Screen {
 				} else {
 					type = "Hero";
 				}
+			}
+			
+			if (downloadRect.contains(click.x, click.y)) {
+				downloadImage();
 			}
 			
 			board.mousePressed(click.x, click.y, surface, 1, framesDone(), eframesDone());
