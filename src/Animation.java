@@ -5,7 +5,7 @@ import processing.core.PImage;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-/**
+/**A class that keeps an ArrayList of PImages to display as an animation
  * 
  * @author Lead: Nicole Spaulding
  *
@@ -13,41 +13,50 @@ import java.util.ArrayList;
 public class Animation {
 	//FIELDS
 	
-	//list of all frames
+	
 	private List<PImage> frames;	
-	//what frame is currently displayed
 	private int frameIndex = 0;			
-	//specified time between frames
 	private int deltaTime = 0;			
-	//system time after the last frame update
 	private long previousTime;			
 	
 	
-	//CONSTRUCTOR, takes in specified time between frames
+	//CONSTRUCTOR
 	
-	
+	/**Creates a new instance of Animation by taking in the specified time in milliseconds 
+	 * 
+	 * @param deltaTime
+	 */
 	public Animation(int deltaTime) {		
 		this.deltaTime = deltaTime;
 		frames = new ArrayList<PImage>();
 	}
-
-	//***********PUBLIC METHODS***************
-
+	
+	/**Updates the animation's frames
+	 * 
+	 */
 	public void update() {	
 		if(System.currentTimeMillis() - previousTime > deltaTime) {									
-			frameIndex++;						//updates animation to next frame 
-			if(frameIndex >= frames.size()) {	//restarts animation at end
+			frameIndex++;						
+			if(frameIndex >= frames.size()) {	
 				frameIndex = 0;
 			}
 			previousTime = System.currentTimeMillis();
 		}
 	}
 
+	/**adds a specified frame to the animation by appending it to the end
+	 * 
+	 * @param newFrame
+	 */
 	public void addFrame(PImage newFrame) {
-		frames.add(newFrame);				//adds specified frames to the animation
+		frames.add(newFrame);				
 	}
 
-	public PImage getFrame() {		//returns current frame's index in list
+	/**returns the current frame, if the animation is empty, returns null
+	 * 
+	 * @return PImage of the current frame, null if empty
+	 */
+	public PImage getFrame() {		//
 		if (frames.size() > 0) {
 			return frames.get(frameIndex);
 		}

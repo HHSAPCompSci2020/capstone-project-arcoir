@@ -8,7 +8,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 // modfied from Mr. Shelby's SecondScreen class
-/**
+/**A screen that displays all the components used to run the game. 
+ * This class was adapted from Mr. Shelby's SecondScreen class from the ProcessingScreenSwitching Demo
  * 
  * @author Lead: Nicole Spaulding, everyone worked on this class
  *
