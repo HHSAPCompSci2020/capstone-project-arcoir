@@ -154,7 +154,7 @@ public class GameScreen extends Screen {
 		if (!edoneLoading && surface.eFramesDone()) {
 			assignEnemyFrames();
 		} 
-		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
+		
 		
 		surface.pushStyle();
 		
@@ -361,7 +361,7 @@ public class GameScreen extends Screen {
 		}
 	}
 	/**if the left mouse button if pressed, the dashboard's mousePressed button is called
-	 * 
+	 * @param p The point with coordinates x and y on the screen that is clicked by the mouse 
 	 */
 	public void mousePressed(Point p) {
 		if (surface.mouseButton == surface.LEFT) {

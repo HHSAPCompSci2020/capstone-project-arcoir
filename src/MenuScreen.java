@@ -2,6 +2,12 @@ import processing.core.PImage;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+/**
+ * The MenuScreen class displays the initial screen when the user first runs the program. 
+ * It prompts the player to start the game and either begin the customization of their character or the game. 
+ * 
+ * @author Lindsay Qin
+ */
 public class MenuScreen extends Screen {
 	
 	private DrawingSurface surface;
@@ -12,6 +18,11 @@ public class MenuScreen extends Screen {
 	private int clickCount;
 	private Dashboard dash;
 	
+	/**
+	 * Constructs a DrawingScreen object.
+	 * 
+	 * @param surface PApplet surface that uses Processing methods.
+	 */
 	public MenuScreen (DrawingSurface surface) {
 		this.surface = surface;
 		clicked1 = false;
@@ -22,6 +33,9 @@ public class MenuScreen extends Screen {
 		play = new Rectangle (320, 330, 160, 40);
 	}
 	
+	/**
+	 * A method that runs as soon as the program starts
+	 */
 	public void setup() {
 		initial = surface.loadImage("resources/arcoir/arcoir.gif");
 		credits = surface.loadImage("resources/arcoir/arcoirCredits.gif");
@@ -38,6 +52,9 @@ public class MenuScreen extends Screen {
 
 	}
 	
+	/**
+	 * Draws components of the menu to the screen.
+	 */
 	public void draw () {
 		if (!clicked1) {
 			surface.image(initial, 0, 0);
@@ -96,6 +113,10 @@ public class MenuScreen extends Screen {
 		}
 	}
 	
+	/**
+	 * if the left mouse button if pressed, the dashboard's mousePressed button is called
+	 * @param p The point with coordinates x and y on the screen that is clicked by the mouse 
+	 */
 	public void mousePressed(Point click) {
 		if (surface.mouseButton == surface.LEFT) {
 			dash.mousePressed(click.x, click.y, surface, 0, false, false);
