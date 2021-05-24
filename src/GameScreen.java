@@ -234,7 +234,7 @@ public class GameScreen extends Screen {
 			}
 		}
 		
-		if(!c.getLiveState()) {
+		if((int)c.getLives() == 0) {
 			surface.switchScreen(3);
 			reset();
 		}
