@@ -721,7 +721,7 @@ public class DrawingScreen extends Screen {
 	
 	private void fill (int x, int y) {
 		recursionCount++;
-		System.out.println(recursionCount);
+		//System.out.println(recursionCount);
 		if(recursionCount >= 5000) {
 			
 			return;
