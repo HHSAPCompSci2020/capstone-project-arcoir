@@ -6,13 +6,24 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
+/**
+ * The Help class creates a help window that gives instructions on how to use the program.
+ * 
+ * @author lindsayqin
+ */
 public class Help {
 	private JFrame helpWindow;
 	
+	/**
+	 * Creates a JFrame called "Help".
+	 */
 	public Help () {
 		helpWindow = new JFrame("Help");
 	}
 	
+	/**
+	 * Displays the help window.
+	 */
 	public void show() {
 		helpWindow.setSize(500,500);
 		helpWindow.setResizable(false);

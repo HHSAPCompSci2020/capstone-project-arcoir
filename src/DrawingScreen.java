@@ -228,8 +228,13 @@ public class DrawingScreen extends Screen {
 		}
 	}
 	
-	//reflects the frame over a vertical axis
-	private PImage reflect (Color [][] copy) {
+	/**
+	 * Reflects the current frame over the middle vertical axis and returns it as a PImage.
+	 * 
+	 * @param copy the frame to be reflected
+	 * @return the frame reflected over the vertical axis as a new PImage.
+	 */
+	public PImage reflect (Color [][] copy) {
 		PImage reflected;
 		if (!isEnemy) {
 			Color [][] reflect = new Color [128][128];
@@ -295,7 +300,7 @@ public class DrawingScreen extends Screen {
 	}
 	/**
 	 * 
-	 * @return the hero frames.
+	 * @return the hero's frames.
 	 */
 	public PImage[][] getFrames() {
 		PImage [][] frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, 
@@ -305,7 +310,7 @@ public class DrawingScreen extends Screen {
 	
 	/**
 	 * 
-	 * @return the enemy frames.
+	 * @return the enemy's frames.
 	 */
 	public PImage [][] getEnemyFrames() {
 		PImage [][] frames = new PImage [][] {{e1R, e2R}, {e1L, e2L}};
@@ -489,6 +494,7 @@ public class DrawingScreen extends Screen {
 		} 
 	}
 	
+	//determines whether a string has numbers in it
 	private boolean isNumeric(String str)
 	{
 	    for (int i = 0; i < str.length(); i++)
@@ -498,6 +504,7 @@ public class DrawingScreen extends Screen {
 	    }
 	    return true;
 	}
+	
 	/**
 	 * (Graphical UI)
 	 * Draws the grid on a PApplet.
@@ -699,7 +706,7 @@ public class DrawingScreen extends Screen {
 	}
 
 	/**
-	 * Fills an object beginning at x,y.
+	 * Fills an object beginning at x,y. If the area to be filled is too big, only a section is filled.
 	 * 
 	 * @param x The x coordinate of the beginning of the paint can fill.
 	 * @param y The y coordinate of the beginning of the paint can fill.
@@ -792,7 +799,7 @@ public class DrawingScreen extends Screen {
 	}
 
 	/**
-	 * Carries out certain methods when the mouse is left clicked.
+	 * Executes certain methods when the mouse is left clicked.
 	 */
 	public void mousePressed(Point click) {
 		if (surface.mouseButton == surface.LEFT) {
@@ -871,7 +878,7 @@ public class DrawingScreen extends Screen {
 	}
 
 	/**
-	 * Carries out certain methods when the mouse is left dragged.
+	 * Executes certain methods when the mouse is left dragged.
 	 */
 	public void mouseDragged(Point click) {
 		if (surface.mouseButton == surface.LEFT) {
