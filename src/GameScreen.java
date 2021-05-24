@@ -47,8 +47,8 @@ public class GameScreen extends Screen {
 		
 		g = new ArrayList<Ground>();
 		g.add(new Ground(new Rectangle(-1000, 450, 7000, 20)));
-		for(int i = 0; i < 6; i++) {
-			g.add(new Ground(new Rectangle(i*300+20, 410, 40, 40)));
+		for(int i = 0; i < 16; i++) {
+			g.add(new Ground(new Rectangle(i*500-1000, 410, 40, 40)));
 		}
 		score = 0;
 		level = 1;
