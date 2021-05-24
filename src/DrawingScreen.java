@@ -723,7 +723,6 @@ public class DrawingScreen extends Screen {
 		recursionCount++;
 		//System.out.println(recursionCount);
 		if(recursionCount >= 5000) {
-			
 			return;
 		}
 		if (!isEnemy) {

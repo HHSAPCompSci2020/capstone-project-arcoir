@@ -28,7 +28,10 @@ public class GameScreen extends Screen {
 	private int displayCount;
 	private ArrayList<PImage> artifacts, backgrounds;
 	
-	// Constructor
+	/** Creates a new instance of a GameScreen with a PApplet object
+	 * 
+	 * @param surface
+	 */
 	public GameScreen(DrawingSurface surface) {
 		isRight = true;
 		this.surface = surface;
@@ -59,6 +62,10 @@ public class GameScreen extends Screen {
 	}
 
 	// Methods
+	
+	/**A method that runs as soon as the program starts, 
+	 * 
+	 */
 	public void setup() {
 		
 		loadCAnims();
@@ -168,7 +175,7 @@ public class GameScreen extends Screen {
 			
 			if(displayCount == 10 && level < 8 && level != 0) {
 				background.setImage(backgrounds.get(level - 2));
-				System.out.println(level - 2);
+				//System.out.println(level - 2);
 			}
 			
 			if(displayCount > 0) {
@@ -235,7 +242,7 @@ public class GameScreen extends Screen {
 			
 			if(c.intersects(enm)) {
 				enm.attack(c);
-				System.out.println(c.getLiveState());
+		//		System.out.println(c.getLiveState());
 			}
 			
 			enm.act(g);
