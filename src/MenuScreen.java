@@ -33,7 +33,7 @@ public class MenuScreen extends Screen {
 		six = surface.loadImage("resources/intro/6.png");
 		seven = surface.loadImage("resources/intro/7.png");
 		
-		dash = new Dashboard(false, true, surface.loadImage("resources/dash/help/helpIcon.gif"), 
+		dash = new Dashboard(false, false, surface.loadImage("resources/dash/help/helpIcon.gif"), 
 				surface.loadImage("resources/dash/back.gif"));
 
 	}
@@ -69,6 +69,7 @@ public class MenuScreen extends Screen {
 			} else if (clickCount == 6) {
 				surface.image(seven, 0, 0);
 			}
+			dash.draw(surface);
 		} else {
 			surface.image(credits, 0, 0);
 			
@@ -85,12 +86,24 @@ public class MenuScreen extends Screen {
 			surface.text("PLAY", play.x + 55, play.y + 27);
 			surface.popStyle();
 			
+			surface.pushStyle();
+			surface.fill(255);
+			surface.rect(760, 460, 30, 30);
+			surface.rect(10, 460, 30, 30);
+			surface.popStyle();
+			
 			dash.draw(surface);
 		}
 	}
 	
 	public void mousePressed(Point click) {
 		if (surface.mouseButton == surface.LEFT) {
+			dash.mousePressed(click.x, click.y, surface, 0, false, false);
+			if (new Rectangle(760, 460, 30, 30).contains(click.x, click.y)) {
+				clickCount--;
+			} else if (new Rectangle(10, 460, 30, 30).contains(click.x, click.y)) {
+				clickCount = -1;
+			}
 			if (clicked1 != true && start.contains(click.x, click.y)) {
 				clicked1 = true;
 			} else if (clicked1 && !clicked2){
@@ -98,7 +111,7 @@ public class MenuScreen extends Screen {
 				if (clickCount == 7) {
 					clicked2 = true;
 				}
-			}else {
+			} else {
 				if (customize.contains(click.x, click.y)) {
 					surface.switchScreen(ScreenSwitcher.DRAWINGSCREEN);
 				} else if (play.contains(click.x, click.y)) {
@@ -106,7 +119,6 @@ public class MenuScreen extends Screen {
 					surface.reset();
 				}
 			}
-			dash.mousePressed(click.x, click.y, surface, 0, false, false);
 			if (new Rectangle(10, 460, 30, 30).contains(click.x, click.y))
 				clicked1 = false;
 		}
