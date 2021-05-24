@@ -238,7 +238,7 @@ public class DrawingScreen extends Screen {
 					i++;
 				}
 			}
-		}else {
+		} else {
 			Color [][] reflect = new Color [64][64];
 			for (int r = 0; r < 64; r++) {
 				for (int c = 0; c < 64; c++) {
@@ -282,7 +282,7 @@ public class DrawingScreen extends Screen {
 	}
 	/**
 	 * 
-	 * @return the animation frames.
+	 * @return the hero frames.
 	 */
 	public PImage[][] getFrames() {
 		PImage [][] frames = new PImage[][] {{frame1R, frame2R, frame3R, frame4R}, {idleR}, 
@@ -290,6 +290,10 @@ public class DrawingScreen extends Screen {
 		return frames;
 	}
 	
+	/**
+	 * 
+	 * @return the enemy frames.
+	 */
 	public PImage [][] getEnemyFrames() {
 		PImage [][] frames = new PImage [][] {{e1R, e2R}, {e1L, e2L}};
 		return frames;
@@ -297,19 +301,23 @@ public class DrawingScreen extends Screen {
 	
 	/**
 	 * 
-	 * @return whether all frames have been saved or not
+	 * @return whether all hero frames have been saved or not
 	 */
 	public boolean framesDone() {
 		return allDone;
 	}
 	
+	/**
+	 * 
+	 * @return whether all enemy frames have been saved or not
+	 */
 	public boolean eframesDone() {
 		return eallDone;
 	}
 	
 	public void setup () {
 		board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+				false, false, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
 		saveIcon = surface.loadImage("resources/drawingIcons/save.gif");
 		refreshIcon = surface.loadImage("resources/drawingIcons/refresh.gif");

@@ -18,7 +18,7 @@ public class GameOverScreen extends Screen {
 	public void setup() {
 		gameOver = surface.loadImage("resources/arcoir/gameOver.gif");		
 		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+				true, true, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 
 	}
 	
@@ -35,6 +35,8 @@ public class GameOverScreen extends Screen {
 		surface.textSize(20);
 		surface.text("RETURN TO MENU", menu.x + 12, menu.y + 27);
 		surface.popStyle();
+		
+		dash.draw(surface);
 	}
 	
 	public void mousePressed(Point click) {

@@ -23,7 +23,7 @@ public class MenuScreen extends Screen {
 		credits = surface.loadImage("resources/arcoir/arcoirCredits.gif");
 		
 		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+				false, true, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 
 	}
 	
@@ -57,12 +57,7 @@ public class MenuScreen extends Screen {
 			surface.text("PLAY", play.x + 55, play.y + 27);
 			surface.popStyle();
 			
-			surface.pushStyle();
-			surface.fill(255);
-			surface.rect(760, 460, 30, 30);
-			surface.rect(10, 460, 30, 30);
 			dash.draw(surface);
-			surface.popStyle();
 		}
 	}
 	

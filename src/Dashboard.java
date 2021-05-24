@@ -15,6 +15,7 @@ public class Dashboard {
 	private Rectangle help, back; 
 	private Help helpWindow;
 	private PImage helpIcon, backIcon;
+	private boolean whiteSquares, over;
 	
 	// Constructor
 	/**
@@ -24,25 +25,37 @@ public class Dashboard {
 	 * @param width of dashboard
 	 * @param height of dashboard
 	 */
-	public Dashboard (int x, int y, int width, int height, PImage image1, PImage image2) {
+	public Dashboard (int x, int y, int width, int height, boolean gameOver, boolean squares, PImage image1, PImage image2) {
 		help = new Rectangle(760, 460, 30, 30);
 		back = new Rectangle (10, 460, 30, 30);
 		helpIcon = image1;
 		helpWindow = new Help();
 		backIcon = image2;
+		over = gameOver;
+		whiteSquares = squares;
 	}	
 	
 	public void draw(PApplet marker) {
-		//load images
+		if (whiteSquares) {
+			marker.pushStyle();
+			marker.fill(255);
+			marker.rect(760, 460, 30, 30);
+			if (!over)
+				marker.rect(10, 460, 30, 30);
+			marker.popStyle();
+		}
+		
+		//show images
 		marker.image(helpIcon, help.x, help.y, help.width, help.height);
-		marker.image(backIcon, back.x, back.y, back.width, back.height);
+		if (!over)
+			marker.image(backIcon, back.x, back.y, back.width, back.height);
 	}
 	
 	public void mousePressed(double x, double y, DrawingSurface surface, int i, boolean framesDone, boolean eframesDone) {
 		if (help.contains(x, y)) {
 			helpWindow.show();
 		}
-		if (back.contains(x, y)) {
+		if (back.contains(x, y) && !over) {
 			if (i == 1 && (!framesDone || !eframesDone)) {
 				int select = -1;
 				if (!framesDone) {

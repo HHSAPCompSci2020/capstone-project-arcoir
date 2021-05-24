@@ -25,7 +25,6 @@ public class GameScreen extends Screen {
 	private Scrollable background;
 	private int level;
 	private int score;
-	private int t;
 	private boolean doneLoading, edoneLoading;
 	private boolean leveledUp;
 	private int displayCount;
@@ -52,9 +51,7 @@ public class GameScreen extends Screen {
 
 		score = 0;
 		level = 1;
-		
-		t = 0;
-		
+				
 		doneLoading = false;
 		edoneLoading = false;
 		
@@ -80,7 +77,7 @@ public class GameScreen extends Screen {
 		spawnEnemy();
 		
 		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+				false, true, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 	}
 
 	private void loadCAnims() {
@@ -134,11 +131,7 @@ public class GameScreen extends Screen {
 		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
 		surface.pushStyle();
-
-//		while (bg.width != this.surface.width || bg.height != this.surface.height)
-//			bg.resize(this.surface.width, this.surface.height);
-		//surface.background(bg); // Clear the screen with a white background
-	//	background.setImage(bg);
+		
 		background.draw(surface);
 		surface.stroke(0); // Set line drawing color to white
 		surface.noFill();
