@@ -129,6 +129,11 @@ public class GameScreen extends Screen {
 		} 
 		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
 		
+		if(!c.getLiveState()) {
+			surface.switchScreen(3);
+			reset();
+		}
+		
 		surface.pushStyle();
 		
 		background.draw(surface);
@@ -238,6 +243,7 @@ public class GameScreen extends Screen {
 			surface.switchScreen(3);
 			reset();
 		}
+		
 		
 		background.update();
 		
