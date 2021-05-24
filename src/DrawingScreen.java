@@ -6,12 +6,11 @@ import processing.core.PImage;
 import processing.core.PConstants;
 
 /**
+ * The DrawingScreen class encompasses all of the functions the user needs to draw and customize Entities. 
  * 
  * @author lindsayqin
- *
  */
 public class DrawingScreen extends Screen {
-//need to fix UI, input RGB, frames show up
 	private ColorPalette palette;
 	private DrawingSurface surface;
 	private Rectangle paletteRect, paintCanRect, saveRect, frameSelect, refreshRect, 
@@ -229,6 +228,7 @@ public class DrawingScreen extends Screen {
 		}
 	}
 	
+	//reflects the frame over a vertical axis
 	private PImage reflect (Color [][] copy) {
 		PImage reflected;
 		if (!isEnemy) {
@@ -328,6 +328,9 @@ public class DrawingScreen extends Screen {
 		return eallDone;
 	}
 	
+	/**
+	 * Sets up the DrawingScreen.
+	 */
 	public void setup () {
 		board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
 				false, false, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
@@ -341,6 +344,9 @@ public class DrawingScreen extends Screen {
 
 	}
 
+	/**
+	 * Draws the DrawingScreen components.
+	 */
 	public void draw () {
 		int gridSide = 500;
 
@@ -483,7 +489,7 @@ public class DrawingScreen extends Screen {
 		} 
 	}
 	
-	public boolean isNumeric(String str)
+	private boolean isNumeric(String str)
 	{
 	    for (int i = 0; i < str.length(); i++)
 	    {
@@ -717,6 +723,9 @@ public class DrawingScreen extends Screen {
 		}
 	}
 	
+	/**
+	 * Downloads the current frame as a png.
+	 */
 	public void downloadImage() {
 		if (!isEnemy) {
 			PImage [][] frames = getFrames();
@@ -782,6 +791,9 @@ public class DrawingScreen extends Screen {
 		}
 	}
 
+	/**
+	 * Carries out certain methods when the mouse is left clicked.
+	 */
 	public void mousePressed(Point click) {
 		if (surface.mouseButton == surface.LEFT) {
 			Point coord = clickToIndex(click, 150, 0, 500, 500);
@@ -858,6 +870,9 @@ public class DrawingScreen extends Screen {
 		} 
 	}
 
+	/**
+	 * Carries out certain methods when the mouse is left dragged.
+	 */
 	public void mouseDragged(Point click) {
 		if (surface.mouseButton == surface.LEFT) {
 			Point coord = clickToIndex(click, 150, 0, 500, 500);

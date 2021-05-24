@@ -3,6 +3,11 @@ import java.awt.Rectangle;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * 
+ * @author Emily Zhang
+ *
+ */
 public class Ground {
 	
 	// Fields
