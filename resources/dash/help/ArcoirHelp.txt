@@ -1,32 +1,41 @@
-﻿Starting Screen
-Left click START to begin the game.
+﻿HELP
 
-Main Menu
+Left click START to begin.
+
+Left click through the storyline to get to the Main menu!
+
+Main Menu:
 Left click CUSTOMIZE to customize characters and enemies.
 Left click PLAY to begin playing the game.
 
-
-Help
+Help:
 Left click the question mark at the bottom right of the screen to get help.
 
-Back
+Back:
 Left click the arrow at the bottom left of the screen to go back to the previous screen.
 
-
-Drawing Screen
+Drawing Screen:
 Left click the colors to select a color. Click the grid to customize your character. 
-Left click the paint can to use the paint can tool. Right click again to turn it off. 
-Left click the save icon to save your edits.
-Left click the refresh icon to reset the frame.
-Left click the "Current Frame" button to move between frames.
-Left click the save icon, and then the "Download Frames" button to download the current frame as a png.  
+Left click the paint bucket icon to fill in a larger area with a single click.
+Left click the save icon to save your customized character.
+Left click the palette with the plus icon to enter a rgb value to choose a specific color. 
+Left click the refresh arrow icon to clear the drawing page. 
+Left click the palette with the refresh icon to reset the color back to default. 
+Left click the pencil to change the stroke width.
+Left click HERO to switch to customizing enemies. Left click ENEMY to switch to customizing the character you will be playing as. 
+Left click DOWNLOAD IMAGE to download your customized character as a jpg or png. This can only be done if the current frame is saved first.
 
-Gameplay Controls
-Press the space bar to kill enemies.
+Gameplay: 
+Description: A game similar to Mario in which the player remains in the center of the screen and the camera pans to keep it that way. Unlike Mario though, leveling up happens by defeating enemies, but if enemies get too close, the character will lose a life! Everytime a level is reached, a new color will be collected. 
+
+Controls:
+Press the spacebar to attack.
+Press the up arrow to jump.
 Press the right arrow to move right.
 Press the left arrow to move left.
-Press the up arrow to jump up.
-Go through coins to collect coins. 
-To avoid monsters, simply jump over them. 
+To avoid monsters, simply jump over them. To kill monsters, press space once the monster comes into range. 
 
-This is a side-view platformer game. The game will scroll as the player moves.
+Left click RETURN TO MENU to return to the menu.
+
+This is a side-view game. The game scrolls as the player moves. 
+
