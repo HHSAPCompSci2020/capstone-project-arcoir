@@ -1,11 +1,9 @@
 package game;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 import dashboard.Dashboard;
