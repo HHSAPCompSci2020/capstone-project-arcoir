@@ -36,7 +36,7 @@ public class GameScreen extends Screen {
 	
 	/** Creates a new instance of a GameScreen with a PApplet object
 	 * 
-	 * @param surface
+	 * @param surface PApplet to draw
 	 */
 	public GameScreen(DrawingSurface surface) {
 		isRight = true;
