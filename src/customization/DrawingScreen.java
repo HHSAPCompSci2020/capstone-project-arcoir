@@ -517,8 +517,7 @@ public class DrawingScreen extends Screen {
 	 * 
 	 * @param x The x pixel coordinate of the upper left corner of the grid drawing. 
 	 * @param y The y pixel coordinate of the upper left corner of the grid drawing.
-	 * @param width The pixel width of the grid drawing.
-	 * @param height The pixel height of the grid drawing.
+	 * @param side The width of the square to draw the grid on.
 	 */
 	public void drawGrid(float x, float y, float side) {
 		if (!isEnemy) {
@@ -570,8 +569,7 @@ public class DrawingScreen extends Screen {
 	 * 
 	 * @param x The x pixel coordinate of the upper left corner of the grid drawing. 
 	 * @param y The y pixel coordinate of the upper left corner of the grid drawing.
-	 * @param width The pixel width of the grid drawing.
-	 * @param height The pixel height of the grid drawing.
+	 * @param side The width of the square to draw the grid on.
 	 */
 	public void drawBackground(float x, float y, float side) {
 		if (!isEnemy) {

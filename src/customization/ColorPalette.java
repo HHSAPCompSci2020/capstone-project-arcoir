@@ -148,8 +148,6 @@ public class ColorPalette {
 	 * @param p A Point object containing a graphical pixel coordinate.
 	 * @param x The x pixel coordinate of the upper left corner of the grid drawing. 
 	 * @param y The y pixel coordinate of the upper left corner of the grid drawing.
-	 * @param width The pixel width of the grid drawing.
-	 * @param height The pixel height of the grid drawing.
 	 * @return A Point object representing a coordinate within the game of life grid.
 	 */
 	public int clickToIndex(Point p, float x, float y) {

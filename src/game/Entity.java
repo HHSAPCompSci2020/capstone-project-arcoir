@@ -367,7 +367,7 @@ public class Entity {
 	
 	/**sets the height of this entity's hitbox to the specified width
 	 * 
-	 * @param w the specified height
+	 * @param h the specified height
 	 */
 	public void setHeight(int h) {
 		hitBox = new Rectangle((int)getX(), (int)getY(), getWidth(), h);

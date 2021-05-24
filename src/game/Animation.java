@@ -25,7 +25,7 @@ public class Animation {
 	
 	/**Creates a new instance of Animation by taking in the specified time in milliseconds 
 	 * 
-	 * @param deltaTime
+	 * @param deltaTime the delta time of the Animation.
 	 */
 	public Animation(int deltaTime) {		
 		this.deltaTime = deltaTime;
@@ -47,7 +47,7 @@ public class Animation {
 
 	/**adds a specified frame to the animation by appending it to the end
 	 * 
-	 * @param newFrame
+	 * @param newFrame The new frame to be added.
 	 */
 	public void addFrame(PImage newFrame) {
 		frames.add(newFrame);				

@@ -45,7 +45,7 @@ public abstract class Screen {
 	/**
 	 * Executes code when the mouse is pressed.
 	 * 
-	 * @param The coordinates of the mouse press.
+	 * @param p The coordinates of the mouse press.
 	 */
 	public void mousePressed(Point p) {
 		
