@@ -38,6 +38,7 @@ public class DrawingScreen extends Screen {
 	private String currentEnemyFrame;
 	private int enemyIndex, prevEnemyIndex;
 	private boolean [] enemyCheck;
+	private int recursionCount;
 
 	public DrawingScreen(DrawingSurface surface) {
 		this.surface = surface;
@@ -88,6 +89,7 @@ public class DrawingScreen extends Screen {
 		prevEnemyIndex = 0;
 		currentEnemyFrame = "Move 1";
 		enemyCheck = new boolean [2];
+		recursionCount = 0;
 	}
 
 	/**
@@ -689,6 +691,7 @@ public class DrawingScreen extends Screen {
 	 */
 	public void paintCanFill(int x, int y) {
 		fill(x, y);
+		recursionCount = 0;
 	}
 	
 	/**
@@ -717,6 +720,12 @@ public class DrawingScreen extends Screen {
 	}
 	
 	private void fill (int x, int y) {
+		recursionCount++;
+		System.out.println(recursionCount);
+		if(recursionCount >= 5000) {
+			
+			return;
+		}
 		if (!isEnemy) {
 			if (x < 0 || x >= 128 || y < 0 || y >= 128) {
 				//do nothing
