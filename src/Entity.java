@@ -133,7 +133,8 @@ public class Entity {
 	
 	public void draw(PApplet g) {
 		animation.update();
-		g.image(animation.getFrame(), (float)(x), (float)(y + imgShiftY));
+		//g.rect((int)x, (int)y, getWidth(), getHeight());
+		g.image(animation.getFrame(), (float)(x + imgShiftX), (float)(y + imgShiftY));
 
 	}
 	
