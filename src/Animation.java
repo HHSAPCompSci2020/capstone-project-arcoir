@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 /**
  * 
- * @author Nicole Spaulding
+ * @author Lead: Nicole Spaulding
  *
  */
 public class Animation {
