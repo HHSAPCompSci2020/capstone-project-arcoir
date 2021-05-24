@@ -154,7 +154,7 @@ public class GameScreen extends Screen {
 		if (!edoneLoading && surface.eFramesDone()) {
 			assignEnemyFrames();
 		} 
-		c.windowBoundary(this.DRAWING_WIDTH, this.DRAWING_HEIGHT);
+		
 		
 		surface.pushStyle();
 		
