@@ -144,7 +144,7 @@ public class GameScreen extends Screen {
 
 		surface.fill(0);
 		surface.text("Move: Arrow keys", 10, 30);
-		surface.text("Menu: Space", 10, 50);
+		surface.text("Attack: Space", 10, 50);
 		
 		surface.text("Score: " + score, 700, 30);
 		surface.text("Level: " + level, 700, 50);
@@ -251,6 +251,10 @@ public class GameScreen extends Screen {
 		isRight = true;
 		level = 0;
 		score = 0;
+		leveledUp = false;
+		displayCount = 0;
+		
+		background.setImage(bg);
 		
 		enemies = new ArrayList<Entity>();
 		enemy = new Entity(eL, "ENEMY", 1, 600, 100);
@@ -333,10 +337,6 @@ public class GameScreen extends Screen {
 				enemies.remove(i);
 				i--;
 			}
-						
-//			if(enemies.size() == 0) {
-//				spawnEnemy();
-//			}
 		}
 	}
 	

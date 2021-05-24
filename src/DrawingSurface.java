@@ -60,6 +60,10 @@ public float ratioX, ratioY;
 		popMatrix();
 	}
 	
+	public void reset() {
+		((GameScreen)(screens.get(2))).reset();
+	}
+	
 	public PImage[][] getFrames() {
 		PImage[][] frames = ((DrawingScreen)(screens.get(1))).getFrames();
 		return frames;
