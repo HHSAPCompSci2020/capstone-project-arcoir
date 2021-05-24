@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 
 /**
+ * The Dashboard class displays the help button and back button on the screen.
  * 
  * @author lindsayqin
- *
  */
 public class Dashboard {
 
@@ -19,13 +19,14 @@ public class Dashboard {
 	
 	// Constructor
 	/**
+	 * Constructs a Dashboard object.
 	 * 
-	 * @param x coordinate of top left corner of dashboard
-	 * @param y coordinate of top left corner of dashboard
-	 * @param width of dashboard
-	 * @param height of dashboard
+	 * @param gameOver
+	 * @param squares
+	 * @param image1
+	 * @param image2
 	 */
-	public Dashboard (int x, int y, int width, int height, boolean gameOver, boolean squares, PImage image1, PImage image2) {
+	public Dashboard (boolean gameOver, boolean squares, PImage image1, PImage image2) {
 		help = new Rectangle(760, 460, 30, 30);
 		back = new Rectangle (10, 460, 30, 30);
 		helpIcon = image1;

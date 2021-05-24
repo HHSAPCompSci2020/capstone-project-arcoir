@@ -337,8 +337,7 @@ public class DrawingScreen extends Screen {
 	 * Sets up the DrawingScreen.
 	 */
 	public void setup () {
-		board = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				false, false, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
+		board = new Dashboard(false, false, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 		paintCanIcon = surface.loadImage("resources/drawingIcons/paintcan.gif");
 		saveIcon = surface.loadImage("resources/drawingIcons/save.gif");
 		refreshIcon = surface.loadImage("resources/drawingIcons/refresh.gif");

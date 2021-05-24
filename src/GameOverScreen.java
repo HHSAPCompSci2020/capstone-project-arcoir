@@ -17,9 +17,7 @@ public class GameOverScreen extends Screen {
 	
 	public void setup() {
 		gameOver = surface.loadImage("resources/arcoir/gameOver.gif");		
-		dash = new Dashboard(DRAWING_WIDTH * 2/3, DRAWING_HEIGHT - DRAWING_WIDTH/20 - 20, DRAWING_WIDTH, DRAWING_HEIGHT, 
-				true, true, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
-
+		dash = new Dashboard(true, true, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 	}
 	
 	public void draw () {
