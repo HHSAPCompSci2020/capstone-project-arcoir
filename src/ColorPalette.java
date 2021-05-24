@@ -4,8 +4,10 @@ import java.awt.Rectangle;
 import processing.core.PApplet;
 
 /**
+ * The ColorPalette class creates twenty four default colors. It displays each color in a rectangle, 
+ * so that users can pick and choose the one that they want to use when designing. 
+ * 
  * @author lindsayqin
- *
  */
 public class ColorPalette {
 	private Color [] palette;
@@ -121,6 +123,7 @@ public class ColorPalette {
 
 	}
 	
+	//initializes the rectangles
 	private void initializeRects() {
 		float rectX = 660;
 		float sideLength = 20;
@@ -169,13 +172,19 @@ public class ColorPalette {
 		return index;
 	}
 	
+	/**
+	 * Sets the selected color to the color in the palette with index i.
+	 * 
+	 * @param i The index of the color that the user clicks on.
+	 */
 	public void toggleCell(int i) {
 		selectedColor = palette[i];
 	}
 	
 	/**
 	 * (Graphical UI)
-	 * changes color of selected pixel.
+	 * 
+	 * Changes the selected color to the color the mouse was clicked on.
 	 * 
 	 * @param p The point that the mouse was clicked on.
 	 */
