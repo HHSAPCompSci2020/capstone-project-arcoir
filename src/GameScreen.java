@@ -8,6 +8,11 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 // modfied from Mr. Shelby's SecondScreen class
+/**
+ * 
+ * @author Lead: Nicole Spaulding, everyone worked on this class
+ *
+ */
 public class GameScreen extends Screen {
 
 	// Fields
@@ -87,6 +92,9 @@ public class GameScreen extends Screen {
 				false, true, surface.loadImage("resources/dash/help/helpIcon.gif"), surface.loadImage("resources/dash/back.gif"));
 	}
 
+	/**A method called in setup to load images and animations
+	 * 
+	 */
 	private void loadCAnims() {
 		bg = surface.loadImage("resources/bgs/bgGrey.jpeg");
 		obstacle = surface.loadImage("resources/obstacle/Mushroom.png");

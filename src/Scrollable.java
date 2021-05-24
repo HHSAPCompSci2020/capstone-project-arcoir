@@ -3,7 +3,11 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-
+/**
+ * 
+ * @author Author: Nicole Spaulding
+ *
+ */
 public class Scrollable {
 	private ArrayList<Integer> imagePos;
 	private PImage image;			
