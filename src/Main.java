@@ -6,12 +6,16 @@ import javax.swing.JFrame;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
-
+/**
+ * The Main class runs and executes the program.
+ * 
+ * @author lindsayqin
+ */
 public class Main {
 	
 	/**Runs the menu to start the game
 	 * 
-	 * @param args
+	 * @param args String array.
 	 */
 	public static void main(String[] args) {
 		
