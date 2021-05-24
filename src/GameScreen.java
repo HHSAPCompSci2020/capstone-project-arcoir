@@ -162,6 +162,24 @@ public class GameScreen extends Screen {
 		surface.text("Score: " + score, 700, 30);
 		surface.text("Level: " + level, 700, 50);
 		surface.text("Lives: " + (int)c.getLives(), 700, 70);
+		
+		
+		if(leveledUp && level < 9 && level > 1) {
+			
+			if(displayCount == 10 && level < 8 && level != 0) {
+				background.setImage(backgrounds.get(level - 2));
+				System.out.println(level - 2);
+			}
+			
+			if(displayCount > 0) {
+				surface.image(artifacts.get(level-2), 400 - artifacts.get(level-2).width/2, 250 - artifacts.get(level-2).height/2);
+				
+				if(level == 8)
+					surface.text("You Won! UNLIMITED MODE:", 280, 180);
+				displayCount--;
+			}
+		}
+		
 		surface.popStyle();
 		
 		background.setSpeed(0);
@@ -233,21 +251,6 @@ public class GameScreen extends Screen {
 		updateEnemyState();
 		enemyAttack();
 		
-		if(leveledUp && level < 9 && level > 1) {
-			
-			if(displayCount == 10 && level < 8) {
-				background.setImage(backgrounds.get(level - 2));
-				System.out.println(level - 2);
-			}
-			if(displayCount == 10 && level < 7 && level != 0) {
-				background.setImage(backgrounds.get(level - 1));
-			}
-			
-			if(displayCount > 0) {
-				surface.image(artifacts.get(level-2), 400 - artifacts.get(level-2).width/2, 250 - artifacts.get(level-2).height/2);
-				displayCount--;
-			}
-		}
 
 		if (surface.isPressed(KeyEvent.VK_SPACE)) {
 			for (int i = 0; i<enemies.size(); i++) {
