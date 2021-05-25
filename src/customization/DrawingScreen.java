@@ -362,8 +362,6 @@ public class DrawingScreen extends Screen {
 
 		surface.background(255);
 
-		surface.fill(0);
-
 		surface.noFill();
 
 		drawBackground(150, 0, gridSide);
